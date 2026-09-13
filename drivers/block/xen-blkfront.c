@@ -476,8 +476,6 @@ static int blkif_queue_discard_req(struct request *req)
 	else
 		ring_req->u.discard.flag = 0;
 
-	info->ring.req_prod_pvt++;
-
 	/* Keep a private copy so we can reissue requests when recovering. */
 	info->shadow[id].req = *ring_req;
 
@@ -693,8 +691,6 @@ static int blkif_queue_rw_req(struct request *req)
 	}
 	if (setup.segments)
 		kunmap_atomic(setup.segments);
-
-	info->ring.req_prod_pvt++;
 
 	/* Keep a private copy so we can reissue requests when recovering. */
 	info->shadow[id].req = *ring_req;
