@@ -1102,7 +1102,7 @@ struct drm_gem_object *msm_gem_svm_new(struct drm_device *dev,
 
 	ret = msm_gem_mn_register(msm_svm_obj, aspace);
 	if (ret)
-		goto fail;
+		return ERR_PTR(ret);
 
 	/*
 	 * Get physical pages and map into smmu in the ioctl itself.
@@ -1116,7 +1116,7 @@ struct drm_gem_object *msm_gem_svm_new(struct drm_device *dev,
 	p = kcalloc(npages, sizeof(struct page *), GFP_KERNEL);
 	if (!p) {
 		ret = -ENOMEM;
-		goto fail;
+		return ERR_PTR(ret);
 	}
 
 	write = (msm_obj->flags & MSM_BO_GPU_READONLY) ? 0 : 1;

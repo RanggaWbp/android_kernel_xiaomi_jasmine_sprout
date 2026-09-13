@@ -303,6 +303,7 @@ struct binder_error {
 
 /**
  * struct binder_node - binder node bookkeeping
+	const struct cred *cred;
  * @debug_id:             unique ID for debugging
  *                        (invariant after initialized)
  * @lock:                 lock for node fields
@@ -3054,8 +3055,8 @@ static void binder_transaction(struct binder_proc *proc,
 			return_error_line = __LINE__;
 			goto err_invalid_target_handle;
 		}
-		if (security_binder_transaction(proc->tsk,
-						target_proc->tsk) < 0) {
+		if (security_binder_transaction(proc->cred,
+						target_proc->cred) < 0) {
 			return_error = BR_FAILED_REPLY;
 			return_error_param = -EPERM;
 			return_error_line = __LINE__;
@@ -3146,7 +3147,7 @@ static void binder_transaction(struct binder_proc *proc,
 		t->from = thread;
 	else
 		t->from = NULL;
-	t->sender_euid = task_euid(proc->tsk);
+	t->sender_euid = proc->cred->euid;
 	t->to_proc = target_proc;
 	t->to_thread = target_thread;
 	t->code = tr->code;
@@ -4784,7 +4785,7 @@ static int binder_ioctl_set_ctx_mgr(struct file *filp,
 		ret = -EBUSY;
 		goto out;
 	}
-	ret = security_binder_set_context_mgr(proc->tsk);
+	ret = security_binder_set_context_mgr(proc->cred);
 	if (ret < 0)
 		goto out;
 	if (uid_valid(context->binder_context_mgr_uid)) {
@@ -5037,6 +5038,7 @@ static void binder_vma_close(struct vm_area_struct *vma)
 
 static int binder_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 {
+	proc->cred = get_cred(filp->f_cred);
 	return VM_FAULT_SIGBUS;
 }
 
@@ -5242,6 +5244,7 @@ static int binder_node_release(struct binder_node *node, int refs)
 		BUG_ON(!list_empty(&ref->death->work.entry));
 		ref->death->work.type = BINDER_WORK_DEAD_BINDER;
 		binder_enqueue_work_ilocked(&ref->death->work,
+	put_cred(proc->cred);
 					    &ref->proc->todo);
 		binder_wakeup_proc_ilocked(ref->proc);
 		binder_inner_proc_unlock(ref->proc);
