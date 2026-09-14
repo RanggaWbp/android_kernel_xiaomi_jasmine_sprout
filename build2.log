@@ -1,0 +1,670 @@
+make[1]: Entering directory '/home/ranggawbp/android_kernel_xiaomi_sdm660/out'
+  CHK     include/config/kernel.release
+  GEN     ./Makefile
+  CHK     include/generated/uapi/linux/version.h
+  Using .. as source for kernel
+  CHK     include/generated/utsrelease.h
+  CHK     scripts/mod/devicetable-offsets.h
+  CHK     include/generated/timeconst.h
+  CHK     include/generated/bounds.h
+  CHK     include/generated/asm-offsets.h
+  CALL    ../scripts/checksyscalls.sh
+make[2]: 'include/generated/vdso-offsets.h' is up to date.
+  CHK     include/generated/compile.h
+  CC      fs/fs-writeback.o
+  CC      fs/pnode.o
+-- Baseband-guard: flask.h found, skip generation
+  CC      kernel/power/wakelock.o
+-- Baseband-guard: CONFIG_BBG enabled, now checking...
+-- Kernel Version: 4.4
+-- Baseband-guard: Okay,seems this Kernel doesn't need to check config.
+-- BBG was enabled!
+-- BBG version: e5c9180d
+-- BBG repo: https://github.com/RanggaWbp/android_kernel_xiaomi_sdm660.git
+  CC      security/baseband-guard/baseband_guard.o
+  CC      kernel/power/poweroff.o
+  CC      kernel/power/wakeup_reason.o
+  CC      fs/splice.o
+  LD      kernel/power/built-in.o
+  CC      security/baseband-guard/tracing/tracing.o
+  CC      kernel/printk/printk.o
+  CC      security/baseband-guard/blkdev_helper.o
+  LD      security/baseband-guard/bbg.o
+  LD      security/baseband-guard/built-in.o
+  CC      crypto/api.o
+  LD      security/built-in.o
+  CC      kernel/rcu/update.o
+  LD      kernel/printk/built-in.o
+  CC      fs/sync.o
+  CC      block/bio.o
+  CC      crypto/cipher.o
+  CC      kernel/rcu/sync.o
+  CC      kernel/rcu/srcu.o
+  CC      crypto/compress.o
+  CC      fs/utimes.o
+  CC      crypto/memneq.o
+  CC      kernel/rcu/tree.o
+  CC      block/elevator.o
+  CC      fs/stack.o
+  CC      crypto/crypto_wq.o
+  CC      fs/fs_struct.o
+  CC      crypto/algapi.o
+  CC      block/blk-core.o
+  LD      kernel/rcu/built-in.o
+  CC      fs/statfs.o
+  CC      kernel/sched/core.o
+../kernel/sched/core.c: In function ‘sched_init’:
+../kernel/sched/core.c:8582:30: warning: the comparison will always evaluate as ‘false’ for the address of ‘cpu_isolated_map’ will never be NULL [-Waddress]
+ 8582 |         if (cpu_isolated_map == NULL)
+      |                              ^~
+../kernel/sched/core.c:298:15: note: ‘cpu_isolated_map’ declared here
+  298 | cpumask_var_t cpu_isolated_map;
+      |               ^~~~~~~~~~~~~~~~
+  CC      crypto/scatterwalk.o
+  CC      fs/fs_pin.o
+  CC      crypto/proc.o
+  CC      fs/nsfs.o
+  CC      block/blk-tag.o
+  CC      crypto/aead.o
+  CC      fs/susfs.o
+In file included from ../include/linux/printk.h:6,
+                 from ../include/linux/kernel.h:13,
+                 from ../include/linux/list.h:8,
+                 from ../include/linux/key.h:19,
+                 from ../include/linux/cred.h:17,
+                 from ../fs/susfs.c:2:
+../fs/susfs.c: In function ‘susfs_add_sus_kstat’:
+../include/linux/kern_levels.h:4:25: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 12 has type ‘long long int’ [-Wformat=]
+    4 | #define KERN_SOH        "\001"          /* ASCII Start Of Header */
+      |                         ^~~~~~
+../include/linux/kern_levels.h:13:25: note: in expansion of macro ‘KERN_SOH’
+   13 | #define KERN_INFO       KERN_SOH "6"    /* informational */
+      |                         ^~~~~~~~
+../include/linux/printk.h:259:16: note: in expansion of macro ‘KERN_INFO’
+  259 |         printk(KERN_INFO pr_fmt(fmt), ##__VA_ARGS__)
+      |                ^~~~~~~~~
+../fs/susfs.c:34:79: note: in expansion of macro ‘pr_info’
+   34 | #define SUSFS_LOGI(fmt, ...) if (static_branch_likely(&susfs_is_log_enabled)) pr_info("susfs:[%u][%d][%s] " fmt, current_uid().val, current->pid, __func__, ##__VA_ARGS__)
+      |                                                                               ^~~~~~~
+../fs/susfs.c:375:25: note: in expansion of macro ‘SUSFS_LOGI’
+  375 |                         SUSFS_LOGI("is_fuse: %d, is_statically: '%d', target_ino: '%lu', target_pathname: '%s', spoofed_ino: '%lu', spoofed_dev: '%lu', spoofed_nlink: '%u', spoofed_size: '%u', spoofed_atime_tv_sec: '%ld', spoofed_mtime_tv_sec: '%ld', spoofed_ctime_tv_sec: '%ld', spoofed_atime_tv_nsec: '%ld', spoofed_mtime_tv_nsec: '%ld', spoofed_ctime_tv_nsec: '%ld', spoofed_blksize: '%lu', spoofed_blocks: '%llu', is successfully added to SUS_KSTAT_HLIST\n",
+      |                         ^~~~~~~~~~
+../include/linux/kern_levels.h:4:25: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 12 has type ‘long long int’ [-Wformat=]
+    4 | #define KERN_SOH        "\001"          /* ASCII Start Of Header */
+      |                         ^~~~~~
+../include/linux/kern_levels.h:13:25: note: in expansion of macro ‘KERN_SOH’
+   13 | #define KERN_INFO       KERN_SOH "6"    /* informational */
+      |                         ^~~~~~~~
+../include/linux/printk.h:259:16: note: in expansion of macro ‘KERN_INFO’
+  259 |         printk(KERN_INFO pr_fmt(fmt), ##__VA_ARGS__)
+      |                ^~~~~~~~~
+../fs/susfs.c:34:79: note: in expansion of macro ‘pr_info’
+   34 | #define SUSFS_LOGI(fmt, ...) if (static_branch_likely(&susfs_is_log_enabled)) pr_info("susfs:[%u][%d][%s] " fmt, current_uid().val, current->pid, __func__, ##__VA_ARGS__)
+      |                                                                               ^~~~~~~
+../fs/susfs.c:412:9: note: in expansion of macro ‘SUSFS_LOGI’
+  412 |         SUSFS_LOGI("is_fuse: %d, is_statically: '%d', target_ino: '%lu', target_pathname: '%s', spoofed_ino: '%lu', spoofed_dev: '%lu', spoofed_nlink: '%u', spoofed_size: '%u', spoofed_atime_tv_sec: '%ld', spoofed_mtime_tv_sec: '%ld', spoofed_ctime_tv_sec: '%ld', spoofed_atime_tv_nsec: '%ld', spoofed_mtime_tv_nsec: '%ld', spoofed_ctime_tv_nsec: '%ld', spoofed_blksize: '%lu', spoofed_blocks: '%llu', is successfully added to SUS_KSTAT_HLIST\n",
+      |         ^~~~~~~~~~
+  CC      block/blk-sysfs.o
+  CC      crypto/ablkcipher.o
+  CC      block/blk-flush.o
+  CC      crypto/blkcipher.o
+  CC      fs/buffer.o
+  CC      block/blk-settings.o
+  CC      kernel/sched/loadavg.o
+  CC      crypto/skcipher.o
+  CC      block/blk-ioc.o
+  CC      kernel/sched/clock.o
+  CC      kernel/sched/cputime.o
+  CC      fs/block_dev.o
+  CC      crypto/chainiv.o
+  CC      block/blk-map.o
+  CC      kernel/sched/idle_task.o
+  CC      crypto/eseqiv.o
+  CC      block/blk-exec.o
+  CC      kernel/sched/fair.o
+  CC      crypto/seqiv.o
+  CC      fs/direct-io.o
+  CC      crypto/echainiv.o
+  CC      block/blk-merge.o
+  CC      crypto/ahash.o
+  CC      crypto/shash.o
+  CC      fs/mpage.o
+  CC      block/blk-softirq.o
+  CC      fs/proc_namespace.o
+  CC      block/blk-timeout.o
+  CC      crypto/pcompress.o
+  CC      fs/configfs/inode.o
+  CC      block/blk-iopoll.o
+  CC      crypto/akcipher.o
+  CC      fs/configfs/file.o
+  CC      kernel/sched/rt.o
+  CC      fs/configfs/dir.o
+  CC      crypto/algboss.o
+  CC      block/blk-lib.o
+  CC      kernel/sched/deadline.o
+  CC      crypto/testmgr.o
+  CC      fs/configfs/symlink.o
+  CC      block/blk-mq.o
+  CC      fs/configfs/mount.o
+  CC      crypto/cmac.o
+  CC      kernel/sched/stop_task.o
+  CC      fs/configfs/item.o
+  CC      kernel/sched/wait.o
+  CC      crypto/hmac.o
+  LD      fs/configfs/configfs.o
+  LD      fs/configfs/built-in.o
+  CC      fs/debugfs/inode.o
+  CC      block/blk-mq-tag.o
+  CC      crypto/xcbc.o
+  CC      kernel/sched/completion.o
+  CC      crypto/crypto_null.o
+  CC      fs/debugfs/file.o
+  CC      kernel/sched/idle.o
+  CC      block/blk-mq-sysfs.o
+  CC      crypto/md4.o
+  CC      kernel/sched/sched_avg.o
+  LD      fs/debugfs/debugfs.o
+  LD      fs/debugfs/built-in.o
+  CC      crypto/md5.o
+  CC      fs/devpts/inode.o
+  CC      block/blk-mq-cpu.o
+  CC      crypto/sha1_generic.o
+  CC      kernel/sched/cpupri.o
+  LD      fs/devpts/devpts.o
+  LD      fs/devpts/built-in.o
+  CC      fs/ecryptfs/dentry.o
+  CC      block/blk-mq-cpumap.o
+  CC      kernel/sched/cpudeadline.o
+  CC      fs/ecryptfs/file.o
+  CC      crypto/sha256_generic.o
+  CC      block/ioctl.o
+  CC      kernel/sched/energy.o
+  CC      fs/ecryptfs/inode.o
+  CC      kernel/sched/hmp.o
+  CC      block/genhd.o
+  CC      crypto/sha512_generic.o
+  CC      fs/ecryptfs/main.o
+  CC      crypto/gf128mul.o
+  CC      fs/ecryptfs/super.o
+  CC      fs/ecryptfs/mmap.o
+  CC      block/scsi_ioctl.o
+  CC      crypto/ecb.o
+  CC      kernel/sched/boost.o
+  CC      fs/ecryptfs/read_write.o
+  CC      crypto/cbc.o
+  CC      kernel/sched/auto_group.o
+  CC      fs/ecryptfs/events.o
+  CC      block/partition-generic.o
+  CC      crypto/heh.o
+  CC      fs/ecryptfs/crypto.o
+  CC      kernel/sched/stats.o
+  CC      crypto/cts.o
+  CC      block/ioprio.o
+  CC      kernel/sched/debug.o
+  CC      crypto/xts.o
+  CC      fs/ecryptfs/keystore.o
+  CC      block/partitions/check.o
+  CC      kernel/sched/tune.o
+  CC      crypto/ctr.o
+  CC      block/partitions/msdos.o
+  CC      kernel/sched/cpuacct.o
+  CC      crypto/gcm.o
+  CC      block/partitions/efi.o
+  CC      fs/ecryptfs/kthread.o
+  CC      kernel/sched/core_ctl.o
+  LD      block/partitions/built-in.o
+  CC      block/bounce.o
+  CC      fs/ecryptfs/debug.o
+  CC      crypto/cryptd.o
+../fs/ecryptfs/debug.c: In function ‘ecryptfs_dump_cipher’:
+../fs/ecryptfs/debug.c:142:26: warning: the comparison will always evaluate as ‘true’ for the address of ‘cipher’ will never be NULL [-Waddress]
+  142 |         if (stat->cipher != NULL)
+      |                          ^~
+In file included from ../fs/ecryptfs/debug.c:24:
+../fs/ecryptfs/ecryptfs_kernel.h:249:23: note: ‘cipher’ declared here
+  249 |         unsigned char cipher[ECRYPTFS_MAX_CIPHER_NAME_SIZE + 1];
+      |                       ^~~~~~
+../fs/ecryptfs/debug.c:146:31: warning: the comparison will always evaluate as ‘true’ for the address of ‘cipher_mode’ will never be NULL [-Waddress]
+  146 |         if (stat->cipher_mode != NULL)
+      |                               ^~
+../fs/ecryptfs/ecryptfs_kernel.h:257:23: note: ‘cipher_mode’ declared here
+  257 |         unsigned char cipher_mode[ECRYPTFS_MAX_CIPHER_NAME_SIZE + 1];
+      |                       ^~~~~~~~~~~
+  CC      fs/ecryptfs/messaging.o
+  CC      block/bsg.o
+  CC      kernel/sched/cpufreq.o
+  CC      fs/ecryptfs/miscdev.o
+  LD      kernel/sched/built-in.o
+  CC      kernel/time/time.o
+  CC      crypto/des_generic.o
+  CC      block/noop-iosched.o
+  LD      fs/ecryptfs/ecryptfs.o
+  LD      fs/ecryptfs/built-in.o
+  LD      fs/exofs/built-in.o
+  CC      fs/ext4/balloc.o
+  CC      crypto/twofish_generic.o
+  CC      kernel/time/timer.o
+  CC      block/deadline-iosched.o
+  CC      crypto/twofish_common.o
+  CC      fs/ext4/bitmap.o
+  CC      block/cfq-iosched.o
+  CC      fs/ext4/dir.o
+  CC      crypto/aes_generic.o
+  CC      block/compat_ioctl.o
+  CC      fs/ext4/file.o
+  CC      kernel/time/hrtimer.o
+  CC      crypto/arc4.o
+  CC      crypto/deflate.o
+  CC      fs/ext4/fsync.o
+  LD      block/built-in.o
+  CC      kernel/trace/trace_clock.o
+  CC      crypto/crc32c_generic.o
+  CC      kernel/trace/ring_buffer.o
+  CC      kernel/time/itimer.o
+  CC      fs/ext4/ialloc.o
+  CC      crypto/authenc.o
+  CC      kernel/time/posix-timers.o
+  CC      kernel/time/posix-cpu-timers.o
+  CC      kernel/trace/trace.o
+  CC      crypto/authencesn.o
+../kernel/trace/trace.c: In function ‘__trace_find_cmdline’:
+../kernel/trace/trace.c:1620:13: warning: unused variable ‘tpid’ [-Wunused-variable]
+ 1620 |         int tpid;
+      |             ^~~~
+  CC      kernel/time/timekeeping.o
+  CC      fs/ext4/inode.o
+  CC      crypto/lzo.o
+  CC      crypto/rng.o
+  CC      kernel/time/ntp.o
+  CC      crypto/ansi_cprng.o
+  CC      kernel/time/clocksource.o
+  CC      crypto/drbg.o
+  CC      kernel/time/jiffies.o
+  CC      kernel/trace/trace_output.o
+  CC      crypto/jitterentropy.o
+  CC      crypto/jitterentropy-kcapi.o
+  CC      kernel/time/timer_list.o
+  CC      fs/ext4/page-io.o
+  CC      kernel/time/timeconv.o
+  CC      crypto/ghash-generic.o
+  CC      kernel/time/timecounter.o
+  CC      kernel/trace/trace_seq.o
+  CC      fs/ext4/ioctl.o
+  CC      kernel/time/posix-clock.o
+  CC      crypto/asymmetric_keys/asymmetric_type.o
+  CC      kernel/trace/trace_stat.o
+  CC      kernel/trace/trace_printk.o
+  CC      fs/ext4/namei.o
+  CC      kernel/time/alarmtimer.o
+  CC      crypto/asymmetric_keys/signature.o
+  CC      kernel/trace/trace_sched_switch.o
+  CC      crypto/asymmetric_keys/public_key.o
+  CC      kernel/trace/trace_cpu_freq_switch.o
+  CC      kernel/time/clockevents.o
+  CC      kernel/trace/trace_nop.o
+  CC      crypto/asymmetric_keys/rsa.o
+  CC      kernel/trace/blktrace.o
+  CC      fs/ext4/super.o
+  CC      kernel/time/tick-common.o
+  CC      kernel/trace/trace_events.o
+  ASN.1   crypto/asymmetric_keys/x509-asn1.c
+  ASN.1   crypto/asymmetric_keys/x509_akid-asn1.c
+  ASN.1   crypto/asymmetric_keys/x509_rsakey-asn1.c
+  CC      crypto/asymmetric_keys/x509_public_key.o
+  CC      kernel/time/tick-broadcast.o
+  ASN.1   crypto/asymmetric_keys/pkcs7-asn1.c
+  CC      crypto/asymmetric_keys/pkcs7_trust.o
+  CC      kernel/time/tick-broadcast-hrtimer.o
+  CC      kernel/trace/trace_export.o
+  CC      crypto/asymmetric_keys/pkcs7_verify.o
+  CC      kernel/time/sched_clock.o
+  CC      kernel/trace/trace_event_perf.o
+  CC      kernel/time/tick-oneshot.o
+  CC      kernel/trace/trace_events_filter.o
+  LD      crypto/asymmetric_keys/asymmetric_keys.o
+  CC      crypto/asymmetric_keys/x509-asn1.o
+  CC      kernel/time/tick-sched.o
+  CC      crypto/asymmetric_keys/x509_akid-asn1.o
+  CC      crypto/asymmetric_keys/x509_rsakey-asn1.o
+  CC      crypto/asymmetric_keys/x509_cert_parser.o
+  CC      kernel/time/timekeeping_debug.o
+  CC      crypto/asymmetric_keys/pkcs7-asn1.o
+  CC      kernel/trace/trace_events_trigger.o
+  LD      kernel/time/built-in.o
+  CC      crypto/asymmetric_keys/pkcs7_parser.o
+  CC      fs/fat/cache.o
+  CC      fs/ext4/symlink.o
+  CC      fs/fat/dir.o
+  LD      crypto/asymmetric_keys/x509_key_parser.o
+  LD      crypto/asymmetric_keys/pkcs7_message.o
+  LD      crypto/asymmetric_keys/built-in.o
+  CC      crypto/hash_info.o
+  CC      fs/ext4/hash.o
+  CC      crypto/ablk_helper.o
+  CC      kernel/trace/power-traces.o
+  CC      fs/ext4/resize.o
+  LD      crypto/crypto.o
+  LD      crypto/crypto_algapi.o
+  LD      crypto/crypto_blkcipher.o
+  LD      crypto/crypto_hash.o
+  LD      crypto/cryptomgr.o
+  LD      crypto/jitterentropy_rng.o
+  LD      crypto/built-in.o
+  CC      kernel/freezer.o
+  CC      fs/fat/fatent.o
+  CC      fs/ext4/extents.o
+  CC      kernel/trace/rpm-traces.o
+  CC      fs/fuse/dev.o
+  CC      fs/fat/file.o
+  CC      kernel/trace/ipc_logging.o
+  CC      fs/fat/inode.o
+  CC      fs/fuse/dir.o
+  CC      kernel/trace/ipc_logging_debug.o
+  CC      fs/ext4/ext4_jbd2.o
+  CC      fs/fat/misc.o
+  LD      kernel/trace/built-in.o
+  CC      fs/ext4/migrate.o
+  CC      fs/fuse/file.o
+  CC      kernel/profile.o
+../kernel/profile.c: In function ‘profile_cpu_callback’:
+../kernel/profile.c:365:35: warning: the comparison will always evaluate as ‘true’ for the address of ‘prof_cpu_mask’ will never be NULL [-Waddress]
+  365 |                 if (prof_cpu_mask != NULL)
+      |                                   ^~
+../kernel/profile.c:46:22: note: ‘prof_cpu_mask’ declared here
+   46 | static cpumask_var_t prof_cpu_mask;
+      |                      ^~~~~~~~~~~~~
+../kernel/profile.c:372:35: warning: the comparison will always evaluate as ‘true’ for the address of ‘prof_cpu_mask’ will never be NULL [-Waddress]
+  372 |                 if (prof_cpu_mask != NULL)
+      |                                   ^~
+../kernel/profile.c:46:22: note: ‘prof_cpu_mask’ declared here
+   46 | static cpumask_var_t prof_cpu_mask;
+      |                      ^~~~~~~~~~~~~
+../kernel/profile.c: In function ‘profile_tick’:
+../kernel/profile.c:413:47: warning: the comparison will always evaluate as ‘true’ for the address of ‘prof_cpu_mask’ will never be NULL [-Waddress]
+  413 |         if (!user_mode(regs) && prof_cpu_mask != NULL &&
+      |                                               ^~
+../kernel/profile.c:46:22: note: ‘prof_cpu_mask’ declared here
+   46 | static cpumask_var_t prof_cpu_mask;
+      |                      ^~~~~~~~~~~~~
+  CC      fs/fat/nfs.o
+  CC      fs/ext4/mballoc.o
+  CC      fs/fat/namei_vfat.o
+  CC      kernel/stacktrace.o
+  CC      fs/fat/namei_msdos.o
+  CC      kernel/futex.o
+  CC      fs/fuse/inode.o
+  LD      fs/fat/fat.o
+  LD      fs/fat/vfat.o
+  LD      fs/fat/msdos.o
+  LD      fs/fat/built-in.o
+  CC      drivers/amba/bus.o
+  LD      drivers/amba/built-in.o
+  CC      drivers/android/binder.o
+../drivers/android/binder.c: In function ‘binder_translate_binder’:
+../drivers/android/binder.c:2530:49: warning: passing argument 1 of ‘security_binder_transfer_binder’ from incompatible pointer type [-Wincompatible-pointer-types]
+ 2530 |         if (security_binder_transfer_binder(proc->tsk, target_proc->tsk)) {
+      |                                             ~~~~^~~~~
+      |                                                 |
+      |                                                 struct task_struct *
+In file included from ../drivers/android/binder.c:71:
+../include/linux/security.h:189:56: note: expected ‘const struct cred *’ but argument is of type ‘struct task_struct *’
+  189 | int security_binder_transfer_binder(const struct cred *from,
+      |                                     ~~~~~~~~~~~~~~~~~~~^~~~
+../drivers/android/binder.c:2530:67: warning: passing argument 2 of ‘security_binder_transfer_binder’ from incompatible pointer type [-Wincompatible-pointer-types]
+ 2530 |         if (security_binder_transfer_binder(proc->tsk, target_proc->tsk)) {
+      |                                                        ~~~~~~~~~~~^~~~~
+      |                                                                   |
+      |                                                                   struct task_struct *
+../include/linux/security.h:190:56: note: expected ‘const struct cred *’ but argument is of type ‘struct task_struct *’
+  190 |                                     const struct cred *to);
+      |                                     ~~~~~~~~~~~~~~~~~~~^~
+../drivers/android/binder.c: In function ‘binder_translate_handle’:
+../drivers/android/binder.c:2576:49: warning: passing argument 1 of ‘security_binder_transfer_binder’ from incompatible pointer type [-Wincompatible-pointer-types]
+ 2576 |         if (security_binder_transfer_binder(proc->tsk, target_proc->tsk)) {
+      |                                             ~~~~^~~~~
+      |                                                 |
+      |                                                 struct task_struct *
+../include/linux/security.h:189:56: note: expected ‘const struct cred *’ but argument is of type ‘struct task_struct *’
+  189 | int security_binder_transfer_binder(const struct cred *from,
+      |                                     ~~~~~~~~~~~~~~~~~~~^~~~
+../drivers/android/binder.c:2576:67: warning: passing argument 2 of ‘security_binder_transfer_binder’ from incompatible pointer type [-Wincompatible-pointer-types]
+ 2576 |         if (security_binder_transfer_binder(proc->tsk, target_proc->tsk)) {
+      |                                                        ~~~~~~~~~~~^~~~~
+      |                                                                   |
+      |                                                                   struct task_struct *
+../include/linux/security.h:190:56: note: expected ‘const struct cred *’ but argument is of type ‘struct task_struct *’
+  190 |                                     const struct cred *to);
+      |                                     ~~~~~~~~~~~~~~~~~~~^~
+../drivers/android/binder.c: In function ‘binder_translate_fd’:
+../drivers/android/binder.c:2660:49: warning: passing argument 1 of ‘security_binder_transfer_file’ from incompatible pointer type [-Wincompatible-pointer-types]
+ 2660 |         ret = security_binder_transfer_file(proc->tsk, target_proc->tsk, file);
+      |                                             ~~~~^~~~~
+      |                                                 |
+      |                                                 struct task_struct *
+../include/linux/security.h:191:54: note: expected ‘const struct cred *’ but argument is of type ‘struct task_struct *’
+  191 | int security_binder_transfer_file(const struct cred *from,
+      |                                   ~~~~~~~~~~~~~~~~~~~^~~~
+../drivers/android/binder.c:2660:67: warning: passing argument 2 of ‘security_binder_transfer_file’ from incompatible pointer type [-Wincompatible-pointer-types]
+ 2660 |         ret = security_binder_transfer_file(proc->tsk, target_proc->tsk, file);
+      |                                                        ~~~~~~~~~~~^~~~~
+      |                                                                   |
+      |                                                                   struct task_struct *
+../include/linux/security.h:192:54: note: expected ‘const struct cred *’ but argument is of type ‘struct task_struct *’
+  192 |                                   const struct cred *to, struct file *file);
+      |                                   ~~~~~~~~~~~~~~~~~~~^~
+../drivers/android/binder.c: In function ‘binder_transaction’:
+../drivers/android/binder.c:3058:53: error: ‘struct binder_proc’ has no member named ‘cred’
+ 3058 |                 if (security_binder_transaction(proc->cred,
+      |                                                     ^~
+../drivers/android/binder.c:3059:60: error: ‘struct binder_proc’ has no member named ‘cred’
+ 3059 |                                                 target_proc->cred) < 0) {
+      |                                                            ^~
+../drivers/android/binder.c:3150:30: error: ‘struct binder_proc’ has no member named ‘cred’
+ 3150 |         t->sender_euid = proc->cred->euid;
+      |                              ^~
+../drivers/android/binder.c: In function ‘binder_ioctl_set_ctx_mgr’:
+../drivers/android/binder.c:4788:51: error: ‘struct binder_proc’ has no member named ‘cred’
+ 4788 |         ret = security_binder_set_context_mgr(proc->cred);
+      |                                                   ^~
+../drivers/android/binder.c: In function ‘binder_vm_fault’:
+../drivers/android/binder.c:5041:9: error: ‘proc’ undeclared (first use in this function)
+ 5041 |         proc->cred = get_cred(filp->f_cred);
+      |         ^~~~
+../drivers/android/binder.c:5041:9: note: each undeclared identifier is reported only once for each function it appears in
+../drivers/android/binder.c:5041:31: error: ‘filp’ undeclared (first use in this function); did you mean ‘file’?
+ 5041 |         proc->cred = get_cred(filp->f_cred);
+      |                               ^~~~
+      |                               file
+../drivers/android/binder.c: In function ‘binder_node_release’:
+../drivers/android/binder.c:5247:22: error: ‘struct binder_proc’ has no member named ‘cred’
+ 5247 |         put_cred(proc->cred);
+      |                      ^~
+../drivers/android/binder.c:5247:29: error: expected ‘)’ before ‘;’ token
+ 5247 |         put_cred(proc->cred);
+      |                             ^
+      |                             )
+../drivers/android/binder.c:5246:44: note: to match this ‘(’
+ 5246 |                 binder_enqueue_work_ilocked(&ref->death->work,
+      |                                            ^
+make[3]: *** [../scripts/Makefile.build:282: drivers/android/binder.o] Error 1
+make[2]: *** [../scripts/Makefile.build:489: drivers/android] Error 2
+make[1]: *** [/home/ranggawbp/android_kernel_xiaomi_sdm660/Makefile:1023: drivers] Error 2
+make[1]: *** Waiting for unfinished jobs....
+  CC      fs/fuse/control.o
+  CC      fs/fuse/passthrough.o
+  CC      fs/ext4/block_validity.o
+  CC      kernel/smp.o
+  CC      fs/jbd2/transaction.o
+  LD      fs/fuse/fuse.o
+  LD      fs/fuse/built-in.o
+  CC      fs/ext4/move_extent.o
+  CC      kernel/uid16.o
+  CC      fs/jbd2/commit.o
+  CC      fs/ext4/mmp.o
+  CC      kernel/module.o
+  CC      fs/kernfs/mount.o
+  CC      fs/jbd2/recovery.o
+  CC      fs/ext4/indirect.o
+  CC      fs/kernfs/inode.o
+  CC      fs/kernfs/dir.o
+  CC      fs/jbd2/checkpoint.o
+  CC      fs/ext4/extents_status.o
+  CC      fs/jbd2/revoke.o
+  CC      fs/ext4/xattr.o
+  CC      fs/kernfs/file.o
+  CC      kernel/module_signing.o
+  CC      kernel/kallsyms.o
+  CC      fs/jbd2/journal.o
+  CC      fs/kernfs/symlink.o
+  CC      fs/ext4/xattr_user.o
+  CC      kernel/compat.o
+  LD      fs/kernfs/built-in.o
+  CC      fs/ext4/xattr_trusted.o
+  CC      kernel/cgroup.o
+  CC      fs/ext4/inline.o
+  LD      fs/jbd2/jbd2.o
+  LD      fs/jbd2/built-in.o
+  CC      fs/ext4/readpage.o
+  CC      fs/nls/nls_base.o
+  CC      fs/ext4/sysfs.o
+  CC      fs/nls/nls_cp437.o
+  CC      kernel/cgroup_freezer.o
+  CC      fs/nomount/nomount.o
+  CC      fs/ext4/xattr_security.o
+  CC      fs/nls/nls_iso8859-1.o
+  CC      kernel/cpuset.o
+  CC      fs/ext4/crypto_policy.o
+  LD      fs/nls/built-in.o
+  CC      fs/notify/fsnotify.o
+  CC      fs/notify/notification.o
+  CC      fs/ext4/crypto.o
+  LD      fs/nomount/built-in.o
+  GZIP    kernel/config_data.gz
+  CC      fs/notify/group.o
+  CC      kernel/stop_machine.o
+  CC      fs/ext4/crypto_key.o
+  CC      fs/notify/inode_mark.o
+  CC      fs/overlayfs/super.o
+  CC      kernel/audit.o
+  CC      fs/ext4/crypto_fname.o
+  CC      fs/notify/mark.o
+  CC      fs/overlayfs/inode.o
+  CC      fs/ext4/ext4_ice.o
+  CC      fs/notify/vfsmount_mark.o
+  CC      fs/notify/fdinfo.o
+  CC      fs/overlayfs/dir.o
+  CC      kernel/auditfilter.o
+  CC      fs/notify/dnotify/dnotify.o
+  LD      fs/ext4/ext4.o
+  LD      fs/ext4/built-in.o
+  CC      fs/proc/task_mmu.o
+  CC      fs/overlayfs/readdir.o
+  LD      fs/notify/dnotify/built-in.o
+  LD      fs/notify/fanotify/built-in.o
+  CC      fs/notify/inotify/inotify_fsnotify.o
+  CC      fs/notify/inotify/inotify_user.o
+  CC      fs/overlayfs/copy_up.o
+  CC      kernel/seccomp.o
+  LD      fs/notify/inotify/built-in.o
+  CC      fs/proc/inode.o
+  LD      fs/notify/built-in.o
+  CC      kernel/utsname_sysctl.o
+  LD      fs/overlayfs/overlay.o
+  LD      fs/overlayfs/built-in.o
+  CC      fs/proc/root.o
+  CC      kernel/taskstats.o
+  CC      fs/pstore/inode.o
+  CC      fs/pstore/platform.o
+  CC      fs/proc/base.o
+  CC      kernel/tsacct.o
+  CC      fs/pstore/pmsg.o
+  CC      kernel/tracepoint.o
+  CC      fs/quota/dquot.o
+  CC      fs/pstore/ram.o
+  CC      fs/proc/generic.o
+  CC      kernel/irq_work.o
+  CC      fs/pstore/ram_core.o
+  CC      fs/proc/array.o
+  CC      kernel/cpu_pm.o
+  CC      fs/quota/quota_v2.o
+  CC      kernel/memremap.o
+  CC      fs/quota/quota_tree.o
+  LD      fs/pstore/pstore.o
+  LD      fs/pstore/ramoops.o
+  LD      fs/pstore/built-in.o
+  CC      fs/proc/fd.o
+  CC      fs/proc/proc_tty.o
+  CC      fs/ramfs/inode.o
+  CC      fs/proc/cmdline.o
+  CC      fs/ramfs/file-mmu.o
+  CHK     kernel/config_data.h
+  UPD     kernel/config_data.h
+  CC      kernel/configs.o
+  CC      fs/quota/quota.o
+  LD      kernel/built-in.o
+  CC      fs/proc/consoles.o
+  LD      fs/ramfs/ramfs.o
+  LD      fs/ramfs/built-in.o
+  CC      fs/sdcardfs/dentry.o
+  CC      fs/sysfs/file.o
+  CC      fs/proc/cpuinfo.o
+  CC      fs/sdcardfs/file.o
+  CC      fs/quota/kqid.o
+  CC      fs/proc/devices.o
+  CC      fs/proc/interrupts.o
+  CC      fs/sdcardfs/inode.o
+  CC      fs/quota/netlink.o
+  CC      fs/sysfs/dir.o
+  CC      fs/proc/loadavg.o
+  CC      fs/sdcardfs/main.o
+  CC      fs/proc/meminfo.o
+  CC      fs/sdcardfs/super.o
+  LD      fs/quota/built-in.o
+  CC      fs/sysfs/symlink.o
+  CC      fs/sysfs/mount.o
+  CC      fs/proc/stat.o
+  CC      fs/tracefs/inode.o
+  CC      fs/proc/uptime.o
+  CC      fs/sdcardfs/lookup.o
+  CC      fs/sysfs/group.o
+  CC      fs/proc/version.o
+  CC      fs/sdcardfs/mmap.o
+  LD      fs/tracefs/tracefs.o
+  CC      fs/proc/softirqs.o
+  CC      fs/sdcardfs/packagelist.o
+  LD      fs/tracefs/built-in.o
+  CC      fs/proc/namespaces.o
+  LD      fs/sysfs/built-in.o
+  CC      fs/sdcardfs/derived_perm.o
+  CC      fs/eventpoll.o
+  CC      fs/proc/self.o
+  CC      fs/proc/thread_self.o
+  CC      fs/proc/uid.o
+  LD      fs/sdcardfs/sdcardfs.o
+  LD      fs/sdcardfs/built-in.o
+  CC      fs/anon_inodes.o
+  CC      fs/proc/proc_sysctl.o
+  CC      fs/signalfd.o
+  CC      fs/proc/proc_net.o
+  CC      fs/timerfd.o
+  CC      fs/proc/kmsg.o
+  CC      fs/eventfd.o
+  CC      fs/proc/page.o
+  CC      fs/aio.o
+  CC      fs/locks.o
+  LD      fs/proc/proc.o
+  LD      fs/proc/built-in.o
+  CC      fs/compat.o
+  CC      fs/compat_ioctl.o
+  CC      fs/binfmt_script.o
+  CC      fs/binfmt_elf.o
+  CC      fs/compat_binfmt_elf.o
+  CC      fs/mbcache.o
+  CC      fs/mbcache2.o
+  CC      fs/posix_acl.o
+  CC      fs/coredump.o
+  CC      fs/drop_caches.o
+  CC      fs/dcookies.o
+  LD      fs/built-in.o
+make[1]: Leaving directory '/home/ranggawbp/android_kernel_xiaomi_sdm660/out'
+make: *** [Makefile:152: sub-make] Error 2
