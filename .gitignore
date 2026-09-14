@@ -126,3 +126,8 @@ Android.bp
 out_*/
 build_*.log
 KernelSU/.git/
+out/
+out_wayne/
+*.orig
+reject-*.rej
+build*.log
