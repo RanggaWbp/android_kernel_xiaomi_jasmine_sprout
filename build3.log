@@ -1,0 +1,2336 @@
+make[1]: Entering directory '/home/ranggawbp/android_kernel_xiaomi_sdm660/out'
+  GEN     ./Makefile
+scripts/kconfig/conf  --silentoldconfig Kconfig
+  CHK     include/config/kernel.release
+  GEN     ./Makefile
+  CHK     include/generated/uapi/linux/version.h
+-- Baseband-guard: flask.h found, skip generation
+-- Baseband-guard: CONFIG_BBG enabled, now checking...
+-- Kernel Version: 4.4
+-- Baseband-guard: Okay,seems this Kernel doesn't need to check config.
+-- BBG was enabled!
+-- BBG version: f1a8a17a
+-- BBG repo: https://github.com/RanggaWbp/android_kernel_xiaomi_sdm660.git
+  Using .. as source for kernel
+  CHK     include/generated/utsrelease.h
+  CHK     scripts/mod/devicetable-offsets.h
+  CHK     include/generated/timeconst.h
+  CHK     include/generated/bounds.h
+  CHK     include/generated/asm-offsets.h
+  CALL    ../scripts/checksyscalls.sh
+-- ReSukiSU version code: 35136
+-- ReSukiSU version name: v4.2.0-rc1-fa1da13f@ReSukiSU
+-- Supported Unofficial Manager: MKSU, RKSU, KOWSU, SukiSU-Ultra, ReSukiSU 
+-- KERNEL_VERSION: 4.4
+-- KERNEL_TYPE: Non-GKI
+-- ReSukiSU: using SuSFS Inline hook
+-- ReSukiSU/susfs_inline: ksu_handle_setresuid found
+-- ReSukiSU/susfs_inline: ksu_handle_execveat found
+-- ReSukiSU/susfs_inline: WARNING: Detected KSU_MANUAL_HOOK guard in ../fs/open.c file.
+-- ReSukiSU/susfs_inline: ksu_handle_faccessat found
+-- ReSukiSU/susfs_inline: WARNING: Detected KSU_MANUAL_HOOK guard in ../fs/read_write.c file.
+-- ReSukiSU/susfs_inline: ksu_handle_sys_read found
+-- ReSukiSU/susfs_inline: ksu_handle_stat found
+-- ReSukiSU/susfs_inline: WARNING: Detected KSU_MANUAL_HOOK guard in ../kernel/reboot.c file.
+-- ReSukiSU/susfs_inline: ksu_handle_sys_reboot found
+-- ReSukiSU/susfs_inline: WARNING: Detected KSU_MANUAL_HOOK guard in ../drivers/input/input.c file.
+-- ReSukiSU/susfs_inline: ksu_handle_input_handle_event found
+-- ReSukiSU/susfs_inline: WARNING: Your build maybe broken.
+-- ReSukiSU/susfs_inline: - If you have any issue, please check your hook before submit an issue to ReSukiSU.
+
+-- SUSFS_VERSION: v2.3.0
+-- ReSukiSU/compat: seccomp_filter_count found
+-- ReSukiSU/compat: file_inode() found
+-- ReSukiSU/compat: ns_get_path found
+-- ReSukiSU/compat: modern dentry_open found
+-- ReSukiSU/compat: ext4_unregister_sysfs found
+-- ReSukiSU/compat: f_op->read_iter found
+-- ReSukiSU/compat: iterate_dir found
+-- ReSukiSU/compat: modern static_key_interface found
+-- ReSukiSU/compat: d_inode found
+-- ReSukiSU/compat: inode_lock found
+-- ReSukiSU/compat: modern errno file found
+-- ReSukiSU/compat: overflow.h found
+-- ReSukiSU/compat: modern proc ns header file found
+-- ReSukiSU/compat: android spec POLICYDB_CONFIG_ANDROID_NETLINK_ROUTE found!!
+-- ReSukiSU/compat: found security_add_hooks
+make[2]: 'include/generated/vdso-offsets.h' is up to date.
+  CHK     include/generated/compile.h
+-- Baseband-guard: flask.h found, skip generation
+-- Baseband-guard: CONFIG_BBG enabled, now checking...
+-- Kernel Version: 4.4
+-- Baseband-guard: Okay,seems this Kernel doesn't need to check config.
+-- BBG was enabled!
+-- BBG version: f1a8a17a
+-- BBG repo: https://github.com/RanggaWbp/android_kernel_xiaomi_sdm660.git
+  CC      security/baseband-guard/baseband_guard.o
+  CC      security/baseband-guard/tracing/tracing.o
+  CHK     kernel/config_data.h
+  CC      security/baseband-guard/blkdev_helper.o
+  CC      sound/sound_core.o
+  LD      security/baseband-guard/bbg.o
+  LD      security/baseband-guard/built-in.o
+  LD      security/built-in.o
+  CC      drivers/android/binder.o
+  LD      drivers/auxdisplay/built-in.o
+  MK_FW   firmware/synaptics_jdi_3331_c8.fw.gen.S
+  IHEX    firmware/synaptics_jdi_3331_c8.fw
+  MK_FW   firmware/synaptics_jdi_3330_c8.fw.gen.S
+  IHEX    firmware/synaptics_jdi_3330_c8.fw
+  MK_FW   firmware/synaptics_sharp_4322_c8.fw.gen.S
+  IHEX    firmware/synaptics_sharp_4322_c8.fw
+  MK_FW   firmware/novatek/tianma_nt36672_miui_d2s.bin.gen.S
+  IHEX    firmware/novatek/tianma_nt36672_miui_d2s.bin
+  MK_FW   firmware/novatek/jdi_nt36672_miui_d2s.bin.gen.S
+  IHEX    firmware/novatek/jdi_nt36672_miui_d2s.bin
+  AS      firmware/synaptics_jdi_3331_c8.fw.gen.o
+  AS      firmware/synaptics_jdi_3330_c8.fw.gen.o
+  CC      drivers/base/component.o
+  AS      firmware/synaptics_sharp_4322_c8.fw.gen.o
+  AS      firmware/novatek/tianma_nt36672_miui_d2s.bin.gen.o
+  AS      firmware/novatek/jdi_nt36672_miui_d2s.bin.gen.o
+  LD      firmware/built-in.o
+  CC      net/socket.o
+  LD      sound/arm/built-in.o
+  LD      sound/atmel/built-in.o
+  CC      sound/core/sound.o
+  CC      drivers/base/core.o
+  CC      sound/core/init.o
+  CC      sound/core/memory.o
+  CC      sound/core/control.o
+  CC      drivers/base/bus.o
+  CC      net/802/p8022.o
+  CC      drivers/base/dd.o
+  CC      drivers/android/binder_alloc.o
+  CC      sound/core/misc.o
+  CC      drivers/base/syscore.o
+  CC      net/802/psnap.o
+  CC      sound/core/device.o
+  LD      drivers/android/built-in.o
+  LD      arch/arm64/lib/built-in.o
+  AS      arch/arm64/lib/bitops.o
+  AS      arch/arm64/lib/clear_page.o
+  CC      drivers/base/driver.o
+  AS      arch/arm64/lib/clear_user.o
+  AS      arch/arm64/lib/copy_from_user.o
+  AS      arch/arm64/lib/copy_in_user.o
+  AS      arch/arm64/lib/copy_page.o
+  AS      arch/arm64/lib/copy_to_user.o
+  CC      arch/arm64/lib/delay.o
+  CC      net/802/stp.o
+  CC      sound/core/info.o
+  CC      drivers/base/class.o
+  AS      arch/arm64/lib/memchr.o
+  AS      arch/arm64/lib/memcmp.o
+  AS      arch/arm64/lib/memcpy.o
+  AS      arch/arm64/lib/memmove.o
+  AS      arch/arm64/lib/memset.o
+  AS      arch/arm64/lib/strchr.o
+  AS      arch/arm64/lib/strcmp.o
+  AS      arch/arm64/lib/strlen.o
+  AS      arch/arm64/lib/strncmp.o
+  AS      arch/arm64/lib/strnlen.o
+  AS      arch/arm64/lib/strrchr.o
+  AR      arch/arm64/lib/lib.a
+  CC      drivers/base/platform.o
+  LD      net/802/built-in.o
+  CC      net/bluetooth/af_bluetooth.o
+  CC      sound/core/ctljack.o
+  CC      drivers/block/brd.o
+  CC      sound/core/jack.o
+  CC      drivers/block/loop.o
+  CC      drivers/base/cpu.o
+  CC      sound/core/hwdep.o
+  CC      net/bluetooth/hci_core.o
+  CC      drivers/base/firmware.o
+  CC      sound/core/timer.o
+  CC      drivers/base/init.o
+  CC      drivers/block/zram/zcomp.o
+  CC      drivers/base/map.o
+  CC      drivers/base/devres.o
+  CC      drivers/block/zram/zram_drv.o
+  CC      sound/core/pcm.o
+  CC      drivers/base/attribute_container.o
+  LD      drivers/block/zram/zram.o
+  LD      drivers/block/zram/built-in.o
+  LD      drivers/block/built-in.o
+  LD      sound/drivers/mpu401/built-in.o
+  LD      sound/drivers/opl3/built-in.o
+  LD      sound/drivers/opl4/built-in.o
+  LD      sound/drivers/pcsp/built-in.o
+  CC      net/bluetooth/hci_conn.o
+  LD      sound/drivers/vx/built-in.o
+  LD      sound/drivers/built-in.o
+  LD      sound/firewire/built-in.o
+  CC      lib/lockref.o
+  CC      drivers/base/transport_class.o
+  CC      lib/bcd.o
+  CC      sound/core/pcm_native.o
+  CC      lib/div64.o
+  CC      lib/sort.o
+  CC      drivers/base/topology.o
+  CC      lib/parser.o
+  CC      drivers/base/container.o
+  CC      lib/halfmd4.o
+  CC      drivers/base/property.o
+  CC      lib/debug_locks.o
+  CC      net/bluetooth/hci_event.o
+  CC      lib/random32.o
+  CC      lib/bust_spinlocks.o
+  CC      drivers/base/cacheinfo.o
+  CC      lib/kasprintf.o
+  CC      drivers/base/dma-contiguous.o
+  CC      lib/bitmap.o
+  CC      sound/core/pcm_lib.o
+  CC      drivers/base/power/sysfs.o
+  CC      lib/scatterlist.o
+  CC      drivers/base/power/generic_ops.o
+  CC      net/bluetooth/mgmt.o
+  CC      sound/core/pcm_misc.o
+  CC      drivers/base/power/common.o
+  CC      lib/gcd.o
+  CC      lib/lcm.o
+  CC      lib/list_sort.o
+  CC      drivers/base/power/qos.o
+  CC      lib/uuid.o
+  CC      sound/core/pcm_memory.o
+  CC      lib/flex_array.o
+  CC      lib/iov_iter.o
+  CC      sound/core/memalloc.o
+  CC      drivers/base/power/runtime.o
+  CC      sound/core/pcm_timer.o
+  CC      drivers/base/power/wakeirq.o
+  CC      lib/clz_ctz.o
+  CC      sound/core/rawmidi.o
+  CC      lib/bsearch.o
+  CC      net/bluetooth/hci_sock.o
+  CC      drivers/base/power/main.o
+  CC      lib/find_bit.o
+  CC      lib/llist.o
+  CC      lib/memweight.o
+  CC      net/bluetooth/hci_sysfs.o
+  CC      sound/core/compress_offload.o
+  CC      lib/kfifo.o
+  CC      net/bluetooth/l2cap_core.o
+  CC      drivers/base/power/wakeup.o
+  CC      lib/percpu-refcount.o
+  LD      sound/core/snd.o
+  LD      sound/core/snd-hwdep.o
+  LD      sound/core/snd-timer.o
+  LD      sound/core/snd-pcm.o
+  LD      sound/core/snd-rawmidi.o
+  LD      sound/core/snd-compress.o
+  LD      sound/core/built-in.o
+  LD      sound/hda/built-in.o
+  LD      sound/i2c/other/built-in.o
+  LD      sound/i2c/built-in.o
+  LD      sound/isa/ad1816a/built-in.o
+  LD      sound/isa/ad1848/built-in.o
+  LD      sound/isa/cs423x/built-in.o
+  LD      sound/isa/es1688/built-in.o
+  LD      sound/isa/galaxy/built-in.o
+  LD      sound/isa/gus/built-in.o
+  LD      sound/isa/msnd/built-in.o
+  LD      sound/isa/opti9xx/built-in.o
+  LD      sound/isa/sb/built-in.o
+  LD      sound/isa/wavefront/built-in.o
+  LD      sound/isa/wss/built-in.o
+  LD      sound/isa/built-in.o
+  LD      sound/mips/built-in.o
+  LD      sound/parisc/built-in.o
+  LD      sound/pci/ac97/built-in.o
+  LD      sound/pci/ali5451/built-in.o
+  LD      sound/pci/asihpi/built-in.o
+  LD      sound/pci/au88x0/built-in.o
+  LD      sound/pci/aw2/built-in.o
+  LD      sound/pci/ca0106/built-in.o
+  LD      sound/pci/cs46xx/built-in.o
+  LD      sound/pci/cs5535audio/built-in.o
+  LD      sound/pci/ctxfi/built-in.o
+  LD      sound/pci/echoaudio/built-in.o
+  LD      sound/pci/emu10k1/built-in.o
+  LD      sound/pci/hda/built-in.o
+  LD      sound/pci/ice1712/built-in.o
+  LD      sound/pci/korg1212/built-in.o
+  LD      sound/pci/lola/built-in.o
+  LD      sound/pci/lx6464es/built-in.o
+  LD      sound/pci/mixart/built-in.o
+  LD      sound/pci/nm256/built-in.o
+  LD      sound/pci/oxygen/built-in.o
+  LD      sound/pci/pcxhr/built-in.o
+  LD      sound/pci/riptide/built-in.o
+  LD      sound/pci/rme9652/built-in.o
+  LD      sound/pci/trident/built-in.o
+  LD      sound/pci/vx222/built-in.o
+  LD      sound/pci/ymfpci/built-in.o
+  LD      sound/pci/built-in.o
+  LD      sound/pcmcia/pdaudiocf/built-in.o
+  LD      sound/pcmcia/vx/built-in.o
+  LD      sound/pcmcia/built-in.o
+  LD      sound/ppc/built-in.o
+  LD      sound/sh/built-in.o
+  CC      sound/soc/soc-core.o
+  CC      lib/percpu_ida.o
+  CC      drivers/base/power/opp/core.o
+  CC      net/bluetooth/l2cap_sock.o
+  CC      lib/rhashtable.o
+  CC      drivers/base/power/opp/cpu.o
+  CC      drivers/base/power/opp/debugfs.o
+  CC      lib/reciprocal_div.o
+  CC      net/bluetooth/smp.o
+  CC      lib/once.o
+  LD      drivers/base/power/opp/built-in.o
+  CC      drivers/base/power/domain.o
+  CC      sound/soc/soc-dapm.o
+  CC      lib/hash.o
+  CC      lib/string_helpers.o
+  CC      lib/hexdump.o
+  CC      drivers/base/power/domain_governor.o
+  CC      net/bluetooth/lib.o
+  CC      lib/kstrtox.o
+  CC      drivers/base/power/clock_ops.o
+  CC      lib/pci_iomap.o
+  CC      sound/soc/soc-jack.o
+  CC      net/bluetooth/ecc.o
+  LD      drivers/base/power/built-in.o
+  CC      drivers/base/regmap/regmap.o
+  CC      lib/iomap_copy.o
+  CC      net/bluetooth/hci_request.o
+  CC      lib/devres.o
+  CC      sound/soc/soc-cache.o
+  CC      lib/hweight.o
+  CC      net/bluetooth/mgmt_util.o
+  CC      sound/soc/soc-utils.o
+  CC      lib/assoc_array.o
+  CC      net/bluetooth/sco.o
+  CC      sound/soc/soc-pcm.o
+  CC      drivers/base/regmap/regcache.o
+  CC      lib/bitrev.o
+  CC      lib/rational.o
+  CC      lib/crc-ccitt.o
+  CC      net/bluetooth/a2mp.o
+  CC      lib/crc16.o
+  CC      drivers/base/regmap/regcache-rbtree.o
+  CC      drivers/base/regmap/regcache-lzo.o
+  HOSTCC  lib/gen_crc32table
+  CC      lib/libcrc32c.o
+  CC      sound/soc/soc-io.o
+  CC      net/bluetooth/amp.o
+  CC      drivers/base/regmap/regcache-flat.o
+  CC      net/bluetooth/hci_debugfs.o
+  CC      lib/genalloc.o
+  CC      sound/soc/soc-devres.o
+  CC      drivers/base/regmap/regmap-debugfs.o
+  CC      lib/lzo/lzo1x_compress.o
+  CC      drivers/base/regmap/regmap-i2c.o
+  LD      net/bluetooth/bluetooth.o
+  LD      net/bluetooth/built-in.o
+  CC      net/bridge/br.o
+  CC      sound/soc/soc-ops.o
+  CC      lib/lzo/lzo1x_decompress_safe.o
+  CC      drivers/base/regmap/regmap-spi.o
+  CC      net/bridge/br_device.o
+  LD      lib/lzo/lzo_compress.o
+  LD      lib/lzo/lzo_decompress.o
+  LD      lib/lzo/built-in.o
+  CC      lib/mpi/generic_mpih-lshift.o
+  CC      sound/soc/soc-compress.o
+  CC      drivers/base/regmap/regmap-spmi.o
+  CC      lib/mpi/generic_mpih-mul1.o
+  CC      lib/mpi/generic_mpih-mul2.o
+  CC      drivers/base/regmap/regmap-mmio.o
+  LD      sound/soc/adi/built-in.o
+  LD      sound/soc/atmel/built-in.o
+  LD      sound/soc/au1x/built-in.o
+  LD      sound/soc/bcm/built-in.o
+  LD      sound/soc/blackfin/built-in.o
+  CC      lib/mpi/generic_mpih-mul3.o
+  LD      sound/soc/cirrus/built-in.o
+  CC      sound/soc/codecs/msm_hdmi_codec_rx.o
+  CC      net/bridge/br_fdb.o
+  CC      lib/mpi/generic_mpih-rshift.o
+  CC      drivers/base/regmap/regmap-swr.o
+  CC      lib/mpi/generic_mpih-sub1.o
+  CC      sound/soc/codecs/wcd9335.o
+  CC      net/bridge/br_forward.o
+  CC      lib/mpi/generic_mpih-add1.o
+  LD      drivers/base/regmap/built-in.o
+  CC      drivers/base/dma-mapping.o
+  CC      lib/mpi/mpicoder.o
+  CC      net/bridge/br_if.o
+  CC      drivers/base/dma-coherent.o
+  CC      lib/mpi/mpi-bit.o
+  CC      net/bridge/br_input.o
+  CC      drivers/base/dma-removed.o
+  CC      lib/mpi/mpi-cmp.o
+  CC      lib/mpi/mpih-cmp.o
+  CC      net/bridge/br_ioctl.o
+  CC      drivers/base/firmware_class.o
+  CC      lib/mpi/mpih-div.o
+  CC      sound/soc/codecs/msm_sdw/msm_sdw_cdc.o
+  CC      lib/mpi/mpih-mul.o
+  CC      net/bridge/br_stp.o
+  CC      lib/mpi/mpi-pow.o
+  CC      drivers/base/module.o
+  CC      lib/mpi/mpiutil.o
+  CC      drivers/base/soc.o
+  CC      net/bridge/br_stp_bpdu.o
+  CC      sound/soc/codecs/msm_sdw/msm_sdw_regmap.o
+  CC      net/bridge/br_stp_if.o
+  LD      lib/mpi/mpi.o
+  LD      lib/mpi/built-in.o
+  CC      lib/reed_solomon/reed_solomon.o
+  CC      drivers/base/pinctrl.o
+  CC      sound/soc/codecs/msm_sdw/msm-sdw-tables.o
+  CC      net/bridge/br_stp_timer.o
+  CC      drivers/base/devcoredump.o
+  CC      sound/soc/codecs/msm_sdw/msm_sdw_cdc_utils.o
+  CC      net/bridge/br_netlink.o
+  LD      lib/reed_solomon/built-in.o
+  CC      lib/zlib_deflate/deflate.o
+  CC      drivers/base/platform-msi.o
+  CC      net/bridge/br_sysfs_if.o
+  LD      sound/soc/codecs/msm_sdw/snd-soc-msm-sdw.o
+  LD      sound/soc/codecs/msm_sdw/built-in.o
+  CC      sound/soc/codecs/sdm660_cdc/msm-analog-cdc.o
+  CC      lib/zlib_deflate/deftree.o
+../sound/soc/codecs/sdm660_cdc/msm-analog-cdc.c: In function ‘msm_anlg_cdc_mbhc_calc_impedance’:
+../sound/soc/codecs/sdm660_cdc/msm-analog-cdc.c:716:41: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  716 |                                         if (impedance_r == impedance_l)
+      |                                         ^~
+../sound/soc/codecs/sdm660_cdc/msm-analog-cdc.c:720:49: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  720 |                                                 sdm660_cdc->imped_det_pin =
+      |                                                 ^~~~~~~~~~
+  CC      lib/zlib_deflate/deflate_syms.o
+  CC      net/bridge/br_sysfs_br.o
+  LD      drivers/base/built-in.o
+  CC      drivers/bluetooth/bluetooth-power.o
+  LD      lib/zlib_deflate/zlib_deflate.o
+  LD      lib/zlib_deflate/built-in.o
+  CC      lib/zlib_inflate/inffast.o
+  CC      lib/zlib_inflate/inflate.o
+  CC      lib/zlib_inflate/infutil.o
+  CC      drivers/bluetooth/btfm_slim.o
+  CC      net/bridge/br_nf_core.o
+  CC      sound/soc/codecs/sdm660_cdc/msm-digital-cdc.o
+  CC      lib/zlib_inflate/inftrees.o
+  CC      lib/zlib_inflate/inflate_syms.o
+  CC      drivers/bluetooth/btfm_slim_codec.o
+  CC      net/bridge/br_multicast.o
+  LD      lib/zlib_inflate/zlib_inflate.o
+  LD      lib/zlib_inflate/built-in.o
+  CC      lib/textsearch.o
+  CC      drivers/bluetooth/btfm_slim_wcn3990.o
+  CC      sound/soc/codecs/sdm660_cdc/sdm660-regmap.o
+  LD      drivers/bluetooth/built-in.o
+  LD      drivers/bus/built-in.o
+  LD      drivers/cdrom/built-in.o
+  CC      drivers/char/mem.o
+  CC      sound/soc/codecs/sdm660_cdc/sdm660-cdc-irq.o
+  CC      lib/ts_kmp.o
+  CC      lib/ts_bm.o
+  CC      drivers/char/random.o
+  CC      sound/soc/codecs/sdm660_cdc/tas2557-core.o
+  CC      lib/ts_fsm.o
+  CC      net/bridge/br_mdb.o
+  CC      lib/percpu_counter.o
+  CC      net/bridge/netfilter/ebtables.o
+  CC      sound/soc/codecs/sdm660_cdc/tas2557-regmap.o
+  CC      lib/audit.o
+  CC      drivers/char/misc.o
+  CC      lib/compat_audit.o
+  CC      lib/swiotlb.o
+  CC      sound/soc/codecs/sdm660_cdc/tas2557-codec.o
+  CC      net/bridge/netfilter/ebtable_broute.o
+  LD      drivers/char/agp/built-in.o
+  CC      drivers/char/diag/diagchar_core.o
+  CC      sound/soc/codecs/sdm660_cdc/tas2557-misc.o
+  CC      lib/iommu-helper.o
+../drivers/char/diag/diagchar_core.c: In function ‘diag_cmd_invalidate_polling’:
+../drivers/char/diag/diagchar_core.c:722:34: warning: the comparison will always evaluate as ‘false’ for the address of ‘entry’ will never be NULL [-Waddress]
+  722 |                 if (&item->entry == NULL) {
+      |                                  ^~
+In file included from ../drivers/char/diag/diagmem.h:15,
+                 from ../drivers/char/diag/diagchar_core.c:33:
+../drivers/char/diag/diagchar.h:343:37: note: ‘entry’ declared here
+  343 |         struct diag_cmd_reg_entry_t entry;
+      |                                     ^~~~~
+../drivers/char/diag/diagchar_core.c: In function ‘diag_cmd_search’:
+../drivers/char/diag/diagchar_core.c:791:34: warning: the comparison will always evaluate as ‘false’ for the address of ‘entry’ will never be NULL [-Waddress]
+  791 |                 if (&item->entry == NULL) {
+      |                                  ^~
+../drivers/char/diag/diagchar.h:343:37: note: ‘entry’ declared here
+  343 |         struct diag_cmd_reg_entry_t entry;
+      |                                     ^~~~~
+../drivers/char/diag/diagchar_core.c: In function ‘diag_cmd_remove_reg_by_pid’:
+../drivers/char/diag/diagchar_core.c:868:34: warning: the comparison will always evaluate as ‘false’ for the address of ‘entry’ will never be NULL [-Waddress]
+  868 |                 if (&item->entry == NULL) {
+      |                                  ^~
+../drivers/char/diag/diagchar.h:343:37: note: ‘entry’ declared here
+  343 |         struct diag_cmd_reg_entry_t entry;
+      |                                     ^~~~~
+../drivers/char/diag/diagchar_core.c: In function ‘diag_cmd_remove_reg_by_proc’:
+../drivers/char/diag/diagchar_core.c:892:34: warning: the comparison will always evaluate as ‘false’ for the address of ‘entry’ will never be NULL [-Waddress]
+  892 |                 if (&item->entry == NULL) {
+      |                                  ^~
+../drivers/char/diag/diagchar.h:343:37: note: ‘entry’ declared here
+  343 |         struct diag_cmd_reg_entry_t entry;
+      |                                     ^~~~~
+  CC      lib/iommu-common.o
+  LD      net/bridge/netfilter/built-in.o
+  CC [M]  net/bridge/br_netfilter_hooks.o
+  CC      sound/soc/codecs/sdm660_cdc/tiload.o
+  CC      lib/syscall.o
+  LD      sound/soc/codecs/sdm660_cdc/snd-soc-sdm660-cdc.o
+  LD      sound/soc/codecs/sdm660_cdc/snd-soc-tas2557.o
+  LD      sound/soc/codecs/sdm660_cdc/built-in.o
+  CC      sound/soc/codecs/wcd934x/wcd934x.o
+  CC      lib/nlattr.o
+  CC [M]  net/bridge/br_netfilter_ipv6.o
+  CC      drivers/char/diag/diagchar_hdlc.o
+  CC      lib/checksum.o
+  CC      drivers/char/diag/diagfwd.o
+  LD      net/bridge/bridge.o
+  LD [M]  net/bridge/br_netfilter.o
+  LD      net/bridge/built-in.o
+  CC      net/core/sock.o
+  CC      lib/cpu_rmap.o
+  CC      lib/dynamic_queue_limits.o
+  CC      drivers/char/diag/diagfwd_glink.o
+  CC      lib/clz_tab.o
+  CC      lib/strncpy_from_user.o
+  CC      lib/strnlen_user.o
+  CC      drivers/char/diag/diagfwd_peripheral.o
+  CC      net/core/request_sock.o
+  CC      lib/net_utils.o
+  CC      sound/soc/codecs/wcd934x/wcd934x-dsp-cntl.o
+  CC      drivers/char/diag/diagfwd_smd.o
+  CC      lib/asn1_decoder.o
+  CC      net/core/skbuff.o
+  GEN     lib/oid_registry_data.c
+  CC      lib/qmi_encdec.o
+  CC      drivers/char/diag/diagfwd_socket.o
+  CC      sound/soc/codecs/wcd934x/wcd934x-mbhc.o
+  CC      lib/argv_split.o
+  CC      drivers/char/diag/diag_mux.o
+  CC      sound/soc/codecs/wcd934x/wcd934x-dsd.o
+  CC      lib/bug.o
+  CC      net/core/datagram.o
+  CC      drivers/char/diag/diag_memorydevice.o
+  CC      lib/cmdline.o
+  CC      lib/cpumask.o
+  LD      sound/soc/codecs/wcd934x/snd-soc-wcd934x.o
+  LD      sound/soc/codecs/wcd934x/snd-soc-wcd934x-mbhc.o
+  LD      sound/soc/codecs/wcd934x/snd-soc-wcd934x-dsd.o
+  LD      sound/soc/codecs/wcd934x/built-in.o
+  CC      sound/soc/codecs/audio-ext-clk-up.o
+  CC      drivers/char/diag/diag_usb.o
+  CC      lib/ctype.o
+  CC      lib/dec_and_lock.o
+  CC      sound/soc/codecs/wcd9xxx-resmgr.o
+  CC      lib/decompress.o
+  CC      net/core/stream.o
+  CC      lib/decompress_bunzip2.o
+  CC      drivers/char/diag/diagmem.o
+  CC      lib/decompress_inflate.o
+  CC      drivers/char/diag/diagfwd_cntl.o
+  CC      sound/soc/codecs/wcd9xxx-mbhc.o
+  CC      net/core/scm.o
+  CC      lib/decompress_unlzma.o
+  CC      drivers/char/diag/diag_dci.o
+  CC      lib/dump_stack.o
+  CC      net/core/gen_stats.o
+  CC      lib/earlycpio.o
+  CC      drivers/char/diag/diag_masks.o
+  CC      lib/extable.o
+  CC      sound/soc/codecs/wcd9xxx-common.o
+  CC      lib/fdt.o
+  CC      drivers/char/diag/diag_debugfs.o
+  CC      lib/fdt_empty_tree.o
+  CC      net/core/gen_estimator.o
+  CC      lib/fdt_ro.o
+  LD      drivers/char/diag/diagchar.o
+  LD      drivers/char/diag/built-in.o
+  CC      drivers/char/hw_random/core.o
+  CC      lib/fdt_rw.o
+  CC      sound/soc/codecs/wcdcal-hwdep.o
+  CC      lib/fdt_strerror.o
+  CC      lib/fdt_sw.o
+  CC      net/core/net_namespace.o
+  CC      lib/fdt_wip.o
+  CC      lib/flex_proportions.o
+  CC      drivers/char/hw_random/msm_rng.o
+  CC      sound/soc/codecs/wcd9xxx-common-v2.o
+  CC      lib/idr.o
+  CC      sound/soc/codecs/wcd9xxx-resmgr-v2.o
+  LD      drivers/char/hw_random/rng-core.o
+  LD      drivers/char/hw_random/built-in.o
+  CC      drivers/char/adsprpc.o
+  CC      lib/int_sqrt.o
+  CC      lib/ioremap.o
+  CC      net/core/secure_seq.o
+  CC      lib/irq_regs.o
+  CC      net/core/flow_dissector.o
+  CC      sound/soc/codecs/wcd_cpe_services.o
+  CC      lib/is_single_threaded.o
+  CC      lib/klist.o
+  CC      sound/soc/codecs/wcd_cpe_core.o
+  CC      drivers/char/adsprpc_compat.o
+  CC      lib/kobject.o
+  CC      net/core/sysctl_net_core.o
+  CC      lib/kobject_uevent.o
+  CC [M]  drivers/char/rdbg.o
+  CC      net/core/dev.o
+  LD      drivers/char/built-in.o
+  CC      drivers/clk/clk-devres.o
+  CC      lib/md5.o
+  CC      sound/soc/codecs/wcd-mbhc-v2.o
+  CC      lib/nmi_backtrace.o
+  CC      drivers/clk/clkdev.o
+  CC      lib/plist.o
+  CC      drivers/clk/clk.o
+  CC      lib/proportions.o
+  CC      lib/radix-tree.o
+  CC      sound/soc/codecs/wsa881x.o
+  CC      net/core/ethtool.o
+  CC      lib/ratelimit.o
+  CC      drivers/clk/clk-divider.o
+  CC      sound/soc/codecs/wsa881x-tables.o
+  CC      lib/rbtree.o
+  CC      sound/soc/codecs/wsa881x-regmap.o
+  CC      lib/seq_buf.o
+  CC      drivers/clk/clk-fixed-factor.o
+  CC      sound/soc/codecs/wsa881x-temp-sensor.o
+  CC      lib/sha1.o
+  CC      net/core/dev_addr_lists.o
+  CC      drivers/clk/clk-fixed-rate.o
+  CC      lib/show_mem.o
+  CC      sound/soc/codecs/wcd-dsp-mgr.o
+  CC      lib/siphash.o
+  CC      drivers/clk/clk-gate.o
+  CC      lib/string.o
+  CC      net/core/dst.o
+  CC      sound/soc/codecs/wcd-dsp-utils.o
+  CC      drivers/clk/clk-multiplier.o
+  CC      lib/timerqueue.o
+  CC      drivers/clk/clk-mux.o
+  CC      sound/soc/codecs/wcd-spi.o
+  CC      lib/vsprintf.o
+  CC      net/core/netevent.o
+  CC      drivers/clk/clk-composite.o
+  CC      sound/soc/codecs/msm_stub.o
+  CC      net/core/neighbour.o
+  CC      drivers/clk/clk-fractional-divider.o
+  LD      sound/soc/codecs/snd-soc-wcd9335.o
+  LD      sound/soc/codecs/audio-ext-clock-up.o
+  LD      sound/soc/codecs/snd-soc-wcd9xxx.o
+  LD      sound/soc/codecs/snd-soc-wcd9xxx-v2.o
+  LD      sound/soc/codecs/snd-soc-wcd-cpe.o
+  LD      sound/soc/codecs/snd-soc-wcd-mbhc.o
+  LD      sound/soc/codecs/snd-soc-wsa881x.o
+  LD      sound/soc/codecs/snd-soc-wcd-dsp-mgr.o
+  LD      sound/soc/codecs/snd-soc-wcd-dsp-utils.o
+  LD      sound/soc/codecs/snd-soc-wcd-spi.o
+  LD      sound/soc/codecs/snd-soc-msm-stub.o
+  LD      sound/soc/codecs/built-in.o
+  LD      sound/soc/davinci/built-in.o
+  LD      sound/soc/dwc/built-in.o
+  LD      sound/soc/fsl/built-in.o
+  LD      sound/soc/generic/built-in.o
+  LD      sound/soc/intel/boards/built-in.o
+  LD      sound/soc/intel/built-in.o
+  LD      sound/soc/jz4740/built-in.o
+  LD      sound/soc/kirkwood/built-in.o
+  LD      sound/soc/mediatek/built-in.o
+  CC      sound/soc/msm/msm-pcm-hostless.o
+  CC      drivers/clk/clk-gpio.o
+  GEN     lib/crc32table.h
+  CC      lib/oid_registry.o
+  CC      net/core/rtnetlink.o
+  CC      sound/soc/msm/qdsp6v2/msm-dai-slim.o
+  AR      lib/lib.a
+  CC      lib/crc32.o
+  CC      drivers/clk/clk-conf.o
+  CC      drivers/clk/clk-xgene.o
+  CC      sound/soc/msm/qdsp6v2/audio_slimslave.o
+  LD      lib/built-in.o
+  CC      drivers/clocksource/clksrc-probe.o
+  CC      sound/soc/msm/qdsp6v2/msm-dai-q6-v2.o
+  LD      drivers/clk/bcm/built-in.o
+  LD      drivers/clk/msm/built-in.o
+  CC      drivers/clk/qcom/common.o
+  CC      drivers/clocksource/arm_arch_timer.o
+  CC      drivers/clk/qcom/clk-regmap.o
+  CC      drivers/clocksource/dummy_timer.o
+  CC      net/core/utils.o
+  LD      drivers/clocksource/built-in.o
+  CC      drivers/clk/qcom/clk-alpha-pll.o
+  LD      sound/sparc/built-in.o
+  CC      sound/soc/msm/qdsp6v2/msm-pcm-q6-v2.o
+  CC      net/ethernet/eth.o
+In file included from ../include/uapi/linux/stddef.h:1,
+                 from ../include/linux/stddef.h:4,
+                 from ../include/uapi/linux/posix_types.h:4,
+                 from ../include/uapi/linux/types.h:13,
+                 from ../include/linux/types.h:5,
+                 from ../include/linux/list.h:4,
+                 from ../include/linux/module.h:9,
+                 from ../net/ethernet/eth.c:40:
+../net/ethernet/eth.c: In function ‘eth_type_trans’:
+../net/ethernet/eth.c:164:22: warning: ‘is_multicast_ether_addr_64bits’ reading 8 bytes from a region of size 6 [-Wstringop-overread]
+  164 |         if (unlikely(is_multicast_ether_addr_64bits(eth->h_dest))) {
+../include/linux/compiler.h:182:45: note: in definition of macro ‘unlikely’
+  182 | # define unlikely(x)    __builtin_expect(!!(x), 0)
+      |                                             ^
+../net/ethernet/eth.c:164:22: note: referencing argument 1 of type ‘const u8[8]’ {aka ‘const unsigned char[8]’}
+  164 |         if (unlikely(is_multicast_ether_addr_64bits(eth->h_dest))) {
+../include/linux/compiler.h:182:45: note: in definition of macro ‘unlikely’
+  182 | # define unlikely(x)    __builtin_expect(!!(x), 0)
+      |                                             ^
+In file included from ../net/ethernet/eth.c:50:
+../include/linux/etherdevice.h:125:20: note: in a call to function ‘is_multicast_ether_addr_64bits’
+  125 | static inline bool is_multicast_ether_addr_64bits(const u8 addr[6+2])
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../net/ethernet/eth.c:165:21: warning: ‘ether_addr_equal_64bits’ reading 8 bytes from a region of size 6 [-Wstringop-overread]
+  165 |                 if (ether_addr_equal_64bits(eth->h_dest, dev->broadcast))
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../net/ethernet/eth.c:165:21: note: referencing argument 1 of type ‘const u8[8]’ {aka ‘const unsigned char[8]’}
+../net/ethernet/eth.c:165:21: note: referencing argument 2 of type ‘const u8[8]’ {aka ‘const unsigned char[8]’}
+../include/linux/etherdevice.h:339:20: note: in a call to function ‘ether_addr_equal_64bits’
+  339 | static inline bool ether_addr_equal_64bits(const u8 addr1[6+2],
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~
+../net/ethernet/eth.c:170:28: warning: ‘ether_addr_equal_64bits’ reading 8 bytes from a region of size 6 [-Wstringop-overread]
+  170 |         else if (unlikely(!ether_addr_equal_64bits(eth->h_dest,
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  171 |                                                    dev->dev_addr)))
+      |                                                    ~~~~~~~~~~~~~~
+../include/linux/compiler.h:182:45: note: in definition of macro ‘unlikely’
+  182 | # define unlikely(x)    __builtin_expect(!!(x), 0)
+      |                                             ^
+../net/ethernet/eth.c:170:28: note: referencing argument 1 of type ‘const u8[8]’ {aka ‘const unsigned char[8]’}
+  170 |         else if (unlikely(!ether_addr_equal_64bits(eth->h_dest,
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  171 |                                                    dev->dev_addr)))
+      |                                                    ~~~~~~~~~~~~~~
+../include/linux/compiler.h:182:45: note: in definition of macro ‘unlikely’
+  182 | # define unlikely(x)    __builtin_expect(!!(x), 0)
+      |                                             ^
+../net/ethernet/eth.c:170:28: note: referencing argument 2 of type ‘const u8[8]’ {aka ‘const unsigned char[8]’}
+  170 |         else if (unlikely(!ether_addr_equal_64bits(eth->h_dest,
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  171 |                                                    dev->dev_addr)))
+      |                                                    ~~~~~~~~~~~~~~
+../include/linux/compiler.h:182:45: note: in definition of macro ‘unlikely’
+  182 | # define unlikely(x)    __builtin_expect(!!(x), 0)
+      |                                             ^
+../include/linux/etherdevice.h:339:20: note: in a call to function ‘ether_addr_equal_64bits’
+  339 | static inline bool ether_addr_equal_64bits(const u8 addr1[6+2],
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~
+  CC      net/core/link_watch.o
+  CC      drivers/clk/qcom/clk-pll.o
+  LD      net/ethernet/built-in.o
+  LD      sound/soc/mxs/built-in.o
+  CC      sound/soc/msm/msm-dai-fe.o
+  CC      drivers/clk/qcom/clk-rcg.o
+  CC      net/core/filter.o
+  CC      sound/soc/msm/qdsp6v2/msm-pcm-routing-v2.o
+  LD      virt/lib/built-in.o
+  LD      virt/built-in.o
+  CC      drivers/cpufreq/cpufreq.o
+../sound/soc/msm/qdsp6v2/msm-pcm-routing-v2.c: In function ‘msm_routing_put_stereo_to_custom_stereo_control’:
+../sound/soc/msm/qdsp6v2/msm-pcm-routing-v2.c:16336:33: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+16336 |                                 if (topo_id < 0)
+      |                                 ^~
+In file included from ../include/linux/kernel.h:13,
+                 from ../include/linux/list.h:8,
+                 from ../include/linux/module.h:9,
+                 from ../sound/soc/msm/qdsp6v2/msm-pcm-routing-v2.c:16:
+../include/linux/printk.h:112:1: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  112 | do {                                            \
+      | ^~
+../include/linux/printk.h:289:9: note: in expansion of macro ‘no_printk’
+  289 |         no_printk(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__)
+      |         ^~~~~~~~~
+../sound/soc/msm/qdsp6v2/msm-pcm-routing-v2.c:16339:41: note: in expansion of macro ‘pr_debug’
+16339 |                                         pr_debug("idx %d\n", idx);
+      |                                         ^~~~~~~~
+  CC      drivers/clk/qcom/clk-rcg2.o
+  CC      net/core/sock_diag.o
+  CC      drivers/clk/qcom/clk-branch.o
+  CC      drivers/cpufreq/freq_table.o
+  CC      sound/soc/msm/qdsp6v2/msm-compress-q6-v2.o
+  CC      drivers/clk/qcom/clk-regmap-divider.o
+  CC      net/core/dev_ioctl.o
+  CC      drivers/cpufreq/cpufreq_governor_attr_set.o
+  CC      drivers/cpufreq/cpufreq_stats.o
+  CC      drivers/clk/qcom/clk-regmap-mux.o
+  CC      net/core/tso.o
+  CC      drivers/cpufreq/cpufreq_times.o
+  CC      drivers/clk/qcom/clk-regmap-mux-div.o
+  CC      sound/soc/msm/qdsp6v2/msm-pcm-afe-v2.o
+  CC      drivers/cpufreq/cpufreq_performance.o
+  CC      drivers/cpufreq/cpufreq_powersave.o
+  CC      net/core/flow.o
+  CC      drivers/clk/qcom/clk-hfpll.o
+  CC      drivers/cpufreq/cpufreq_userspace.o
+  CC      sound/soc/msm/qdsp6v2/msm-pcm-voip-v2.o
+  CC      net/core/net-sysfs.o
+  CC      drivers/clk/qcom/reset.o
+  CC      drivers/cpufreq/cpufreq_ondemand.o
+  CC      sound/soc/msm/qdsp6v2/msm-pcm-voice-v2.o
+  CC      drivers/clk/qcom/clk-voter.o
+../sound/soc/msm/qdsp6v2/msm-pcm-voice-v2.c: In function ‘msm_voice_sidetone_put’:
+../sound/soc/msm/qdsp6v2/msm-pcm-voice-v2.c:502:29: warning: comparison of constant ‘0’ with boolean expression is always false [-Wbool-compare]
+  502 |         if (sidetone_enable < 0) {
+      |                             ^
+../sound/soc/msm/qdsp6v2/msm-pcm-voice-v2.c: At top level:
+../sound/soc/msm/qdsp6v2/msm-pcm-voice-v2.c:626:19: warning: duplicate ‘const’ declaration specifier [-Wduplicate-decl-specifier]
+  626 | static const char const *tty_mode[] = {"OFF", "HCO", "VCO", "FULL"};
+      |                   ^~~~~
+  CC      sound/soc/msm/qdsp6v2/msm-dai-q6-hdmi-v2.o
+  CC      drivers/cpufreq/cpufreq_conservative.o
+  CC      drivers/clk/qcom/clk-dummy.o
+  CC      sound/soc/msm/qdsp6v2/msm-lsm-client.o
+  CC      net/core/net-procfs.o
+  CC      drivers/cpufreq/cpufreq_interactive.o
+  CC      drivers/clk/qcom/clk-debug.o
+  CC      sound/soc/msm/qdsp6v2/msm-pcm-host-voice-v2.o
+  CC      net/core/fib_rules.o
+  CC      drivers/clk/qcom/gdsc.o
+  CC      sound/soc/msm/qdsp6v2/msm-audio-effects-q6-v2.o
+  CC      drivers/cpufreq/cpufreq_governor.o
+  CC      drivers/clk/qcom/gdsc-regulator.o
+  CC      net/core/net-traces.o
+  CC      sound/soc/msm/qdsp6v2/msm-pcm-loopback-v2.o
+  CC      drivers/cpufreq/cpu-boost.o
+  CC      drivers/clk/qcom/gcc-sdm660.o
+  CC      drivers/cpufreq/qcom-cpufreq.o
+  LD      drivers/cpufreq/built-in.o
+  CC      sound/soc/msm/qdsp6v2/msm-transcode-loopback-q6-v2.o
+  CC      net/ipc_router/ipc_router_core.o
+  CC      drivers/clk/qcom/gpucc-sdm660.o
+  CC      net/core/sockev_nlmcast.o
+  CC      sound/soc/msm/qdsp6v2/adsp_err.o
+  CC      drivers/clk/qcom/mmcc-sdm660.o
+  CC      sound/soc/msm/qdsp6v2/msm-pcm-dtmf-v2.o
+  CC      drivers/clk/qcom/clk-smd-rpm.o
+  CC      net/core/dst_cache.o
+  CC      sound/soc/msm/qdsp6v2/msm-dai-stub-v2.o
+  CC      drivers/clk/qcom/clk-cpu-osm.o
+  CC      sound/soc/msm/qdsp6v2/msm-pcm-routing-devdep.o
+  LD      net/core/built-in.o
+  CC      sound/soc/msm/qdsp6v2/msm-ds2-dap-config.o
+  CC      net/ipc_router/ipc_router_socket.o
+  LD      sound/spi/built-in.o
+  LD      sound/soc/nuc900/built-in.o
+  CC      sound/soc/msm/msm-cpe-lsm.o
+  CC      drivers/clk/qcom/mdss/mdss-pll-util.o
+  CC      sound/soc/msm/qdsp6v2/msm-dts-srs-tm-config.o
+../sound/soc/msm/qdsp6v2/msm-dts-srs-tm-config.c: In function ‘reg_ion_mem’:
+../sound/soc/msm/qdsp6v2/msm-dts-srs-tm-config.c:293:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  293 |         if (rc != 0)
+      |         ^~
+In file included from ../include/linux/kernel.h:13,
+                 from ../include/linux/list.h:8,
+                 from ../include/linux/module.h:9,
+                 from ../sound/soc/msm/qdsp6v2/msm-dts-srs-tm-config.c:15:
+../include/linux/printk.h:112:1: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  112 | do {                                            \
+      | ^~
+../include/linux/printk.h:289:9: note: in expansion of macro ‘no_printk’
+  289 |         no_printk(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__)
+      |         ^~~~~~~~~
+../sound/soc/msm/qdsp6v2/msm-dts-srs-tm-config.c:295:17: note: in expansion of macro ‘pr_debug’
+  295 |                 pr_debug("%s: exited ion_client = %pK, ion_handle = %pK, phys_addr = %lu, length = %d, vaddr = %pK, rc = 0x%x\n",
+      |                 ^~~~~~~~
+  CC      net/ipc_router/ipc_router_security.o
+  CC      sound/soc/msm/qdsp6v2/msm-qti-pp-config.o
+  CC      drivers/clk/qcom/mdss/mdss-pll.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-sim.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm660-internal-codec-cdp.dtb
+  CC      sound/soc/msm/qdsp6v2/audio_calibration.o
+  CC      drivers/clk/qcom/mdss/mdss-dsi-pll-14nm.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-internal-codec-mtp.dtb
+  LD      net/ipc_router/built-in.o
+  CC      sound/soc/msm/qdsp6v2/audio_cal_utils.o
+  CC      net/ipv4/route.o
+  CC      drivers/clk/qcom/mdss/mdss-dsi-pll-14nm-util.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-internal-codec-rcm.dtb
+  CC      sound/soc/msm/qdsp6v2/q6adm.o
+  CC      drivers/clk/qcom/mdss/mdss-dp-pll-14nm.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-cdp.dtb
+  CC      drivers/clk/qcom/mdss/mdss-dp-pll-14nm-util.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-mtp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm660-qrd.dtb
+  LD      drivers/clk/qcom/mdss/built-in.o
+  LD      drivers/clk/qcom/clk-qcom.o
+  LD      drivers/clk/qcom/built-in.o
+  LD      drivers/clk/built-in.o
+  CC      drivers/cpuidle/cpuidle.o
+  CC      net/ipv4/inetpeer.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-rcm.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm660-rumi.dtb
+  CC      sound/soc/msm/qdsp6v2/q6afe.o
+  CC      drivers/cpuidle/driver.o
+  CC      net/ipv4/protocol.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-pm660a-cdp.dtb
+  CC      drivers/cpuidle/governor.o
+  CC      drivers/cpuidle/sysfs.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-pm660a-mtp.dtb
+  CC      net/ipv4/ip_input.o
+  CC      drivers/cpuidle/governors/ladder.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-pm660a-qrd.dtb
+  CC      drivers/cpuidle/governors/menu.o
+  LD      drivers/cpuidle/governors/built-in.o
+  CC      drivers/cpuidle/lpm-levels.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-pm660a-rcm.dtb
+  CC      net/ipv4/ip_fragment.o
+  CC      sound/soc/msm/qdsp6v2/q6asm.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-pm660a-rumi.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm660-internal-codec-pm660a-cdp.dtb
+  CC      net/ipv4/ip_forward.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-internal-codec-pm660a-mtp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm660-internal-codec-pm660a-rcm.dtb
+  CC      drivers/cpuidle/lpm-levels-of.o
+  CC      net/ipv4/ip_options.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-pm660a-sim.dtb
+  CC      drivers/cpuidle/lpm-workarounds.o
+  DTC     arch/arm64/boot/dts/qcom/sda660-cdp.dtb
+  LD      drivers/cpuidle/built-in.o
+  CC      drivers/crypto/msm/qcedev.o
+  CC      net/ipv4/ip_output.o
+  DTC     arch/arm64/boot/dts/qcom/sda660-mtp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sda660-rcm.dtb
+  CC      sound/soc/msm/qdsp6v2/q6audio-v2.o
+  DTC     arch/arm64/boot/dts/qcom/sda660-pm660a-cdp.dtb
+  CC      sound/soc/msm/qdsp6v2/q6voice.o
+  CC      drivers/crypto/msm/qce50.o
+  DTC     arch/arm64/boot/dts/qcom/sda660-pm660a-mtp.dtb
+  CC      net/ipv4/ip_sockglue.o
+  DTC     arch/arm64/boot/dts/qcom/sda660-pm660a-rcm.dtb
+  DTC     arch/arm64/boot/dts/qcom/sda660-pm660a-qrd-hdk.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm660-headset-jacktype-no-cdp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm660-headset-jacktype-no-rcm.dtb
+  CC      net/ipv4/inet_hashtables.o
+  CC      sound/soc/msm/qdsp6v2/q6core.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-pm660a-headset-jacktype-no-cdp.dtb
+  CC      drivers/crypto/msm/compat_qcedev.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-pm660a-headset-jacktype-no-rcm.dtb
+  CC      net/ipv4/inet_timewait_sock.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-usbc-audio-mtp.dtb
+  CC      sound/soc/msm/qdsp6v2/rtac.o
+  DTC     arch/arm64/boot/dts/qcom/sdm660-usbc-audio-rcm.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm658-mtp.dtb
+  CC      net/ipv4/inet_connection_sock.o
+  CC      drivers/crypto/msm/qcrypto.o
+  CC      sound/soc/msm/qdsp6v2/q6lsm.o
+  DTC     arch/arm64/boot/dts/qcom/sdm658-cdp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm658-rcm.dtb
+  CC      sound/soc/msm/qdsp6v2/msm-pcm-q6-noirq.o
+  CC      net/ipv4/tcp.o
+  DTC     arch/arm64/boot/dts/qcom/sdm658-qrd.dtb
+  CC      sound/soc/msm/qdsp6v2/q6common.o
+  DTC     arch/arm64/boot/dts/qcom/sdm658-pm660a-mtp.dtb
+  LD      sound/soc/msm/qdsp6v2/snd-soc-qdsp6v2.o
+  LD      sound/soc/msm/qdsp6v2/built-in.o
+  CC      sound/soc/msm/msm8998.o
+  DTC     arch/arm64/boot/dts/qcom/sdm658-pm660a-cdp.dtb
+  CC      drivers/crypto/msm/ota_crypto.o
+  DTC     arch/arm64/boot/dts/qcom/sdm658-pm660a-rcm.dtb
+  CC      drivers/crypto/msm/ice.o
+  DTC     arch/arm64/boot/dts/qcom/sdm658-pm660a-qrd.dtb
+  CC      net/ipv4/tcp_input.o
+  DTC     arch/arm64/boot/dts/qcom/sdm658-internal-codec-mtp.dtb
+  CC      sound/soc/msm/sdm660-common.o
+  DTC     arch/arm64/boot/dts/qcom/sdm658-internal-codec-cdp.dtb
+  LD      drivers/crypto/msm/built-in.o
+  LD      drivers/crypto/built-in.o
+  CC      drivers/devfreq/devfreq.o
+  DTC     arch/arm64/boot/dts/qcom/sdm658-internal-codec-rcm.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm658-internal-codec-pm660a-mtp.dtb
+  CC      drivers/devfreq/governor_simpleondemand.o
+  CC      sound/soc/msm/sdm660-internal.o
+  CC      drivers/devfreq/governor_performance.o
+  DTC     arch/arm64/boot/dts/qcom/sdm658-internal-codec-pm660a-cdp.dtb
+  CC      net/ipv4/tcp_output.o
+  DTC     arch/arm64/boot/dts/qcom/sdm658-internal-codec-pm660a-rcm.dtb
+  CC      drivers/devfreq/governor_powersave.o
+  CC      sound/soc/msm/sdm660-external.o
+  CC      drivers/devfreq/governor_userspace.o
+  DTC     arch/arm64/boot/dts/qcom/sda658-cdp.dtb
+  CC      drivers/devfreq/governor_msm_adreno_tz.o
+  DTC     arch/arm64/boot/dts/qcom/sda658-mtp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sda658-rcm.dtb
+  CC      sound/soc/msm/sdm660-ext-dai-links.o
+  CC      net/ipv4/tcp_timer.o
+  CC      drivers/devfreq/governor_cpufreq.o
+  DTC     arch/arm64/boot/dts/qcom/sda658-pm660a-mtp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sda658-pm660a-cdp.dtb
+  CC      drivers/devfreq/bimc-bwmon.o
+  DTC     arch/arm64/boot/dts/qcom/sda658-pm660a-rcm.dtb
+  LD      sound/soc/msm/snd-soc-hostless-pcm.o
+  LD      sound/soc/msm/snd-soc-qdsp6v2.o
+  LD      sound/soc/msm/snd-soc-cpe.o
+  LD      sound/soc/msm/snd-soc-msm8998.o
+  LD      sound/soc/msm/snd-soc-sdm660-common.o
+  LD      sound/soc/msm/snd-soc-int-codec.o
+  LD      sound/soc/msm/snd-soc-ext-codec.o
+  LD      sound/soc/msm/built-in.o
+  LD      sound/soc/omap/built-in.o
+  LD      sound/soc/pxa/built-in.o
+  LD      sound/soc/qcom/built-in.o
+  LD      sound/soc/rockchip/built-in.o
+  LD      sound/soc/samsung/built-in.o
+  LD      sound/soc/sh/built-in.o
+  LD      sound/soc/sirf/built-in.o
+  LD      sound/soc/spear/built-in.o
+  LD      sound/soc/sti/built-in.o
+  LD      sound/soc/sunxi/built-in.o
+  LD      sound/soc/tegra/built-in.o
+  LD      sound/soc/txx9/built-in.o
+  LD      sound/soc/ux500/built-in.o
+  LD      sound/soc/xtensa/built-in.o
+  LD      sound/soc/zte/built-in.o
+  LD      sound/soc/snd-soc-core.o
+  LD      sound/soc/built-in.o
+  LD      sound/synth/built-in.o
+  CC      sound/usb/card.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-cdp.dtb
+  CC      net/ipv4/tcp_ipv4.o
+  CC      drivers/devfreq/arm-memlat-mon.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-mtp.dtb
+  CC      drivers/devfreq/governor_bw_hwmon.o
+  CC      sound/usb/clock.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-qrd.dtb
+  CC      sound/usb/endpoint.o
+  CC      drivers/devfreq/governor_spdm_bw_hyp.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-rcm.dtb
+  CC      drivers/devfreq/governor_gpubw_mon.o
+  CC      sound/usb/format.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-headset-jacktype-no-cdp.dtb
+  CC      net/ipv4/tcp_minisocks.o
+  CC      sound/usb/helper.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-headset-jacktype-no-rcm.dtb
+  CC      sound/usb/mixer.o
+  CC      drivers/devfreq/governor_bw_vbif.o
+  CC      drivers/devfreq/governor_memlat.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-internal-codec-cdp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm636-internal-codec-mtp.dtb
+  CC      net/ipv4/tcp_cong.o
+  CC      drivers/devfreq/devfreq_devbw.o
+  CC      sound/usb/mixer_quirks.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-internal-codec-pm660a-cdp.dtb
+  CC      drivers/devfreq/devfreq_spdm.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-internal-codec-pm660a-mtp.dtb
+  CC      net/ipv4/tcp_metrics.o
+  CC      drivers/devfreq/devfreq_spdm_debugfs.o
+  CC      sound/usb/mixer_scarlett.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-internal-codec-pm660a-rcm.dtb
+  CC      sound/usb/pcm.o
+  LD      drivers/devfreq/built-in.o
+  CC      drivers/dma/dmaengine.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-internal-codec-rcm.dtb
+  CC      net/ipv4/tcp_fastopen.o
+  CC      sound/usb/proc.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-pm660a-headset-jacktype-no-cdp.dtb
+  CC      drivers/dma/of-dma.o
+  CC      sound/usb/quirks.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-pm660a-headset-jacktype-no-rcm.dtb
+  CC      net/ipv4/tcp_recovery.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-pm660a-cdp.dtb
+  CC      sound/usb/stream.o
+  CC      net/ipv4/tcp_offload.o
+  CC      drivers/dma/qcom-sps-dma.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-pm660a-mtp.dtb
+  CC      sound/usb/badd.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-pm660a-qrd.dtb
+  CC      net/ipv4/datagram.o
+  CC      sound/usb/midi.o
+  LD      drivers/dma/xilinx/built-in.o
+  LD      drivers/dma/built-in.o
+  CC      drivers/dma-buf/dma-buf.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-pm660a-rcm.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm636-usbc-audio-mtp.dtb
+  CC      net/ipv4/raw.o
+  DTC     arch/arm64/boot/dts/qcom/sdm636-usbc-audio-rcm.dtb
+  DTC     arch/arm64/boot/dts/qcom/sda636-cdp.dtb
+  CC      drivers/dma-buf/fence.o
+  LD      sound/usb/6fire/built-in.o
+  LD      sound/usb/bcd2000/built-in.o
+  LD      sound/usb/caiaq/built-in.o
+  LD      sound/usb/hiface/built-in.o
+  LD      sound/usb/misc/built-in.o
+  LD      sound/usb/usx2y/built-in.o
+  CC      sound/usb/usb_audio_qmi_v01.o
+  CC      sound/usb/usb_audio_qmi_svc.o
+  DTC     arch/arm64/boot/dts/qcom/sda636-mtp.dtb
+  CC      net/ipv4/udp.o
+  CC      drivers/dma-buf/reservation.o
+  LD      sound/usb/snd-usb-audio.o
+  LD      sound/usb/snd-usbmidi-lib.o
+  LD      sound/usb/built-in.o
+  CC      sound/last.o
+  DTC     arch/arm64/boot/dts/qcom/sda636-rcm.dtb
+  LD      sound/soundcore.o
+  LD      sound/built-in.o
+  CC      drivers/dma-buf/seqno-fence.o
+  CC      net/ipv6/af_inet6.o
+  DTC     arch/arm64/boot/dts/qcom/sda636-pm660a-cdp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sda636-pm660a-mtp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sda636-pm660a-qrd-hdk.dtb
+  CC      net/ipv4/udplite.o
+  CC      net/ipv6/anycast.o
+  LD      drivers/dma-buf/built-in.o
+  CC      drivers/extcon/extcon.o
+  DTC     arch/arm64/boot/dts/qcom/sda636-pm660a-rcm.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm630-rumi.dtb
+  CC      net/ipv4/udp_offload.o
+  CC      net/ipv6/ip6_output.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-pm660a-rumi.dtb
+  LD      drivers/extcon/built-in.o
+  LD      drivers/firewire/built-in.o
+  CC      drivers/firmware/psci.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-mtp.dtb
+  CC      net/ipv4/arp.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-usbc-audio-mtp.dtb
+  CC      drivers/firmware/qcom_scm.o
+  CC      drivers/firmware/qcom_scm-64.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-usbc-audio-rcm.dtb
+  LD      drivers/firmware/broadcom/built-in.o
+  CC      drivers/firmware/qcom/tz_log.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-cdp.dtb
+  CC      net/ipv4/icmp.o
+  CC      net/ipv6/ip6_input.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-rcm.dtb
+  LD      drivers/firmware/qcom/built-in.o
+  LD      drivers/firmware/built-in.o
+  CC      drivers/gpio/devres.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-internal-codec-mtp.dtb
+  CC      net/ipv6/addrconf.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-internal-codec-cdp.dtb
+  CC      net/ipv4/devinet.o
+  CC      drivers/gpio/gpiolib.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-internal-codec-rcm.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm630-pm660a-cdp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm630-pm660a-mtp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm630-pm660a-rcm.dtb
+  CC      drivers/gpio/gpiolib-legacy.o
+  CC      net/ipv4/af_inet.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-pm660a-qrd.dtb
+  CC      net/ipv6/addrlabel.o
+  CC      drivers/gpio/gpiolib-of.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-internal-codec-pm660a-cdp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm630-internal-codec-pm660a-mtp.dtb
+  CC      drivers/gpio/gpiolib-sysfs.o
+  CC      net/ipv6/route.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-internal-codec-pm660a-rcm.dtb
+  CC      net/ipv4/igmp.o
+  DTC     arch/arm64/boot/dts/qcom/sda630-mtp.dtb
+  CC      drivers/gpio/qpnp-pin.o
+  DTC     arch/arm64/boot/dts/qcom/sda630-cdp.dtb
+  CC      net/ipv6/ip6_fib.o
+  DTC     arch/arm64/boot/dts/qcom/sda630-rcm.dtb
+  DTC     arch/arm64/boot/dts/qcom/sda630-pm660a-mtp.dtb
+  CC      drivers/gpio/gpio-msm-smp2p.o
+  CC      net/ipv4/fib_frontend.o
+  DTC     arch/arm64/boot/dts/qcom/sda630-pm660a-cdp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sda630-pm660a-rcm.dtb
+  LD      drivers/gpio/built-in.o
+  CC      net/ipv6/ipv6_sockglue.o
+  LD      drivers/gpu/drm/bridge/built-in.o
+  LD      drivers/gpu/drm/i2c/built-in.o
+  LD      drivers/gpu/drm/panel/built-in.o
+  LD      drivers/gpu/drm/tilcdc/built-in.o
+  LD      drivers/gpu/drm/built-in.o
+  CC      drivers/gpu/msm/kgsl.o
+  DTC     arch/arm64/boot/dts/qcom/sda630-pm660a-qrd-hdk.dtb
+  CC      net/ipv4/fib_semantics.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-headset-jacktype-no-cdp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm630-headset-jacktype-no-rcm.dtb
+  CC      net/ipv6/ndisc.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-pm660a-headset-jacktype-no-cdp.dtb
+  CC      net/ipv4/fib_trie.o
+  DTC     arch/arm64/boot/dts/qcom/sdm630-pm660a-headset-jacktype-no-rcm.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm455-mtp.dtb
+  CC      net/ipv6/udp.o
+  DTC     arch/arm64/boot/dts/qcom/sdm455-qrd.dtb
+  CC      net/ipv4/inet_fragment.o
+  CC      drivers/gpu/msm/kgsl_trace.o
+  DTC     arch/arm64/boot/dts/qcom/sdm455-cdp.dtb
+  DTC     arch/arm64/boot/dts/qcom/sdm455-rcm.dtb
+  CC      net/ipv4/ping.o
+  DTC     arch/arm64/boot/dts/qcom/sdm455-internal-codec-rcm.dtb
+  CC      net/ipv6/udplite.o
+  CC      drivers/gpu/vga/vgaarb.o
+  CC      net/ipv6/raw.o
+  CC      net/ipv4/ip_tunnel_core.o
+  CC      drivers/gpu/msm/kgsl_drawobj.o
+  LD      drivers/gpu/vga/built-in.o
+  CC      net/key/af_key.o
+  CC      net/ipv4/gre_offload.o
+  CC      drivers/gpu/msm/kgsl_ioctl.o
+  CC      net/ipv6/icmp.o
+  CC      net/ipv4/ip_tunnel.o
+  CC      drivers/gpu/msm/kgsl_sharedmem.o
+  LD      net/key/built-in.o
+  CC      drivers/hid/hid-core.o
+  CC      net/ipv6/mcast.o
+  CC      drivers/gpu/msm/kgsl_pwrctrl.o
+  CC      net/ipv4/sysctl_net_ipv4.o
+  CC      drivers/hid/hid-input.o
+  CC      net/ipv4/sysfs_net_ipv4.o
+  CC      net/ipv4/proc.o
+  CC      net/ipv6/reassembly.o
+  CC      drivers/gpu/msm/kgsl_pwrscale.o
+  CC      net/ipv4/fib_rules.o
+  CC      drivers/gpu/msm/kgsl_mmu.o
+  CC      drivers/hid/hid-debug.o
+  CC      net/ipv6/tcp_ipv6.o
+  CC      net/ipv4/udp_tunnel.o
+  CC      drivers/hid/uhid.o
+  CC      drivers/gpu/msm/kgsl_snapshot.o
+  CC      drivers/hid/hid-generic.o
+  CC      net/ipv4/ip_vti.o
+  CC      net/ipv6/ping.o
+  CC      drivers/hid/hid-apple.o
+  CC      drivers/gpu/msm/kgsl_events.o
+  CC      drivers/hid/hid-elecom.o
+  CC      drivers/hid/hid-magicmouse.o
+  CC      net/ipv4/ah4.o
+  CC      net/ipv6/exthdrs.o
+  CC      drivers/hid/hid-microsoft.o
+  CC      drivers/gpu/msm/kgsl_pool.o
+  CC      drivers/hid/hid-multitouch.o
+  CC      net/ipv4/esp4.o
+  CC      drivers/gpu/msm/kgsl_iommu.o
+  CC      drivers/hid/hid-plantronics.o
+  CC      net/ipv6/datagram.o
+  CC      drivers/hid/hid-sony.o
+  CC      net/ipv4/ipcomp.o
+  CC      net/ipv4/xfrm4_tunnel.o
+  CC      drivers/gpu/msm/kgsl_debugfs.o
+  CC      net/ipv6/ip6_flowlabel.o
+  CC      drivers/hid/usbhid/hid-core.o
+  CC      drivers/gpu/msm/kgsl_sync.o
+  CC      net/ipv4/xfrm4_mode_beet.o
+  CC      drivers/gpu/msm/kgsl_compat.o
+  CC      net/ipv4/tunnel4.o
+  CC      net/ipv6/inet6_connection_sock.o
+  CC      drivers/hid/usbhid/hid-quirks.o
+  CC      drivers/gpu/msm/adreno_ioctl.o
+  LD      drivers/hid/usbhid/usbhid.o
+  LD      drivers/hid/usbhid/built-in.o
+  CC      drivers/gpu/msm/adreno_ringbuffer.o
+  LD      drivers/hid/hid.o
+  LD      drivers/hid/built-in.o
+  CC      net/ipv4/xfrm4_mode_transport.o
+  CC      net/ipv6/sysctl_net_ipv6.o
+  CC      net/l2tp/l2tp_core.o
+  CC      net/ipv4/xfrm4_mode_tunnel.o
+  CC      net/ipv6/xfrm6_policy.o
+  CC      drivers/gpu/msm/adreno_drawctxt.o
+  CC      net/ipv4/ipconfig.o
+  CC      net/ipv6/xfrm6_state.o
+  CC      drivers/gpu/msm/adreno_dispatch.o
+  CC      net/l2tp/l2tp_ppp.o
+  CC      net/ipv6/xfrm6_input.o
+  CC      net/ipv4/netfilter.o
+  CC      net/ipv6/xfrm6_output.o
+  CC      net/l2tp/l2tp_ip.o
+  CC      drivers/gpu/msm/adreno_snapshot.o
+  CC      net/ipv4/netfilter/nf_conntrack_l3proto_ipv4_compat.o
+  CC      net/ipv6/xfrm6_protocol.o
+  CC      drivers/gpu/msm/adreno_coresight.o
+  CC      net/ipv4/netfilter/nf_conntrack_l3proto_ipv4.o
+  CC      net/l2tp/l2tp_netlink.o
+  CC      drivers/gpu/msm/adreno_trace.o
+  CC      net/ipv6/netfilter.o
+  CC      net/ipv4/netfilter/nf_conntrack_proto_icmp.o
+  CC      net/l2tp/l2tp_eth.o
+  CC      drivers/gpu/msm/adreno_a5xx.o
+  CC      net/ipv4/netfilter/nf_nat_l3proto_ipv4.o
+  CC      net/ipv6/fib6_rules.o
+  CC      net/l2tp/l2tp_ip6.o
+  CC      net/ipv4/netfilter/nf_nat_proto_icmp.o
+  CC      net/ipv6/proc.o
+  LD      net/l2tp/built-in.o
+  LD      drivers/hsi/clients/built-in.o
+  LD      drivers/hsi/controllers/built-in.o
+  LD      drivers/hsi/built-in.o
+  CC      net/ipv4/inet_diag.o
+  CC      drivers/gpu/msm/adreno_a5xx_snapshot.o
+  CC      drivers/gpu/msm/adreno_a5xx_preempt.o
+  CC      net/ipv6/ah6.o
+  CC      net/ipv4/netfilter/nf_defrag_ipv4.o
+  CC      net/llc/llc_core.o
+  CC      drivers/gpu/msm/adreno_sysfs.o
+  CC      net/ipv4/netfilter/nf_log_ipv4.o
+  CC      drivers/gpu/msm/adreno.o
+  CC      net/ipv6/esp6.o
+  CC      net/llc/llc_input.o
+  CC      net/ipv4/netfilter/nf_reject_ipv4.o
+  CC      net/ipv6/ipcomp6.o
+  CC      net/llc/llc_output.o
+  CC      drivers/gpu/msm/adreno_cp_parser.o
+  CC      net/ipv6/xfrm6_tunnel.o
+  CC      net/ipv4/netfilter/nf_nat_h323.o
+  LD      net/llc/llc.o
+  LD      net/llc/built-in.o
+  CC      drivers/gpu/msm/adreno_perfcounter.o
+  CC      drivers/hwmon/hwmon.o
+  CC      net/ipv6/tunnel6.o
+  CC      net/ipv4/netfilter/nf_nat_pptp.o
+  CC      drivers/gpu/msm/adreno_iommu.o
+  CC      net/ipv4/netfilter/nf_nat_masquerade_ipv4.o
+  CC      drivers/hwmon/qpnp-adc-voltage.o
+  CC      drivers/gpu/msm/adreno_debugfs.o
+  CC      net/ipv6/xfrm6_mode_transport.o
+  CC      net/ipv4/netfilter/nf_nat_proto_gre.o
+  CC      drivers/gpu/msm/adreno_profile.o
+  CC      net/ipv6/xfrm6_mode_tunnel.o
+  CC      net/ipv4/netfilter/ip_tables.o
+  CC      drivers/hwmon/qpnp-adc-common.o
+  CC      drivers/gpu/msm/adreno_compat.o
+  CC      net/ipv6/xfrm6_mode_beet.o
+  LD      drivers/gpu/msm/msm_kgsl_core.o
+  LD      drivers/gpu/msm/msm_adreno.o
+  LD      drivers/gpu/msm/built-in.o
+  LD      drivers/gpu/built-in.o
+  CC      net/ipv4/tcp_diag.o
+  CC      net/ipv6/mip6.o
+  LD      drivers/hwmon/built-in.o
+  CC      net/ipv4/netfilter/iptable_filter.o
+  CC      drivers/hwspinlock/hwspinlock_core.o
+  CC      net/ipv6/netfilter/ip6_tables.o
+  CC      net/ipv4/netfilter/iptable_mangle.o
+  CC      net/netfilter/core.o
+  CC      drivers/hwspinlock/msm_remote_spinlock.o
+  CC      net/ipv4/netfilter/iptable_nat.o
+  CC      net/ipv6/netfilter/ip6table_filter.o
+  LD      drivers/hwspinlock/built-in.o
+  LD      drivers/hwtracing/intel_th/built-in.o
+  CC      drivers/i2c/i2c-boardinfo.o
+  CC      net/ipv4/netfilter/iptable_raw.o
+  CC      net/netfilter/nf_log.o
+  CC      net/ipv6/netfilter/ip6table_mangle.o
+  CC      net/ipv4/netfilter/iptable_security.o
+  CC      drivers/i2c/i2c-core.o
+  CC      net/ipv6/netfilter/ip6table_raw.o
+  CC      net/ipv4/netfilter/ipt_ah.o
+  CC      net/netfilter/nf_queue.o
+  CC      net/ipv6/netfilter/nf_conntrack_l3proto_ipv6.o
+  CC      net/ipv4/netfilter/ipt_rpfilter.o
+  CC      net/ipv4/netfilter/ipt_MASQUERADE.o
+  CC      net/ipv6/netfilter/nf_conntrack_proto_icmpv6.o
+  CC      net/netfilter/nf_sockopt.o
+  CC      drivers/i2c/i2c-dev.o
+  CC      net/ipv4/netfilter/ipt_REJECT.o
+  CC      net/ipv6/netfilter/nf_defrag_ipv6_hooks.o
+  CC      drivers/i2c/i2c-mux.o
+  CC      net/ipv4/netfilter/arp_tables.o
+  CC      net/netfilter/nfnetlink.o
+  CC      net/ipv6/netfilter/nf_conntrack_reasm.o
+  LD      drivers/i2c/algos/built-in.o
+  CC      drivers/i2c/busses/i2c-msm-v2.o
+../drivers/i2c/busses/i2c-msm-v2.c:2874:19: warning: duplicate ‘const’ declaration specifier [-Wduplicate-decl-specifier]
+ 2874 | static const char const *i2c_msm_adapter_name = "MSM-I2C-v2-adapter";
+      |                   ^~~~~
+  CC      net/netfilter/nfnetlink_queue.o
+  CC      net/ipv4/netfilter/arpt_mangle.o
+  CC      net/ipv6/netfilter/nf_log_ipv6.o
+  LD      drivers/i2c/busses/built-in.o
+  LD      drivers/i2c/muxes/built-in.o
+  LD      drivers/i2c/built-in.o
+  LD      drivers/idle/built-in.o
+  CC      drivers/iio/industrialio-core.o
+  CC      net/ipv4/netfilter/arptable_filter.o
+  CC      net/netfilter/nfnetlink_log.o
+  CC      net/ipv6/netfilter/nf_reject_ipv6.o
+  CC      drivers/iio/industrialio-event.o
+  CC      net/ipv4/netfilter/nf_dup_ipv4.o
+  CC      net/ipv6/netfilter/nf_dup_ipv6.o
+  CC      drivers/iio/inkern.o
+  CC      net/netfilter/nf_conntrack_core.o
+  LD      net/ipv4/netfilter/nf_conntrack_ipv4.o
+  LD      net/ipv4/netfilter/nf_nat_ipv4.o
+  LD      net/ipv4/netfilter/built-in.o
+  CC      net/ipv4/udp_diag.o
+  CC      net/ipv6/netfilter/ip6t_rpfilter.o
+  CC      net/ipv4/tcp_cubic.o
+  LD      drivers/iio/accel/built-in.o
+  CC      drivers/iio/adc/qcom-rradc.o
+  CC      net/ipv6/netfilter/ip6t_REJECT.o
+  CC      drivers/iio/adc/qcom-tadc.o
+  CC      net/ipv4/cipso_ipv4.o
+  LD      net/ipv6/netfilter/nf_conntrack_ipv6.o
+  LD      net/ipv6/netfilter/nf_defrag_ipv6.o
+  LD      net/ipv6/netfilter/built-in.o
+  CC      net/ipv6/ip6_vti.o
+  CC      net/netfilter/nf_conntrack_standalone.o
+  LD      drivers/iio/adc/built-in.o
+  LD      drivers/iio/amplifiers/built-in.o
+  LD      drivers/iio/buffer/built-in.o
+  LD      drivers/iio/chemical/built-in.o
+  LD      drivers/iio/common/hid-sensors/built-in.o
+  LD      drivers/iio/common/ms_sensors/built-in.o
+  LD      drivers/iio/common/ssp_sensors/built-in.o
+  CC      net/ipv4/xfrm4_policy.o
+  LD      drivers/iio/common/st_sensors/built-in.o
+  LD      drivers/iio/common/built-in.o
+  LD      drivers/iio/dac/built-in.o
+  LD      drivers/iio/frequency/built-in.o
+  LD      drivers/iio/gyro/built-in.o
+  LD      drivers/iio/humidity/built-in.o
+  LD      drivers/iio/imu/inv_mpu6050/built-in.o
+  LD      drivers/iio/imu/built-in.o
+  LD      drivers/iio/light/built-in.o
+  LD      drivers/iio/magnetometer/built-in.o
+  LD      drivers/iio/orientation/built-in.o
+  LD      drivers/iio/potentiometer/built-in.o
+  LD      drivers/iio/pressure/built-in.o
+  LD      drivers/iio/proximity/built-in.o
+  LD      drivers/iio/temperature/built-in.o
+  LD      drivers/iio/trigger/built-in.o
+  LD      drivers/iio/industrialio.o
+  LD      drivers/iio/built-in.o
+  CC      drivers/input/input.o
+  CC      net/ipv6/sit.o
+  CC      net/netfilter/nf_conntrack_expect.o
+  CC      net/ipv4/xfrm4_state.o
+  CC      net/ipv6/ip6_tunnel.o
+  CC      drivers/input/input-compat.o
+  CC      net/ipv4/xfrm4_input.o
+  CC      drivers/input/input-mt.o
+  CC      net/netfilter/nf_conntrack_helper.o
+  CC      drivers/input/ff-core.o
+  CC      net/ipv4/xfrm4_output.o
+  CC      net/ipv6/addrconf_core.o
+  CC      drivers/input/input-leds.o
+  CC      net/netfilter/nf_conntrack_proto.o
+  CC      drivers/input/mousedev.o
+  CC      net/ipv4/xfrm4_protocol.o
+  CC      net/netfilter/nf_conntrack_l3proto_generic.o
+  CC      net/ipv6/exthdrs_core.o
+  CC      drivers/input/evdev.o
+  CC      net/ipv6/ip6_checksum.o
+  CC      net/netfilter/nf_conntrack_proto_generic.o
+  LD      net/ipv4/built-in.o
+  CC      net/netfilter/nf_conntrack_proto_tcp.o
+  CC      drivers/input/keyboard/atkbd.o
+  CC      drivers/input/serio/serio.o
+  CC      net/ipv6/ip6_icmp.o
+  CC      drivers/input/keyboard/gpio_keys.o
+  CC      net/netfilter/nf_conntrack_proto_udp.o
+  CC      drivers/input/serio/libps2.o
+  CC      net/ipv6/output_core.o
+  LD      drivers/input/keyboard/built-in.o
+  CC      drivers/input/misc/qpnp-power-on.o
+  CC      net/ipv6/protocol.o
+  CC      net/netfilter/nf_conntrack_extend.o
+  LD      drivers/input/serio/built-in.o
+  CC      net/netlabel/netlabel_user.o
+  CC      net/netlabel/netlabel_kapi.o
+  CC      drivers/input/misc/uinput.o
+  CC      net/ipv6/ip6_offload.o
+  CC      net/netfilter/nf_conntrack_acct.o
+  CC      net/netfilter/nf_conntrack_seqadj.o
+  CC      net/ipv6/tcpv6_offload.o
+  CC      net/netlabel/netlabel_domainhash.o
+  CC      drivers/input/misc/vl53L0/stmvl53l0_module.o
+../drivers/input/misc/vl53L0/stmvl53l0_module.c: In function ‘stmvl53l0_ioctl_handler’:
+../drivers/input/misc/vl53L0/stmvl53l0_module.c:1873:33: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 1873 |                                 if (data->enableDebug)
+      |                                 ^~
+../drivers/input/misc/vl53L0/stmvl53l0_module.c:1878:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 1878 |                                         parameter.status =
+      |                                         ^~~~~~~~~
+  CC      net/ipv6/udp_offload.o
+  CC      net/netlabel/netlabel_addrlist.o
+  CC      net/netfilter/nf_conntrack_ecache.o
+  CC      net/ipv6/exthdrs_offload.o
+  CC      drivers/input/misc/vl53L0/stmvl53l0_module-i2c.o
+  CC      net/netlabel/netlabel_mgmt.o
+  CC      drivers/input/misc/vl53L0/stmvl53l0_module-cci.o
+  CC      net/ipv6/inet6_hashtables.o
+  CC      net/netfilter/nf_conntrack_proto_dccp.o
+  CC      drivers/input/misc/vl53L0/src/vl53l0_api_calibration.o
+  CC      net/netlabel/netlabel_unlabeled.o
+  CC      net/ipv6/ip6_udp_tunnel.o
+  CC      net/netfilter/nf_conntrack_proto_gre.o
+  CC      drivers/input/misc/vl53L0/src/vl53l0_api_core.o
+  CC      net/netlabel/netlabel_cipso_v4.o
+  CC      drivers/input/misc/vl53L0/src/vl53l0_api_histogram.o
+  CC      net/ipv6/mcast_snoop.o
+  CC      net/netfilter/nf_conntrack_proto_sctp.o
+  LD      net/netlabel/built-in.o
+  CC      net/netfilter/nf_conntrack_proto_udplite.o
+  CC      drivers/input/misc/vl53L0/src/vl53l0_api_ranging.o
+  CC      drivers/input/misc/vl53L0/src/vl53l0_api_strings.o
+  CC      net/netfilter/nf_conntrack_netlink.o
+  LD      net/ipv6/ipv6.o
+  CC      drivers/input/touchscreen/nvt_touch_d2s/nt36xxx.o
+  LD      net/ipv6/built-in.o
+  CC      drivers/input/misc/vl53L0/src/vl53l0_api.o
+  CC      drivers/iommu/iommu.o
+  CC      drivers/input/touchscreen/nvt_touch_d2s/nt36xxx_fw_update.o
+  CC      drivers/input/touchscreen/nvt_touch_d2s/nt36xxx_ext_proc.o
+  CC      drivers/input/misc/vl53L0/src/vl53l0_platform.o
+  CC      net/netfilter/nf_conntrack_amanda.o
+  CC      drivers/input/touchscreen/nvt_touch_d2s/nt36xxx_mp_ctrlram.o
+  CC      drivers/input/misc/vl53L0/src/vl53l0_i2c_platform.o
+  LD      drivers/input/touchscreen/nvt_touch_d2s/built-in.o
+  LD      drivers/input/touchscreen/synaptics_dsx_e7s/built-in.o
+  CC      drivers/input/touchscreen/synaptics_dsx_force/synaptics_dsx_i2c.o
+  CC      drivers/iommu/iommu-traces.o
+  CC      drivers/input/misc/vl53L0/src/vl53l0_port_i2c.o
+  CC      net/netfilter/nf_conntrack_ftp.o
+  CC      drivers/iommu/iommu-sysfs.o
+  CC      drivers/input/misc/vl53L0/src/vl53l010_api.o
+  LD      drivers/input/touchscreen/synaptics_dsx_force/built-in.o
+  CC      drivers/input/touchscreen/synaptics_tcm/synaptics_tcm_i2c.o
+  CC      drivers/iommu/msm_dma_iommu_mapping.o
+  CC      drivers/iommu/io-pgtable.o
+  LD      drivers/input/touchscreen/synaptics_tcm/built-in.o
+  CC      drivers/input/touchscreen/tp_common.o
+  CC      drivers/input/misc/vl53L0/src/vl53l010_tuning.o
+  CC      net/netfilter/nf_conntrack_h323_main.o
+  LD      drivers/input/misc/vl53L0/stmvl53l0.o
+  LD      drivers/input/touchscreen/built-in.o
+  LD      drivers/input/misc/vl53L0/built-in.o
+  CC      drivers/irqchip/irqchip.o
+  LD      drivers/input/misc/built-in.o
+  CC      drivers/input/keyreset.o
+  CC      drivers/iommu/io-pgtable-arm.o
+  CC      drivers/irqchip/irq-gic.o
+  CC      drivers/input/keycombo.o
+  CC      drivers/iommu/io-pgtable-fast.o
+  LD      drivers/input/input-core.o
+  LD      drivers/input/built-in.o
+-- ReSukiSU version code: 35136
+-- ReSukiSU version name: v4.2.0-rc1-fa1da13f@ReSukiSU
+-- Supported Unofficial Manager: MKSU, RKSU, KOWSU, SukiSU-Ultra, ReSukiSU 
+-- KERNEL_VERSION: 4.4
+-- KERNEL_TYPE: Non-GKI
+-- ReSukiSU: using SuSFS Inline hook
+-- ReSukiSU/susfs_inline: ksu_handle_setresuid found
+-- ReSukiSU/susfs_inline: ksu_handle_execveat found
+-- ReSukiSU/susfs_inline: WARNING: Detected KSU_MANUAL_HOOK guard in ../fs/open.c file.
+-- ReSukiSU/susfs_inline: ksu_handle_faccessat found
+-- ReSukiSU/susfs_inline: WARNING: Detected KSU_MANUAL_HOOK guard in ../fs/read_write.c file.
+-- ReSukiSU/susfs_inline: ksu_handle_sys_read found
+-- ReSukiSU/susfs_inline: ksu_handle_stat found
+-- ReSukiSU/susfs_inline: WARNING: Detected KSU_MANUAL_HOOK guard in ../kernel/reboot.c file.
+-- ReSukiSU/susfs_inline: ksu_handle_sys_reboot found
+-- ReSukiSU/susfs_inline: WARNING: Detected KSU_MANUAL_HOOK guard in ../drivers/input/input.c file.
+-- ReSukiSU/susfs_inline: ksu_handle_input_handle_event found
+-- ReSukiSU/susfs_inline: WARNING: Your build maybe broken.
+-- ReSukiSU/susfs_inline: - If you have any issue, please check your hook before submit an issue to ReSukiSU.
+
+-- SUSFS_VERSION: v2.3.0
+-- ReSukiSU/compat: seccomp_filter_count found
+-- ReSukiSU/compat: file_inode() found
+-- ReSukiSU/compat: ns_get_path found
+-- ReSukiSU/compat: modern dentry_open found
+-- ReSukiSU/compat: ext4_unregister_sysfs found
+-- ReSukiSU/compat: f_op->read_iter found
+-- ReSukiSU/compat: iterate_dir found
+-- ReSukiSU/compat: modern static_key_interface found
+-- ReSukiSU/compat: d_inode found
+-- ReSukiSU/compat: inode_lock found
+-- ReSukiSU/compat: modern errno file found
+-- ReSukiSU/compat: overflow.h found
+-- ReSukiSU/compat: modern proc ns header file found
+-- ReSukiSU/compat: android spec POLICYDB_CONFIG_ANDROID_NETLINK_ROUTE found!!
+-- ReSukiSU/compat: found security_add_hooks
+  CC      drivers/kernelsu/core/init.o
+  CC      net/netfilter/nf_conntrack_h323_asn1.o
+  CC      drivers/irqchip/irq-gic-common.o
+  CC      drivers/iommu/dma-mapping-fast.o
+  CC      drivers/irqchip/irq-gic-v2m.o
+  CC      net/netfilter/nf_conntrack_irc.o
+  CC      drivers/kernelsu/policy/allowlist.o
+  CC      drivers/irqchip/irq-gic-v3.o
+  CC      drivers/iommu/of_iommu.o
+  CC      net/netfilter/nf_conntrack_broadcast.o
+  CC      drivers/irqchip/irq-gic-v3-its.o
+  CC      drivers/kernelsu/policy/app_profile.o
+  CC      drivers/iommu/arm-smmu.o
+  CC      net/netfilter/nf_conntrack_netbios_ns.o
+  CC      drivers/kernelsu/policy/feature.o
+  CC      net/netfilter/nf_conntrack_pptp.o
+  CC      drivers/irqchip/irq-gic-v3-its-pci-msi.o
+  CC      drivers/kernelsu/feature/sucompat.o
+  CC      drivers/irqchip/irq-gic-v3-its-platform-msi.o
+  CC      net/netfilter/nf_conntrack_sane.o
+  CC      drivers/irqchip/msm_show_resume_irq.o
+  LD      drivers/iommu/built-in.o
+  CC      drivers/kernelsu/feature/kernel_umount.o
+  CC      drivers/leds/led-core.o
+  LD      drivers/irqchip/built-in.o
+  CC      net/netlink/af_netlink.o
+  CC      drivers/kernelsu/feature/sulog.o
+  CC      net/netfilter/nf_conntrack_tftp.o
+  CC      drivers/leds/led-class.o
+  CC      drivers/kernelsu/feature/adb_root.o
+  CC      drivers/kernelsu/feature/selinux_hide.o
+  CC      drivers/leds/led-triggers.o
+  CC      net/netfilter/nf_log_common.o
+  CC      drivers/leds/leds-qpnp.o
+  CC      drivers/kernelsu/feature/module_load_filter.o
+  CC      net/netlink/genetlink.o
+  CC      net/netfilter/nf_nat_core.o
+  CC      drivers/kernelsu/hook/setuid_hook.o
+  CC      drivers/leds/leds-qpnp-flash-v2.o
+  CC      drivers/kernelsu/feature/dynamic_manager.o
+  CC      net/netfilter/nf_nat_proto_unknown.o
+  LD      net/netlink/built-in.o
+  CC      net/netfilter/nf_nat_proto_common.o
+  CC      drivers/kernelsu/manager/apk_sign.o
+  CC      drivers/leds/leds-qpnp-flash-common.o
+  LD      drivers/lguest/built-in.o
+  CC      net/packet/af_packet.o
+  CC      net/netfilter/nf_nat_proto_udp.o
+  CC      drivers/leds/leds-qpnp-wled.o
+  CC      drivers/kernelsu/manager/throne_tracker.o
+  CC      net/netfilter/nf_nat_proto_tcp.o
+  CC      drivers/kernelsu/manager/manager.o
+  CC      net/netfilter/nf_nat_helper.o
+  CC      drivers/leds/leds-syscon.o
+  CC      drivers/kernelsu/compat/kernel_compat.o
+  LD      drivers/leds/trigger/built-in.o
+  LD      drivers/leds/built-in.o
+  CC      net/rfkill/core.o
+  LD      net/packet/built-in.o
+  CC      drivers/kernelsu/infra/su_mount_ns.o
+  CC      net/netfilter/nf_nat_redirect.o
+  LD      drivers/macintosh/built-in.o
+  CC      drivers/kernelsu/infra/seccomp_cache.o
+  CC      net/rmnet_data/rmnet_data_main.o
+  LD      net/rfkill/rfkill.o
+  LD      net/rfkill/built-in.o
+  CC      drivers/md/linear.o
+  CC      net/netfilter/nf_nat_proto_dccp.o
+  CC      drivers/kernelsu/infra/file_wrapper.o
+  CC      net/rmnet_data/rmnet_data_config.o
+  CC      drivers/md/md.o
+  CC      net/netfilter/nf_nat_proto_udplite.o
+  CC      drivers/kernelsu/infra/event_queue.o
+  CC      net/netfilter/nf_nat_proto_sctp.o
+  CC      net/rmnet_data/rmnet_data_vnd.o
+  CC      drivers/kernelsu/runtime/boot_event.o
+  CC      drivers/kernelsu/runtime/ksud_integration.o
+  CC      net/rmnet_data/rmnet_data_handlers.o
+  CC      net/netfilter/nf_nat_amanda.o
+  CC      net/netfilter/nf_nat_ftp.o
+  CC      net/rmnet_data/rmnet_map_data.o
+  CC      drivers/kernelsu/selinux/selinux.o
+  CC      net/netfilter/nf_nat_irc.o
+  CC      net/netfilter/nf_nat_tftp.o
+  CC      drivers/kernelsu/selinux/sepolicy.o
+  CC      net/rmnet_data/rmnet_map_command.o
+  CC      net/netfilter/x_tables.o
+  CC      drivers/md/bitmap.o
+  CC      net/rmnet_data/rmnet_data_stats.o
+  CC      drivers/kernelsu/selinux/rules.o
+  LD      net/rmnet_data/rmnet_data.o
+  LD      net/rmnet_data/built-in.o
+  LD      drivers/media/common/b2c2/built-in.o
+  LD      drivers/media/common/saa7146/built-in.o
+  LD      drivers/media/common/siano/built-in.o
+  LD      drivers/media/common/built-in.o
+  CC      drivers/media/dvb-core/dvbdev.o
+  CC      drivers/kernelsu/sulog/event.o
+  CC      drivers/media/dvb-core/dmxdev.o
+  CC      net/netfilter/xt_tcpudp.o
+  CC      drivers/md/dm-uevent.o
+  CC      drivers/kernelsu/sulog/fd.o
+  CC      drivers/md/dm.o
+  CC      net/netfilter/xt_mark.o
+  CC      drivers/kernelsu/supercall/dispatch.o
+  CC      net/netfilter/xt_connmark.o
+  CC      net/netfilter/xt_nat.o
+  CC      drivers/kernelsu/supercall/perm.o
+  CC      net/netfilter/xt_CLASSIFY.o
+  CC      drivers/media/dvb-core/dvb_demux.o
+  CC      drivers/kernelsu/supercall/supercall.o
+  CC      drivers/md/dm-table.o
+  CC      net/netfilter/xt_CONNSECMARK.o
+  CC      net/netfilter/xt_CT.o
+  CC      drivers/kernelsu/compat/apatch_conflict.o
+  CC      drivers/kernelsu/hook/arm64/patch_memory.o
+  CC      drivers/md/dm-target.o
+  CC      drivers/kernelsu/infra/symbol_resolver.o
+  CC      net/netfilter/xt_LOG.o
+  CC      drivers/media/dvb-core/dvb_filter.o
+  CC      drivers/media/dvb-core/dvb_ca_en50221.o
+  CC      drivers/md/dm-linear.o
+  CC      drivers/kernelsu/hook/lsm_hooks.o
+  CC      net/netfilter/xt_NETMAP.o
+  CC      drivers/md/dm-stripe.o
+  LD      drivers/kernelsu/kernelsu.o
+  LD      drivers/kernelsu/built-in.o
+  CC      net/netfilter/xt_NFLOG.o
+  LD      drivers/media/dvb-frontends/built-in.o
+  CC      drivers/media/dvb-core/dvb_frontend.o
+  CC      drivers/md/dm-ioctl.o
+  CC      net/netfilter/xt_NFQUEUE.o
+  CC      net/sched/sch_generic.o
+  CC      net/netfilter/xt_REDIRECT.o
+  CC      drivers/md/dm-io.o
+  CC      drivers/media/dvb-core/dvb_net.o
+  CC      net/netfilter/xt_SECMARK.o
+  CC      net/sched/sch_mq.o
+  CC      drivers/md/dm-kcopyd.o
+  CC      net/netfilter/xt_TPROXY.o
+  CC      net/sched/sch_api.o
+  CC      drivers/media/dvb-core/dvb_ringbuffer.o
+  CC      drivers/md/dm-sysfs.o
+  CC      net/netfilter/xt_TCPMSS.o
+  CC      drivers/media/dvb-core/dvb_math.o
+  CC      drivers/md/dm-stats.o
+  LD      drivers/media/dvb-core/dvb-core.o
+  LD      drivers/media/dvb-core/built-in.o
+  LD      drivers/media/firewire/built-in.o
+  LD      drivers/media/i2c/soc_camera/built-in.o
+  LD      drivers/media/i2c/built-in.o
+  LD      drivers/media/mmc/siano/built-in.o
+  LD      drivers/media/mmc/built-in.o
+  LD      drivers/media/pci/b2c2/built-in.o
+  LD      drivers/media/pci/ddbridge/built-in.o
+  LD      drivers/media/pci/dm1105/built-in.o
+  LD      drivers/media/pci/mantis/built-in.o
+  LD      drivers/media/pci/netup_unidvb/built-in.o
+  LD      drivers/media/pci/ngene/built-in.o
+  LD      drivers/media/pci/pluto2/built-in.o
+  LD      drivers/media/pci/pt1/built-in.o
+  LD      drivers/media/pci/pt3/built-in.o
+  CC      net/netfilter/xt_TEE.o
+  LD      drivers/media/pci/saa7146/built-in.o
+  LD      drivers/media/pci/smipcie/built-in.o
+  LD      drivers/media/pci/ttpci/built-in.o
+  LD      drivers/media/pci/built-in.o
+  LD      drivers/media/platform/msm/broadcast/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/camera/camera.o
+  CC      net/sched/sch_blackhole.o
+  CC      drivers/md/dm-builtin.o
+  CC      net/sched/cls_api.o
+  CC      net/netfilter/xt_TRACE.o
+  CC      drivers/md/dm-bufio.o
+  CC      net/netfilter/xt_IDLETIMER.o
+  LD      drivers/media/platform/msm/camera_v2/camera/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/common/msm_camera_io_util.o
+  CC      net/sched/act_api.o
+  CC      drivers/media/platform/msm/camera_v2/common/cam_smmu_api.o
+  CC      net/netfilter/xt_HARDIDLETIMER.o
+  CC      drivers/md/dm-crypt.o
+  CC      net/sched/act_gact.o
+  CC      net/netfilter/xt_comment.o
+  CC      drivers/media/platform/msm/camera_v2/common/cam_hw_ops.o
+  CC      drivers/md/dm-verity-fec.o
+  CC      net/netfilter/xt_connlimit.o
+  CC      net/sched/act_mirred.o
+  CC      drivers/media/platform/msm/camera_v2/common/cam_soc_api.o
+  CC      drivers/md/dm-verity-target.o
+../drivers/media/platform/msm/camera_v2/common/cam_soc_api.c: In function ‘msm_camera_regulator_set_mode’:
+../drivers/media/platform/msm/camera_v2/common/cam_soc_api.c:716:33: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  716 |                                 if (rc < 0)
+      |                                 ^~
+../drivers/media/platform/msm/camera_v2/common/cam_soc_api.c:719:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  719 |                                         goto error;
+      |                                         ^~~~
+../drivers/media/platform/msm/camera_v2/common/cam_soc_api.c: In function ‘msm_camera_put_regulators’:
+../drivers/media/platform/msm/camera_v2/common/cam_soc_api.c:744:17: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  744 |                 if (vdd_info[i] && !IS_ERR_OR_NULL(vdd_info[i]->vdd))
+      |                 ^~
+In file included from ../include/linux/kernel.h:13,
+                 from ../include/linux/delay.h:10,
+                 from ../drivers/media/platform/msm/camera_v2/common/cam_soc_api.c:23:
+../include/linux/printk.h:112:1: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  112 | do {                                            \
+      | ^~
+../include/linux/printk.h:289:9: note: in expansion of macro ‘no_printk’
+  289 |         no_printk(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__)
+      |         ^~~~~~~~~
+../drivers/media/platform/msm/camera_v2/common/cam_soc_api.c:20:28: note: in expansion of macro ‘pr_debug’
+   20 | #define CDBG(fmt, args...) pr_debug(fmt, ##args)
+      |                            ^~~~~~~~
+../drivers/media/platform/msm/camera_v2/common/cam_soc_api.c:746:25: note: in expansion of macro ‘CDBG’
+  746 |                         CDBG("vdd ptr[%d] :%pK\n", i, vdd_info[i]->vdd);
+      |                         ^~~~
+  CC      net/sched/act_skbedit.o
+  CC      net/netfilter/xt_conntrack.o
+  CC      drivers/media/platform/msm/camera_v2/common/msm_camera_tz_util.o
+  CC      net/sched/sch_fifo.o
+  CC      drivers/md/dm-req-crypt.o
+  CC      net/netfilter/xt_dscp.o
+  CC      drivers/media/platform/msm/camera_v2/common/msm_cam_cx_ipeak.o
+../drivers/md/dm-req-crypt.c:48: warning: "SECTOR_SIZE" redefined
+   48 | #define SECTOR_SIZE 512
+      | 
+In file included from ../drivers/md/dm-req-crypt.c:18:
+../include/linux/blkdev.h:851: note: this is the location of the previous definition
+  851 | #define SECTOR_SIZE (1 << SECTOR_SHIFT)
+      | 
+  LD      drivers/media/platform/msm/camera_v2/common/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/fd/msm_fd_dev.o
+  CC      net/netfilter/xt_ecn.o
+../drivers/md/dm-req-crypt.c:48: warning: "SECTOR_SIZE" redefined
+   48 | #define SECTOR_SIZE 512
+      | 
+In file included from ../drivers/md/dm-req-crypt.c:18:
+../include/linux/blkdev.h:851: note: this is the location of the previous definition
+  851 | #define SECTOR_SIZE (1 << SECTOR_SHIFT)
+      | 
+  CC      net/sched/sch_htb.o
+  CC      drivers/md/dm-android-verity.o
+  CC      net/netfilter/xt_esp.o
+  CC      drivers/media/platform/msm/camera_v2/fd/msm_fd_hw.o
+  CC      net/netfilter/xt_hashlimit.o
+  LD      drivers/md/md-mod.o
+  LD      drivers/md/dm-mod.o
+  LD      drivers/md/dm-verity.o
+  LD      drivers/md/built-in.o
+  CC      net/unix/af_unix.o
+  CC      net/sched/sch_ingress.o
+  LD      drivers/media/platform/msm/camera_v2/fd/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/isp/msm_buf_mgr.o
+  CC      net/sched/sch_prio.o
+  CC      net/netfilter/xt_helper.o
+  CC      net/sched/sch_multiq.o
+  CC      drivers/media/platform/msm/camera_v2/isp/msm_isp_util.o
+  CC      net/netfilter/xt_hl.o
+  CC      net/sched/cls_u32.o
+  CC      net/unix/garbage.o
+  CC      net/netfilter/xt_iprange.o
+  CC      net/sched/cls_fw.o
+  CC      net/netfilter/xt_length.o
+  CC      net/unix/sysctl_net_unix.o
+  CC      net/unix/scm.o
+  CC      net/sched/cls_flow.o
+  CC      net/netfilter/xt_limit.o
+  CC      drivers/media/platform/msm/camera_v2/isp/msm_isp_axi_util.o
+  LD      net/unix/unix.o
+  LD      net/unix/built-in.o
+  CC      net/netfilter/xt_mac.o
+  CC      net/sched/ematch.o
+  LD      drivers/media/platform/omap/built-in.o
+  LD      drivers/media/radio/built-in.o
+  LD      drivers/media/platform/msm/dvb/built-in.o
+  LD      drivers/media/platform/msm/dvb/adapter/built-in.o
+  CC [M]  drivers/media/platform/msm/dvb/adapter/mpq_adapter.o
+  CC      net/netfilter/xt_multiport.o
+  CC      net/sched/em_cmp.o
+  CC [M]  drivers/media/platform/msm/dvb/adapter/mpq_stream_buffer.o
+  CC      net/netfilter/xt_pkttype.o
+  CC      net/netfilter/xt_policy.o
+  CC      drivers/media/platform/msm/camera_v2/isp/msm_isp_stats_util.o
+  LD [M]  drivers/media/platform/msm/dvb/adapter/mpq-adapter.o
+  LD      drivers/media/platform/msm/dvb/demux/built-in.o
+  CC [M]  drivers/media/platform/msm/dvb/demux/mpq_dmx_plugin_common.o
+  CC      net/sched/em_nbyte.o
+  CC      net/netfilter/xt_qtaguid_print.o
+  CC      drivers/media/platform/msm/camera_v2/isp/msm_isp48.o
+  CC      net/sched/em_u32.o
+  CC      net/netfilter/xt_qtaguid.o
+  CC [M]  drivers/media/platform/msm/dvb/demux/mpq_sdmx.o
+  CC      drivers/media/platform/msm/camera_v2/isp/msm_isp47.o
+  CC      net/sched/em_meta.o
+  CC [M]  drivers/media/platform/msm/dvb/demux/mpq_dmx_plugin_sw.o
+  CC      net/netfilter/xt_quota.o
+  CC      net/sched/em_text.o
+  LD [M]  drivers/media/platform/msm/dvb/demux/mpq-dmx-hw-plugin.o
+  CC      drivers/media/platform/msm/camera_v2/ispif/msm_ispif.o
+  CC      net/netfilter/xt_quota2.o
+  LD      net/sched/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/isp/msm_isp46.o
+  CC      drivers/mfd/mfd-core.o
+  CC      net/netfilter/xt_socket.o
+  CC      drivers/mfd/qcom-spmi-pmic.o
+  LD      drivers/media/platform/msm/camera_v2/ispif/built-in.o
+  CC      drivers/mfd/qcom-i2c-pmic.o
+  LD      drivers/media/rc/keymaps/built-in.o
+  LD      drivers/media/rc/built-in.o
+  CC      drivers/media/tuners/tuner-xc2028.o
+  CC      drivers/media/platform/msm/camera_v2/isp/msm_isp44.o
+  CC      net/netfilter/xt_state.o
+  CC      drivers/mfd/syscon.o
+  CC      net/netfilter/xt_statistic.o
+  CC      drivers/mfd/msm-cdc-pinctrl.o
+  CC      drivers/media/tuners/tuner-simple.o
+  CC      net/netfilter/xt_string.o
+  CC      drivers/media/platform/msm/camera_v2/isp/msm_isp40.o
+  CC      drivers/mfd/msm-cdc-supply.o
+  CC      net/netfilter/xt_time.o
+  CC      drivers/media/tuners/tuner-types.o
+  CC      net/netfilter/xt_u32.o
+  CC      drivers/media/tuners/mt20xx.o
+  CC      drivers/mfd/wcd9xxx-utils.o
+  LD      net/netfilter/netfilter.o
+  LD      net/netfilter/nf_conntrack.o
+  LD      net/netfilter/nf_conntrack_h323.o
+  LD      net/netfilter/nf_nat.o
+  LD      net/netfilter/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/isp/msm_isp.o
+  LD      net/wireguard/built-in.o
+  CC [M]  net/wireguard/main.o
+  CC      drivers/media/tuners/tda8290.o
+  CC      drivers/mfd/wcd9xxx-core.o
+  CC [M]  net/wireguard/noise.o
+  LD      drivers/media/platform/msm/camera_v2/isp/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/jpeg_10/msm_jpeg_dev.o
+  CC [M]  net/wireguard/device.o
+  CC      drivers/media/tuners/tda9887.o
+  CC      drivers/mfd/wcd9xxx-irq.o
+  CC      drivers/media/platform/msm/camera_v2/jpeg_10/msm_jpeg_sync.o
+  CC      drivers/mfd/wcd9xxx-slimslave.o
+  CC [M]  net/wireguard/peer.o
+  CC      drivers/media/tuners/tda827x.o
+  CC      drivers/media/platform/msm/camera_v2/jpeg_10/msm_jpeg_core.o
+  CC      drivers/mfd/wcd9335-regmap.o
+  CC [M]  net/wireguard/timers.o
+  CC      drivers/media/platform/msm/camera_v2/jpeg_10/msm_jpeg_hw.o
+In file included from ../include/linux/kernel.h:13,
+                 from ../include/linux/uio.h:12,
+                 from ../include/linux/socket.h:7,
+                 from ../include/uapi/linux/if.h:24,
+                 from ./../net/wireguard/compat/udp_tunnel/udp_tunnel_partial_compat.h:142,
+                 from ./../net/wireguard/compat/compat.h:76,
+                 from <command-line>:
+../net/wireguard/timers.c: In function ‘wg_expired_retransmit_handshake’:
+../include/linux/kern_levels.h:4:25: warning: format ‘%d’ expects argument of type ‘int’, but argument 5 has type ‘long unsigned int’ [-Wformat=]
+    4 | #define KERN_SOH        "\001"          /* ASCII Start Of Header */
+      |                         ^~~~~~
+../include/linux/printk.h:114:24: note: in definition of macro ‘no_printk’
+  114 |                 printk(fmt, ##__VA_ARGS__);     \
+      |                        ^~~
+../include/linux/kern_levels.h:14:25: note: in expansion of macro ‘KERN_SOH’
+   14 | #define KERN_DEBUG      KERN_SOH "7"    /* debug-level messages */
+      |                         ^~~~~~~~
+../include/linux/printk.h:289:19: note: in expansion of macro ‘KERN_DEBUG’
+  289 |         no_printk(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__)
+      |                   ^~~~~~~~~~
+../net/wireguard/timers.c:47:17: note: in expansion of macro ‘pr_debug’
+   47 |                 pr_debug("%s: Handshake for peer %llu (%pISpfsc) did not complete after %d attempts, giving up\n",
+      |                 ^~~~~~~~
+../include/linux/kern_levels.h:4:25: warning: format ‘%d’ expects argument of type ‘int’, but argument 5 has type ‘long unsigned int’ [-Wformat=]
+    4 | #define KERN_SOH        "\001"          /* ASCII Start Of Header */
+      |                         ^~~~~~
+../include/linux/printk.h:114:24: note: in definition of macro ‘no_printk’
+  114 |                 printk(fmt, ##__VA_ARGS__);     \
+      |                        ^~~
+../include/linux/kern_levels.h:14:25: note: in expansion of macro ‘KERN_SOH’
+   14 | #define KERN_DEBUG      KERN_SOH "7"    /* debug-level messages */
+      |                         ^~~~~~~~
+../include/linux/printk.h:289:19: note: in expansion of macro ‘KERN_DEBUG’
+  289 |         no_printk(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__)
+      |                   ^~~~~~~~~~
+../net/wireguard/timers.c:65:17: note: in expansion of macro ‘pr_debug’
+   65 |                 pr_debug("%s: Handshake for peer %llu (%pISpfsc) did not complete after %d seconds, retrying (try %d)\n",
+      |                 ^~~~~~~~
+../net/wireguard/timers.c: In function ‘wg_expired_new_handshake’:
+../include/linux/kern_levels.h:4:25: warning: format ‘%d’ expects argument of type ‘int’, but argument 5 has type ‘long unsigned int’ [-Wformat=]
+    4 | #define KERN_SOH        "\001"          /* ASCII Start Of Header */
+      |                         ^~~~~~
+../include/linux/printk.h:114:24: note: in definition of macro ‘no_printk’
+  114 |                 printk(fmt, ##__VA_ARGS__);     \
+      |                        ^~~
+../include/linux/kern_levels.h:14:25: note: in expansion of macro ‘KERN_SOH’
+   14 | #define KERN_DEBUG      KERN_SOH "7"    /* debug-level messages */
+      |                         ^~~~~~~~
+../include/linux/printk.h:289:19: note: in expansion of macro ‘KERN_DEBUG’
+  289 |         no_printk(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__)
+      |                   ^~~~~~~~~~
+../net/wireguard/timers.c:95:9: note: in expansion of macro ‘pr_debug’
+   95 |         pr_debug("%s: Retrying handshake with peer %llu (%pISpfsc) because we stopped hearing back after %d seconds\n",
+      |         ^~~~~~~~
+../net/wireguard/timers.c: In function ‘wg_queued_expired_zero_key_material’:
+../include/linux/kern_levels.h:4:25: warning: format ‘%d’ expects argument of type ‘int’, but argument 5 has type ‘long unsigned int’ [-Wformat=]
+    4 | #define KERN_SOH        "\001"          /* ASCII Start Of Header */
+      |                         ^~~~~~
+../include/linux/printk.h:114:24: note: in definition of macro ‘no_printk’
+  114 |                 printk(fmt, ##__VA_ARGS__);     \
+      |                        ^~~
+../include/linux/kern_levels.h:14:25: note: in expansion of macro ‘KERN_SOH’
+   14 | #define KERN_DEBUG      KERN_SOH "7"    /* debug-level messages */
+      |                         ^~~~~~~~
+../include/linux/printk.h:289:19: note: in expansion of macro ‘KERN_DEBUG’
+  289 |         no_printk(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__)
+      |                   ^~~~~~~~~~
+../net/wireguard/timers.c:127:9: note: in expansion of macro ‘pr_debug’
+  127 |         pr_debug("%s: Zeroing out all keys for peer %llu (%pISpfsc), since we haven't received a new one in %d seconds\n",
+      |         ^~~~~~~~
+  CC      drivers/media/tuners/tda18271-maps.o
+  CC      drivers/media/platform/msm/camera_v2/jpeg_10/msm_jpeg_platform.o
+  CC [M]  net/wireguard/queueing.o
+  CC      drivers/mfd/wcd9335-tables.o
+  CC      drivers/mfd/wcd934x-regmap.o
+  CC      drivers/media/tuners/tda18271-common.o
+  LD      drivers/media/platform/msm/camera_v2/jpeg_10/built-in.o
+  CC [M]  net/wireguard/send.o
+  CC      drivers/media/tuners/tda18271-fe.o
+  CC      drivers/media/platform/msm/camera_v2/jpeg_dma/msm_jpeg_dma_dev.o
+  CC      drivers/mfd/wcd934x-tables.o
+  LD      drivers/mfd/built-in.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_dev.o
+  CC [M]  net/wireguard/receive.o
+  CC      drivers/media/platform/msm/camera_v2/jpeg_dma/msm_jpeg_dma_hw.o
+  CC      drivers/media/tuners/xc5000.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_core.o
+  LD      drivers/media/platform/msm/camera_v2/jpeg_dma/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/msm_buf_mgr/msm_generic_buf_mgr.o
+  CC      drivers/media/tuners/xc4000.o
+  CC [M]  net/wireguard/socket.o
+  LD      drivers/media/platform/msm/camera_v2/msm_buf_mgr/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/msm_vb2/msm_vb2.o
+  CC [M]  net/wireguard/peerlookup.o
+  CC      drivers/media/tuners/mc44s803.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_base.o
+  LD      drivers/media/platform/msm/camera_v2/msm_vb2/built-in.o
+  LD      drivers/media/tuners/tda18271.o
+  CC      drivers/media/platform/msm/camera_v2/pproc/cpp/msm_cpp_soc.o
+  LD      drivers/media/tuners/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/actuator/msm_actuator.o
+  CC [M]  net/wireguard/allowedips.o
+  CC      drivers/media/platform/msm/camera_v2/pproc/cpp/msm_cpp.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_formats.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_util.o
+  CC [M]  net/wireguard/ratelimiter.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/actuator/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/cci/msm_cci.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_io_util.o
+  CC [M]  net/wireguard/cookie.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/cci/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/csid/msm_csid.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_smmu.o
+  LD      drivers/media/platform/msm/camera_v2/pproc/cpp/built-in.o
+  LD      drivers/media/platform/msm/camera_v2/pproc/built-in.o
+  CC      drivers/media/platform/msm/vidc/msm_v4l2_vidc.o
+  CC [M]  net/wireguard/netlink.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_r1_wb.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/csid/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/csiphy/msm_csiphy.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_r1_pipe.o
+  CC      drivers/media/platform/msm/vidc/msm_vidc_common.o
+  CC [M]  net/wireguard/crypto/zinc/chacha20/chacha20.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_r1_ctl.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/csiphy/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/eeprom/msm_eeprom.o
+../drivers/media/platform/msm/vidc/msm_vidc_common.c:3145:33: warning: conflicting types for ‘get_buff_req_buffer’ due to enum/integer mismatch; have ‘struct hal_buffer_requirements *(struct msm_vidc_inst *, enum hal_buffer)’ [-Wenum-int-mismatch]
+ 3145 | struct hal_buffer_requirements *get_buff_req_buffer(
+      |                                 ^~~~~~~~~~~~~~~~~~~
+In file included from ../drivers/media/platform/msm/vidc/msm_vidc_common.c:21:
+../drivers/media/platform/msm/vidc/msm_vidc_common.h:69:33: note: previous declaration of ‘get_buff_req_buffer’ with type ‘struct hal_buffer_requirements *(struct msm_vidc_inst *, u32)’ {aka ‘struct hal_buffer_requirements *(struct msm_vidc_inst *, unsigned int)’}
+   69 | struct hal_buffer_requirements *get_buff_req_buffer(
+      |                                 ^~~~~~~~~~~~~~~~~~~
+../drivers/media/platform/msm/vidc/msm_vidc_common.c: In function ‘msm_comm_qbuf’:
+../drivers/media/platform/msm/vidc/msm_vidc_common.c:3862:24: warning: the omitted middle operand in ‘?:’ will always be ‘true’, suggest explicit middle operand [-Wparentheses]
+ 3862 |         defer = defer ?: inst->state != MSM_VIDC_START_DONE;
+      |                        ^
+../drivers/media/platform/msm/vidc/msm_vidc_common.c:3869:24: warning: the omitted middle operand in ‘?:’ will always be ‘true’, suggest explicit middle operand [-Wparentheses]
+ 3869 |         defer = defer ?: vbuf && vbuf->flags & V4L2_MSM_BUF_FLAG_DEFER;
+      |                        ^
+../drivers/media/platform/msm/vidc/msm_vidc_common.c:3872:24: warning: the omitted middle operand in ‘?:’ will always be ‘true’, suggest explicit middle operand [-Wparentheses]
+ 3872 |         defer = defer ?: batch_mode && (!output_count || !capture_count);
+      |                        ^
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_r1.o
+  PERLASM net/wireguard/crypto/zinc/chacha20/chacha20-arm64.S
+  CC [M]  net/wireguard/crypto/zinc/poly1305/poly1305.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_r3.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/eeprom/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/flash/msm_flash.o
+  PERLASM net/wireguard/crypto/zinc/poly1305/poly1305-arm64.S
+  CC [M]  net/wireguard/crypto/zinc/chacha20poly1305.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/flash/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/io/msm_camera_cci_i2c.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_sync.o
+  CC      drivers/media/platform/msm/vidc/msm_vidc.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_debug.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/io/msm_camera_qup_i2c.o
+  CC [M]  net/wireguard/crypto/zinc/blake2s/blake2s.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/io/msm_camera_spi.o
+../net/wireguard/crypto/zinc/blake2s/blake2s.c: In function ‘blake2s_mod_init’:
+../net/wireguard/crypto/zinc/blake2s/blake2s.c:254:14: warning: ‘selftest_run’ reading 8 bytes from a region of size 0 [-Wstringop-overread]
+  254 |         if (!selftest_run("blake2s", blake2s_selftest, blake2s_nobs,
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  255 |                           ARRAY_SIZE(blake2s_nobs)))
+      |                           ~~~~~~~~~~~~~~~~~~~~~~~~~
+../net/wireguard/crypto/zinc/blake2s/blake2s.c:254:14: note: referencing argument 3 of type ‘bool * const[0]’ {aka ‘_Bool * const[]’}
+In file included from ../net/wireguard/crypto/zinc/blake2s/blake2s.c:12:
+../net/wireguard/crypto/zinc/blake2s/../selftest/run.h:13:20: note: in a call to function ‘selftest_run’
+   13 | static inline bool selftest_run(const char *name, bool (*selftest)(void),
+      |                    ^~~~~~~~~~~~
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_r1_debug.o
+  CC      drivers/media/platform/msm/vidc/msm_vdec.o
+  CC      drivers/media/platform/msm/sde/rotator/sde_rotator_r3_debug.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/io/msm_camera_dt_util.o
+  LD      drivers/media/platform/msm/sde/rotator/built-in.o
+  LD      drivers/media/platform/msm/sde/built-in.o
+  CC      net/wireless/core.o
+  CC [M]  net/wireguard/crypto/zinc/curve25519/curve25519.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/io/msm_camera_tz_i2c.o
+../net/wireguard/crypto/zinc/curve25519/curve25519.c: In function ‘curve25519_mod_init’:
+../net/wireguard/crypto/zinc/curve25519/curve25519.c:93:14: warning: ‘selftest_run’ reading 8 bytes from a region of size 0 [-Wstringop-overread]
+   93 |         if (!selftest_run("curve25519", curve25519_selftest, curve25519_nobs,
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   94 |                           ARRAY_SIZE(curve25519_nobs)))
+      |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../net/wireguard/crypto/zinc/curve25519/curve25519.c:93:14: note: referencing argument 3 of type ‘bool * const[0]’ {aka ‘_Bool * const[]’}
+In file included from ../net/wireguard/crypto/zinc/curve25519/curve25519.c:13:
+../net/wireguard/crypto/zinc/curve25519/../selftest/run.h:13:20: note: in a call to function ‘selftest_run’
+   13 | static inline bool selftest_run(const char *name, bool (*selftest)(void),
+      |                    ^~~~~~~~~~~~
+  CC      drivers/media/platform/msm/vidc/msm_venc.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/io/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/ir_cut/msm_ir_cut.o
+  AS [M]  net/wireguard/crypto/zinc/chacha20/chacha20-arm64.o
+  AS [M]  net/wireguard/crypto/zinc/poly1305/poly1305-arm64.o
+  LD [M]  net/wireguard/wireguard.o
+  CC      drivers/media/platform/msm/camera_v2/msm.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/ir_cut/built-in.o
+In file included from ../arch/arm64/include/asm/bug.h:67,
+                 from ../include/linux/bug.h:4,
+                 from ../arch/arm64/include/asm/cmpxchg.h:21,
+                 from ../arch/arm64/include/asm/atomic.h:41,
+                 from ../include/linux/atomic.h:4,
+                 from ../include/linux/mutex.h:18,
+                 from ../include/linux/kernfs.h:13,
+                 from ../include/linux/sysfs.h:15,
+                 from ../include/linux/kobject.h:21,
+                 from ../include/linux/of.h:21,
+                 from ../drivers/media/platform/msm/camera_v2/msm.c:13:
+../drivers/media/platform/msm/camera_v2/msm.c: In function ‘msm_probe’:
+../drivers/media/platform/msm/camera_v2/msm.c:1353:38: warning: comparison of constant ‘0’ with boolean expression is always false [-Wbool-compare]
+ 1353 |                         0, NULL, 0)) < 0))
+      |                                      ^
+../include/asm-generic/bug.h:87:32: note: in definition of macro ‘WARN_ON’
+   87 |         int __ret_warn_on = !!(condition);                              \
+      |                                ^~~~~~~~~
+  CC      drivers/media/platform/msm/camera_v2/sensor/ir_led/msm_ir_led.o
+  CC      net/wireless/sysfs.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/ir_led/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/laser_led/msm_laser_led.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/ois/msm_ois.o
+  CC      drivers/media/platform/msm/vidc/msm_smem.o
+  CC      net/wireless/radiotap.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/laser_led/built-in.o
+  LD      drivers/misc/cb710/built-in.o
+  LD      drivers/misc/eeprom/built-in.o
+  LD      drivers/misc/lis3lv02d/built-in.o
+  LD      drivers/misc/mic/bus/built-in.o
+  LD      drivers/misc/mic/built-in.o
+  CC      drivers/misc/qcom/qdsp6v2/aac_in.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/ois/built-in.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/msm_sensor_init.o
+  CC      drivers/misc/qcom/qdsp6v2/qcelp_in.o
+  CC      drivers/media/platform/msm/vidc/msm_vidc_debug.o
+  CC      net/wireless/util.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/msm_sensor_driver.o
+  CC      drivers/misc/qcom/qdsp6v2/evrc_in.o
+  CC      drivers/misc/qcom/qdsp6v2/amrnb_in.o
+  CC      drivers/media/platform/msm/camera_v2/sensor/msm_sensor.o
+  CC      drivers/media/platform/msm/vidc/msm_vidc_res_parse.o
+  CC      drivers/misc/qcom/qdsp6v2/g711mlaw_in.o
+  CC      drivers/misc/qcom/qdsp6v2/g711alaw_in.o
+  CC      net/wireless/reg.o
+  LD      drivers/media/platform/msm/camera_v2/sensor/built-in.o
+  LD      drivers/media/platform/msm/camera_v2/built-in.o
+  LD      drivers/media/usb/b2c2/built-in.o
+  LD      drivers/media/usb/dvb-usb/built-in.o
+  LD      drivers/media/usb/dvb-usb-v2/built-in.o
+  LD      drivers/media/usb/gspca/built-in.o
+  CC [M]  drivers/media/usb/gspca/gspca.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_utils.o
+  CC      drivers/media/platform/msm/vidc/venus_hfi.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_wma.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_wmapro.o
+  CC [M]  drivers/media/usb/gspca/autogain_functions.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_aac.o
+  LD [M]  drivers/media/usb/gspca/gspca_main.o
+  LD      drivers/media/usb/s2255/built-in.o
+  LD      drivers/media/usb/siano/built-in.o
+  LD      drivers/media/usb/stkwebcam/built-in.o
+  LD      drivers/media/usb/ttusb-budget/built-in.o
+  LD      drivers/media/usb/ttusb-dec/built-in.o
+  CC      drivers/media/usb/uvc/uvc_driver.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_multi_aac.o
+  CC      net/wireless/scan.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_alac.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_ape.o
+  CC      drivers/media/platform/msm/vidc/hfi_response_handler.o
+  CC      drivers/media/usb/uvc/uvc_queue.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_utils_aio.o
+../drivers/media/platform/msm/vidc/hfi_response_handler.c: In function ‘hfi_process_session_rel_buf_done’:
+../drivers/media/platform/msm/vidc/hfi_response_handler.c:1847:33: warning: the comparison will always evaluate as ‘true’ for the address of ‘rg_buffer_info’ will never be NULL [-Waddress]
+ 1847 |         if (pkt->rg_buffer_info != NULL) {
+      |                                 ^~
+In file included from ../drivers/media/platform/msm/vidc/hfi_response_handler.c:23:
+../drivers/media/platform/msm/vidc/vidc_hfi.h:767:13: note: ‘rg_buffer_info’ declared here
+  767 |         u32 rg_buffer_info[1];
+      |             ^~~~~~~~~~~~~~
+  CC      drivers/media/usb/uvc/uvc_v4l2.o
+  CC      net/wireless/nl80211.o
+  CC      drivers/media/platform/msm/vidc/hfi_packetization.o
+  CC      drivers/misc/qcom/qdsp6v2/q6audio_v2.o
+  CC      drivers/media/usb/uvc/uvc_video.o
+  CC      drivers/misc/qcom/qdsp6v2/q6audio_v2_aio.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_g711mlaw.o
+  CC      drivers/media/platform/msm/vidc/vidc_hfi.o
+  CC      drivers/media/usb/uvc/uvc_ctrl.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_g711alaw.o
+  CC      drivers/media/platform/msm/vidc/venus_boot.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_mp3.o
+  CC      drivers/media/usb/uvc/uvc_status.o
+  CC      drivers/media/platform/msm/vidc/msm_vidc_dcvs.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_amrnb.o
+  CC      drivers/media/usb/uvc/uvc_isight.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_amrwb.o
+  CC      drivers/media/platform/msm/vidc/governors/msm_vidc_dyn_gov.o
+  CC      drivers/media/usb/uvc/uvc_debugfs.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_amrwbplus.o
+  CC      drivers/media/usb/uvc/uvc_entity.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_evrc.o
+  LD      drivers/media/usb/uvc/uvcvideo.o
+  LD      drivers/media/usb/uvc/built-in.o
+  LD      drivers/media/usb/zr364xx/built-in.o
+  LD      drivers/media/usb/built-in.o
+  CC      net/xfrm/xfrm_policy.o
+  CC      drivers/media/platform/msm/vidc/governors/msm_vidc_table_gov.o
+  CC      drivers/misc/qcom/qdsp6v2/audio_qcelp.o
+  CC      drivers/misc/qcom/qdsp6v2/amrwb_in.o
+  LD      drivers/media/platform/msm/vidc/governors/msm-vidc-dyn-gov.o
+  LD      drivers/media/platform/msm/vidc/governors/msm-vidc-table-gov.o
+  LD      drivers/media/platform/msm/vidc/governors/built-in.o
+  CC      drivers/media/platform/msm/vidc/vmem/vmem.o
+../drivers/misc/qcom/qdsp6v2/amrwb_in.c: In function ‘amrwb_in_ioctl’:
+../drivers/misc/qcom/qdsp6v2/amrwb_in.c:159:17: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  159 |                 if (copy_to_user((void *)arg, audio->enc_cfg,
+      |                 ^~
+../drivers/misc/qcom/qdsp6v2/amrwb_in.c:163:25: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  163 |                         rc = -EFAULT;
+      |                         ^~
+  CC      drivers/misc/qcom/qdsp6v2/audio_hwacc_effects.o
+  CC      drivers/media/platform/msm/vidc/vmem/vmem_debugfs.o
+  CC      drivers/misc/qcom/qdsp6v2/ultrasound/usf.o
+  LD      drivers/media/platform/msm/vidc/vmem/msm-vidc-vmem.o
+  LD      drivers/media/platform/msm/vidc/vmem/built-in.o
+  LD      drivers/media/platform/msm/vidc/msm-vidc.o
+  LD      drivers/media/platform/msm/vidc/built-in.o
+  LD      drivers/media/platform/msm/built-in.o
+  LD      drivers/media/platform/built-in.o
+  CC      drivers/media/v4l2-core/v4l2-dev.o
+  CC      drivers/misc/qcom/qdsp6v2/ultrasound/usfcdev.o
+  CC      net/xfrm/xfrm_state.o
+  CC      drivers/media/v4l2-core/v4l2-ioctl.o
+  CC      drivers/misc/qcom/qdsp6v2/ultrasound/q6usm.o
+  LD      drivers/misc/qcom/qdsp6v2/ultrasound/built-in.o
+  LD      drivers/misc/qcom/qdsp6v2/built-in.o
+  LD      drivers/misc/qcom/built-in.o
+  LD      drivers/misc/ti-st/built-in.o
+  CC      drivers/misc/qseecom.o
+  CC      net/xfrm/xfrm_hash.o
+  CC      drivers/media/v4l2-core/v4l2-device.o
+  CC      net/xfrm/xfrm_input.o
+  CC      net/wireless/mlme.o
+  CC      drivers/media/v4l2-core/v4l2-fh.o
+  CC      drivers/media/v4l2-core/v4l2-event.o
+  CC      net/xfrm/xfrm_output.o
+  CC      drivers/media/v4l2-core/v4l2-ctrls.o
+  CC      net/wireless/ibss.o
+  CC      net/xfrm/xfrm_sysctl.o
+  CC      net/xfrm/xfrm_replay.o
+  CC      drivers/misc/hdcp.o
+../drivers/misc/hdcp.c: In function ‘hdcp_lib_txmtr_init_legacy’:
+../drivers/misc/hdcp.c:1398:57: warning: the comparison will always evaluate as ‘false’ for the address of ‘message’ will never be NULL [-Waddress]
+ 1398 |             (rsp_buf->msglen <= 0) || (rsp_buf->message == NULL)) {
+      |                                                         ^~
+../drivers/misc/hdcp.c:342:17: note: ‘message’ declared here
+  342 |         uint8_t message[MAX_TX_MESSAGE_SIZE];
+      |                 ^~~~~~~
+../drivers/misc/hdcp.c: In function ‘hdcp_lib_start_auth’:
+../drivers/misc/hdcp.c:1518:57: warning: the comparison will always evaluate as ‘false’ for the address of ‘message’ will never be NULL [-Waddress]
+ 1518 |             (rsp_buf->msglen <= 0) || (rsp_buf->message == NULL)) {
+      |                                                         ^~
+../drivers/misc/hdcp.c:503:17: note: ‘message’ declared here
+  503 |         uint8_t message[MAX_TX_MESSAGE_SIZE];
+      |                 ^~~~~~~
+../drivers/misc/hdcp.c: In function ‘hdcp_lib_stream’:
+../drivers/misc/hdcp.c:1587:27: warning: the comparison will always evaluate as ‘false’ for the address of ‘msg’ will never be NULL [-Waddress]
+ 1587 |             (rsp_buf->msg == NULL)) {
+      |                           ^~
+../drivers/misc/hdcp.c:416:17: note: ‘msg’ declared here
+  416 |         uint8_t msg[MAX_TX_MESSAGE_SIZE];
+      |                 ^~~
+  CC      drivers/media/v4l2-core/v4l2-subdev.o
+../drivers/misc/hdcp.c: In function ‘hdcp_lib_msg_recvd’:
+../drivers/misc/hdcp.c:2238:27: warning: the comparison will always evaluate as ‘false’ for the address of ‘msg’ will never be NULL [-Waddress]
+ 2238 |             (rsp_buf->msg == NULL)) {
+      |                           ^~
+../drivers/misc/hdcp.c:380:17: note: ‘msg’ declared here
+  380 |         uint8_t msg[MAX_TX_MESSAGE_SIZE];
+      |                 ^~~
+  CC      net/wireless/sme.o
+  CC      net/xfrm/xfrm_proc.o
+  CC      drivers/media/v4l2-core/v4l2-clk.o
+  CC      drivers/misc/compat_qseecom.o
+  CC      net/xfrm/xfrm_algo.o
+  CC      drivers/media/v4l2-core/v4l2-async.o
+  CC      net/wireless/chan.o
+  CC      drivers/media/v4l2-core/v4l2-compat-ioctl32.o
+  CC      drivers/misc/uid_sys_stats.o
+  CC      net/xfrm/xfrm_user.o
+  CC      drivers/misc/qpnp-misc.o
+  CC      drivers/misc/fastchg.o
+  CC      drivers/misc/ant_check.o
+  CC      net/wireless/ethtool.o
+  CC      drivers/media/v4l2-core/v4l2-of.o
+  LD      drivers/misc/built-in.o
+  CC      net/wireless/mesh.o
+  CC      net/xfrm/xfrm_ipcomp.o
+  LD      drivers/media/v4l2loopback-master/built-in.o
+  CC      net/compat.o
+  CC      net/wireless/ap.o
+  CC      drivers/media/v4l2-core/vb2-trace.o
+  CC      net/wireless/trace.o
+  LD      net/xfrm/built-in.o
+  CC      drivers/mmc/card/block.o
+  CC      drivers/mmc/card/queue.o
+  CC      drivers/media/v4l2-core/v4l2-trace.o
+  CC      drivers/media/v4l2-core/v4l2-common.o
+  CC      drivers/media/media-device.o
+  CC      drivers/media/v4l2-core/v4l2-dv-timings.o
+  CC      net/wireless/ocb.o
+  LD      drivers/mmc/card/mmc_block.o
+  LD      drivers/mmc/card/built-in.o
+  CC      drivers/mmc/core/core.o
+../drivers/mmc/core/core.c: In function ‘mmc_cmdq_wait_for_dcmd’:
+../drivers/mmc/core/core.c:1771:17: error: label ‘power_cycle’ used but not defined
+ 1771 |                 goto power_cycle;
+      |                 ^~~~
+make[4]: *** [../scripts/Makefile.build:282: drivers/mmc/core/core.o] Error 1
+make[3]: *** [../scripts/Makefile.build:489: drivers/mmc/core] Error 2
+make[2]: *** [../scripts/Makefile.build:489: drivers/mmc] Error 2
+  CC      net/sysctl_net.o
+make[2]: *** Waiting for unfinished jobs....
+  CC      drivers/media/v4l2-core/v4l2-mem2mem.o
+  CC      drivers/media/media-devnode.o
+  CC      drivers/media/media-entity.o
+  CC      drivers/media/v4l2-core/videobuf2-core.o
+  CC      drivers/media/v4l2-core/videobuf2-v4l2.o
+  LD      drivers/media/media.o
+  CC      net/wireless/wext-core.o
+  CC      drivers/media/v4l2-core/videobuf2-memops.o
+  CC      net/wireless/wext-proc.o
+  CC      drivers/media/v4l2-core/videobuf2-vmalloc.o
+  CC      net/wireless/wext-spy.o
+  LD      drivers/media/v4l2-core/videodev.o
+  CC      net/wireless/wext-priv.o
+  CC      net/wireless/regdb.o
+  LD      drivers/media/v4l2-core/built-in.o
+  LD      drivers/media/built-in.o
+make[1]: *** [/home/ranggawbp/android_kernel_xiaomi_sdm660/Makefile:1023: drivers] Error 2
+make[1]: *** Waiting for unfinished jobs....
+  LD      net/wireless/cfg80211.o
+  LD      net/wireless/built-in.o
+  LD      net/built-in.o
+make[1]: Leaving directory '/home/ranggawbp/android_kernel_xiaomi_sdm660/out'
+make: *** [Makefile:152: sub-make] Error 2

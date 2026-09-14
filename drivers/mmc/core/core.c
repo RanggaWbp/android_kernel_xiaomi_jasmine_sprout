@@ -1768,7 +1768,7 @@ int mmc_cmdq_wait_for_dcmd(struct mmc_host *host,
 	mrq->done = mmc_cmdq_dcmd_req_done;
 	err = mmc_cmdq_start_req(host, cmdq_req);
 	if (err)
-		goto power_cycle;
+		return err;
 
 	wait_for_completion_io(&mrq->completion);
 	if (cmd->error) {
