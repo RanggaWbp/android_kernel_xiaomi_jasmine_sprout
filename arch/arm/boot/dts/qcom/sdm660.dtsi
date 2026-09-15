@@ -54,6 +54,7 @@
 			qcom,limits-info = <&mitigation_profile0>;
 			qcom,lmh-dcvs = <&lmh_dcvs0>;
 			qcom,ea = <&ea0>;
+			qcom,sched-energy-costs = <&CPU_COST0 &CLUSTER_COST0>;
 			efficiency = <1024>;
 			next-level-cache = <&L2_0>;
 			L2_0: l2-cache {
@@ -83,6 +84,7 @@
 			qcom,limits-info = <&mitigation_profile0>;
 			qcom,lmh-dcvs = <&lmh_dcvs0>;
 			qcom,ea = <&ea1>;
+			qcom,sched-energy-costs = <&CPU_COST0 &CLUSTER_COST0>;
 			efficiency = <1024>;
 			next-level-cache = <&L2_0>;
 			L1_I_1: l1-icache {
@@ -106,6 +108,7 @@
 			qcom,limits-info = <&mitigation_profile0>;
 			qcom,lmh-dcvs = <&lmh_dcvs0>;
 			qcom,ea = <&ea2>;
+			qcom,sched-energy-costs = <&CPU_COST0 &CLUSTER_COST0>;
 			efficiency = <1024>;
 			next-level-cache = <&L2_0>;
 			L1_I_2: l1-icache {
@@ -129,6 +132,7 @@
 			qcom,limits-info = <&mitigation_profile0>;
 			qcom,lmh-dcvs = <&lmh_dcvs0>;
 			qcom,ea = <&ea3>;
+			qcom,sched-energy-costs = <&CPU_COST0 &CLUSTER_COST0>;
 			efficiency = <1024>;
 			next-level-cache = <&L2_0>;
 			L1_I_3: l1-icache {
@@ -152,6 +156,7 @@
 			qcom,limits-info = <&mitigation_profile1>;
 			qcom,lmh-dcvs = <&lmh_dcvs1>;
 			qcom,ea = <&ea4>;
+			qcom,sched-energy-costs = <&CPU_COST1 &CLUSTER_COST1>;
 			efficiency = <1638>;
 			next-level-cache = <&L2_1>;
 			L2_1: l2-cache {
@@ -179,6 +184,7 @@
 			qcom,limits-info = <&mitigation_profile2>;
 			qcom,lmh-dcvs = <&lmh_dcvs1>;
 			qcom,ea = <&ea5>;
+			qcom,sched-energy-costs = <&CPU_COST1 &CLUSTER_COST1>;
 			efficiency = <1638>;
 			next-level-cache = <&L2_1>;
 			L1_I_101: l1-icache {
@@ -202,6 +208,7 @@
 			qcom,limits-info = <&mitigation_profile3>;
 			qcom,lmh-dcvs = <&lmh_dcvs1>;
 			qcom,ea = <&ea6>;
+			qcom,sched-energy-costs = <&CPU_COST1 &CLUSTER_COST1>;
 			efficiency = <1638>;
 			next-level-cache = <&L2_1>;
 			L1_I_102: l1-icache {
@@ -225,6 +232,7 @@
 			qcom,limits-info = <&mitigation_profile4>;
 			qcom,lmh-dcvs = <&lmh_dcvs1>;
 			qcom,ea = <&ea7>;
+			qcom,sched-energy-costs = <&CPU_COST1 &CLUSTER_COST1>;
 			efficiency = <1638>;
 			next-level-cache = <&L2_1>;
 			L1_I_103: l1-icache {
@@ -887,6 +895,60 @@
 	qcom,lmh {
 		compatible = "qcom,lmh_v1";
 		interrupts = <GIC_SPI 134 IRQ_TYPE_LEVEL_HIGH>;
+	};
+
+	CPU_COST0: core-cost0 {
+		busy-cost-data = <
+			 167   8
+			 352  23
+			 501  40
+			 619  59
+			 779  92
+			 853 117
+			 971 158
+			1024 206
+			>;
+		idle-cost-data = <6 5 3 1>;
+	};
+
+	CLUSTER_COST0: cluster-cost0 {
+		busy-cost-data = <
+			 167  3
+			 352  9
+			 501 16
+			 619 24
+			 779 37
+			 853 47
+			 971 63
+			1024 82
+			>;
+		idle-cost-data = <3 2 1 1>;
+	};
+
+	CPU_COST1: core-cost1 {
+		busy-cost-data = <
+			 200  21
+			 742 153
+			 934 240
+			1165 375
+			1305 497
+			1433 609
+			1638 790
+			>;
+		idle-cost-data = <16 13 8 3>;
+	};
+
+	CLUSTER_COST1: cluster-cost1 {
+		busy-cost-data = <
+			 200   8
+			 742  61
+			 934  96
+			1165 150
+			1305 199
+			1433 244
+			1638 316
+			>;
+		idle-cost-data = <8 6 4 2>;
 	};
 
 	qcom,msm-core@780000 {
