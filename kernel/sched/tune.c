@@ -772,16 +772,22 @@ static void schedtune_attach(struct cgroup_taskset *tset)
 {
 	struct task_struct *task;
 	struct cgroup_subsys_state *css;
+#ifdef CONFIG_SCHED_HMP
 	struct schedtune *st;
 	bool colocate;
+#endif
 
 	cgroup_taskset_first(tset, &css);
+#ifdef CONFIG_SCHED_HMP
 	st = css_st(css);
-
 	colocate = st->colocate;
+#endif
 
-	cgroup_taskset_for_each(task, css, tset)
+	cgroup_taskset_for_each(task, css, tset) {
+#ifdef CONFIG_SCHED_HMP
 		sync_cgroup_colocation(task, colocate);
+#endif
+	}
 }
 
 static struct cftype files[] = {
