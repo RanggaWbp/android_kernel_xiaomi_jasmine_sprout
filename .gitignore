@@ -131,3 +131,4 @@ out_wayne/
 *.orig
 reject-*.rej
 build*.log
+*.bak_ksu
