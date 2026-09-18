@@ -315,7 +315,7 @@ jobs:
           cat > anykernel.sh << EOF
           ### AnyKernel3 Ramdisk Mod Script
           properties() { '
-          kernel.string=Custom OC Kernel (${{ matrix.profile }}, risk=${RISK_LEVEL}) [ReSukiSU+SUSFS+Re-Kernel+NoMount+BBG] for ${{ matrix.device }} by RanggaWbp - ${{ env.BUILD_DATE }}
+          kernel.string=Custom OC Kernel for ${{ matrix.display_name }} (${{ matrix.codename }}) | profile: ${{ matrix.profile }} (risk: ${RISK_LEVEL}) | features: ReSukiSU + SUSFS + Re:Kernel + NoMount + BBG + EAS | by RanggaWbp | ${{ env.BUILD_DATE }}
           do.devicecheck=1
           do.modules=0
           do.systemless=1
@@ -430,13 +430,44 @@ jobs:
           fail_on_unmatched_files: true
           files: zips/*.zip
           body: |
-            Custom OC Kernel For Mi 6X (wayne) & Mi A2 (jasmine_sprout).
-            feature **ReSukiSU + SUSFS + Re-Kernel + NoMount+BBG** included.
-            Build Date: ${{ env.BUILD_DATE }} (run #${{ github.run_number }}).
-            Variant :
-            normal - nothing changes
-            CPU only - OC CPU 2.46 GHz
+            # Custom OC Kernel — Mi 6X & Mi A2
 
-            Commit: `${{ github.sha }}`
+            Linux 4.4 (Non-GKI) · ARM64 · commits [`${{ github.sha }}`](https://github.com/RanggaWbp/android_kernel_xiaomi_sdm660/commit/${{ github.sha }})
+
+            ## Features
+
+            | Feature | Description |
+            | :------ | :---------- |
+            | **ReSukiSU** | Kernel-based root solution |
+            | **SUSFS** | Root-hiding filesystem layer |
+            | **Re:Kernel** | Kernel-level hardening |
+            | **NoMount** | Mount namespace isolation |
+            | **BBG** | Baseband guard, anti-format |
+            | **EAS** | Energy-aware scheduling |
+
+            ## Devices
+
+            | Device | Codename | Slot |
+            | :----- | :------- | :--- |
+            | Xiaomi Mi 6X | `wayne` | A-only |
+            | Xiaomi Mi A2 | `jasmine_sprout` | A/B |
+
+            ## Variants
+
+            | Profile | CPU big cluster | Risk |
+            | :------ | :-------------- | :--- |
+            | `normal` | stock (efuse speed-bin) | none |
+            | `cpu-only-oc` | 2.46 GHz (forced speed-bin 0) | HIGH |
+
+            > The OC profile forces the best-binned LUT onto silicon that may be
+            > binned lower. Keep a boot backup ready.
+
+            ## Flash
+
+            Flash the zip in TWRP. AnyKernel3 — no need to extract.
+
+            ---
+
+            **Build** ${{ env.BUILD_DATE }} · run #${{ github.run_number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

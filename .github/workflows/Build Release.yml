@@ -87,6 +87,7 @@ jobs:
 
       - name: Package AnyKernel3 zip
         run: |
+          BUILD_DATE="$(date +'%d-%m-%Y')"
           git clone --depth=1 https://github.com/osm0sis/AnyKernel3.git AK3
           cd AK3
           rm -rf ramdisk patch tools/keycheck
@@ -94,7 +95,7 @@ jobs:
           cat > anykernel.sh << EOF
           ### AnyKernel3 Ramdisk Mod Script
           properties() { '
-          kernel.string=ReSukiSU Support Kernel for ${{ matrix.device }} by RanggaWbp
+          kernel.string=Custom Kernel for ${{ matrix.display_name }} (${{ matrix.device }}) | features: ReSukiSU + SUSFS + Re:Kernel + NoMount + BBG + EAS | by RanggaWbp | ${BUILD_DATE}
           do.devicecheck=1
           do.modules=0
           do.systemless=1
@@ -122,7 +123,6 @@ jobs:
           write_boot;
           EOF
           TAG_NAME="${GITHUB_REF_NAME}"
-          BUILD_DATE="$(date +'%d-%m-%Y')"
           ZIP_NAME="${{ matrix.model_prefix }}-ReSukiSU-SUSFS-${{ matrix.device }}-${TAG_NAME}-${BUILD_DATE}.zip"
           zip -r9 "../${ZIP_NAME}" . -x ".git/*" ".github/*" "*.md"
           echo "ZIP_NAME=${ZIP_NAME}" >> "$GITHUB_ENV"
@@ -163,16 +163,33 @@ jobs:
           files: release-files/*.zip
           name: "Kernel ${{ github.ref_name }}"
           body: |
-            Automated build for tag `${{ github.ref_name }}`.
+            # Custom Kernel — Mi 6X & Mi A2
 
-            Devices: wayne (Mi 6X), jasmine_sprout (Mi A2)
+            Linux 4.4 (Non-GKI) · ARM64 · tag `${{ github.ref_name }}`
 
-            jasmine_sprout build is EXPERIMENTAL / not yet hardware-validated.
-            Its device tree reuses wayne's base hardware config with only
-            panel brightness overrides on top — some real Mi A2 units may
-            experience display issues (seen in early testing: corrupted
-            recovery-mode display on at least one unit). Flash at your own
-            risk and keep a boot backup ready.
+            ## Features
+
+            | Feature | Description |
+            | :------ | :---------- |
+            | **ReSukiSU** | Kernel-based root solution |
+            | **SUSFS** | Root-hiding filesystem layer |
+            | **Re:Kernel** | Kernel-level hardening |
+            | **NoMount** | Mount namespace isolation |
+            | **BBG** | Baseband guard, anti-format |
+            | **EAS** | Energy-aware scheduling |
+
+            ## Devices
+
+            | Device | Codename | Slot |
+            | :----- | :------- | :--- |
+            | Xiaomi Mi 6X | `wayne` | A-only |
+            | Xiaomi Mi A2 | `jasmine_sprout` | A/B |
+
+            ## Flash
+
+            Flash the zip in TWRP. AnyKernel3 — no need to extract.
+
+            ---
 
             See commit history for changelog.
           draft: false
