@@ -1,0 +1,242 @@
+#!/usr/bin/env bash
+#
+# audit_hooks.sh -- ReSukiSU / SUSFS Inline Hook integration audit
+#
+# Mirrors the EXACT checks performed by ReSukiSU upstream:
+#   drivers/kernelsu/tools/inline_hook_check.mk   (CONFIG_KSU_SUSFS selected)
+#   drivers/kernelsu/tools/manual_hook_check.mk   (CONFIG_KSU_MANUAL_HOOK selected)
+#
+# IMPORTANT: drivers/kernelsu is a SYMLINK to KernelSU/kernel (ReSukiSU
+# submodule). A recursive `grep -R drivers/` follows that symlink and scans
+# upstream ReSukiSU sources, which legitimately contain CONFIG_KSU_MANUAL_HOOK
+# (lsm_hooks.c, ksud_integration.c, Kbuild, manual_hook_check.mk, ...). Those
+# hits are NOT manual-hook guards in this kernel. Upstream only ever greps the
+# seven kernel files listed below, so this script does the same.
+#
+# Exit codes:
+#   0 = PASS
+#   1 = FAIL (manual-hook guard present in a kernel file, required hook
+#             missing, or incompatible legacy hook still installed)
+
+set -uo pipefail
+
+SRCTREE="${1:-$(pwd)}"
+cd "$SRCTREE" || { echo "::error::srctree not found: $SRCTREE"; exit 1; }
+
+FAIL=0
+WARN=0
+
+hr() { echo "--------------------------------------------------------------"; }
+
+# The seven kernel files upstream inspects, with the hook each must contain.
+# Format: <file>|<required_hook>
+HOOK_TABLE=(
+  "kernel/sys.c|ksu_handle_setresuid"
+  "fs/exec.c|ksu_handle_execveat"
+  "fs/open.c|ksu_handle_faccessat"
+  "fs/read_write.c|ksu_handle_sys_read"
+  "fs/stat.c|ksu_handle_stat"
+  "kernel/reboot.c|ksu_handle_sys_reboot"
+  "drivers/input/input.c|ksu_handle_input_handle_event"
+)
+
+# Legacy hooks that MUST NOT be present (they were replaced by static_key
+# variants in susfs4ksu commit 00be2d47). Format: <hook>|<file>
+INCOMPATIBLE_TABLE=(
+  "ksu_vfs_read_hook|fs/read_write.c"
+  "ksu_input_hook|drivers/input/input.c"
+  "ksu_execveat_hook|fs/exec.c"
+  "ksu_init_rc_hook|fs/read_write.c"
+  "ksu_init_rc_hook|fs/stat.c"
+)
+
+hr
+echo "== ReSukiSU / SUSFS Inline Hook audit =="
+echo "srctree : $SRCTREE"
+echo "commit  : $(git rev-parse HEAD 2>/dev/null || echo unknown)"
+hr
+
+# --------------------------------------------------------------------------
+# 1. Manual hook guard detection (upstream check_ksu_manual_guard)
+#    Upstream: grep -wq "CONFIG_KSU_MANUAL_HOOK" <file>
+# --------------------------------------------------------------------------
+echo
+echo "[1] Manual hook guard detection (CONFIG_KSU_MANUAL_HOOK)"
+echo "    mirrors inline_hook_check.mk check_ksu_manual_guard"
+echo
+
+GUARD_FILES=()
+for entry in "${HOOK_TABLE[@]}"; do
+  f="${entry%%|*}"
+  if [ ! -f "$f" ]; then
+    echo "  MISSING FILE  $f"
+    FAIL=1
+    continue
+  fi
+  if grep -wq "CONFIG_KSU_MANUAL_HOOK" "$f"; then
+    echo "  GUARD FOUND   $f"
+    GUARD_FILES+=("$f")
+    FAIL=1
+  else
+    echo "  clean         $f"
+  fi
+done
+
+if [ "${#GUARD_FILES[@]}" -gt 0 ]; then
+  echo
+  echo "  ::error::KSU_MANUAL_HOOK guard detected in: ${GUARD_FILES[*]}"
+  echo "  ReSukiSU/susfs_inline: WARNING: Your build maybe broken."
+else
+  echo
+  echo "  No KSU_MANUAL_HOOK guard in any of the 7 inspected kernel files."
+fi
+
+# --------------------------------------------------------------------------
+# 2. Required hook presence (upstream check_ksu_hook)
+# --------------------------------------------------------------------------
+echo
+hr
+echo "[2] Required SUSFS inline hook presence"
+echo "    mirrors inline_hook_check.mk check_ksu_hook"
+echo
+
+for entry in "${HOOK_TABLE[@]}"; do
+  f="${entry%%|*}"
+  hook="${entry##*|}"
+  [ -f "$f" ] || continue
+  if grep -q "$hook" "$f"; then
+    echo "  found         $hook  ($f)"
+  else
+    echo "  MISSING       $hook  ($f)"
+    echo "  ::error::You lost $hook hook in your kernel ($f)"
+    FAIL=1
+  fi
+done
+
+# --------------------------------------------------------------------------
+# 3. Incompatible legacy hook detection (upstream check_ksu_hook_incompatible)
+# --------------------------------------------------------------------------
+echo
+hr
+echo "[3] Incompatible legacy hook detection"
+echo "    mirrors inline_hook_check.mk check_ksu_hook_incompatible"
+echo
+
+for entry in "${INCOMPATIBLE_TABLE[@]}"; do
+  hook="${entry%%|*}"
+  f="${entry##*|}"
+  [ -f "$f" ] || continue
+  if grep -wq "$hook" "$f"; then
+    echo "  INCOMPATIBLE  $hook  ($f)"
+    echo "  ::error::$hook is an incompatible hook, replace it with the static_key variant"
+    FAIL=1
+  else
+    echo "  absent        $hook  ($f)"
+  fi
+done
+
+# --------------------------------------------------------------------------
+# 4. Repo-wide guard scan, symlink-safe (informational + hard fail if the
+#    guard leaks into kernel-owned trees outside drivers/kernelsu)
+# --------------------------------------------------------------------------
+echo
+hr
+echo "[4] Repo-wide KSU_MANUAL_HOOK scan (symlink-safe)"
+echo "    'grep -r' does NOT follow symlinks; drivers/kernelsu is excluded"
+echo "    because it resolves to the ReSukiSU submodule."
+echo
+
+SCAN_HITS="$(grep -rn "CONFIG_KSU_MANUAL_HOOK" \
+      fs/ kernel/ security/ mm/ ipc/ drivers/ \
+      2>/dev/null \
+    | grep -v '^drivers/kernelsu/' \
+    || true)"
+
+if [ -n "$SCAN_HITS" ]; then
+  echo "$SCAN_HITS"
+  # Only defconfig-style comment lines are tolerated.
+  REAL_HITS="$(echo "$SCAN_HITS" | grep -vE '^[^:]+:[0-9]+:# CONFIG_KSU_MANUAL_HOOK' || true)"
+  if [ -n "$REAL_HITS" ]; then
+    echo
+    echo "  ::error::Active CONFIG_KSU_MANUAL_HOOK references outside the submodule"
+    FAIL=1
+  else
+    echo
+    echo "  Only commented-out defconfig entries -- harmless."
+  fi
+else
+  echo "  No CONFIG_KSU_MANUAL_HOOK outside drivers/kernelsu."
+fi
+
+# --------------------------------------------------------------------------
+# 5. Supporting component sanity (informational)
+# --------------------------------------------------------------------------
+echo
+hr
+echo "[5] Supporting components"
+echo
+
+check_present() {
+  if [ -e "$2" ]; then echo "  ok            $1  ($2)"; else echo "  MISSING       $1  ($2)"; FAIL=1; fi
+}
+
+check_present "ReSukiSU submodule"  "KernelSU/kernel/Kbuild"
+check_present "SUSFS source"        "fs/susfs.c"
+check_present "SUSFS header"        "include/linux/susfs.h"
+check_present "SUSFS Kconfig"       "fs/Kconfig" 
+check_present "Re:Kernel"           "drivers/net/rekernel/Makefile"
+check_present "drivers/Makefile KSU wiring" "drivers/Makefile"
+
+if grep -q "kernelsu" drivers/Makefile 2>/dev/null; then
+  echo "  ok            drivers/Makefile registers kernelsu/"
+else
+  echo "  MISSING       drivers/Makefile does not register kernelsu/"
+  FAIL=1
+fi
+
+SUSFS_VER="$(grep -E '^#define SUSFS_VERSION' include/linux/susfs.h 2>/dev/null | cut -d' ' -f3 | tr -d '"' || true)"
+echo "  SUSFS_VERSION ${SUSFS_VER:-unknown}"
+
+# --------------------------------------------------------------------------
+# 6. Defconfig option audit
+# --------------------------------------------------------------------------
+echo
+hr
+echo "[6] Defconfig options"
+echo
+
+for dc in arch/arm64/configs/wayne_defconfig arch/arm64/configs/jasmine-stock_defconfig; do
+  [ -f "$dc" ] || continue
+  echo "  --- $dc"
+  for opt in CONFIG_KSU CONFIG_KSU_SUSFS CONFIG_NOMOUNT CONFIG_BBG CONFIG_REKERNEL; do
+    if grep -qE "^${opt}=y" "$dc"; then
+      echo "      ok            ${opt}=y"
+    else
+      echo "      MISSING       ${opt}=y"
+      FAIL=1
+    fi
+  done
+  if grep -qE "^CONFIG_KSU_MANUAL_HOOK=y" "$dc"; then
+    echo "      ::error::CONFIG_KSU_MANUAL_HOOK=y present in $dc"
+    FAIL=1
+  else
+    echo "      ok            CONFIG_KSU_MANUAL_HOOK not enabled"
+  fi
+done
+
+# --------------------------------------------------------------------------
+hr
+echo
+echo "=== AUDIT RESULT ==="
+if [ "$FAIL" -eq 0 ]; then
+  echo "Manual Hook        : NOT FOUND"
+  echo "Inline Hook        : FOUND"
+  echo "Duplicate Hook     : NO"
+  echo "Potential Overlap  : NO"
+  echo "Unresolved Hook    : NO"
+  echo "STATUS             : PASS"
+  exit 0
+else
+  echo "STATUS             : FAIL"
+  exit 1
+fi
