@@ -194,6 +194,48 @@ else
   FAIL=1
 fi
 
+# --- component Kconfig/Makefile wiring ------------------------------------
+# A component whose Kconfig is never sourced cannot be enabled: the symbol in
+# the defconfig is silently dropped and the driver is never compiled, while the
+# build still reports success. Assert the wiring explicitly.
+check_wiring() {
+  local label="$1" kconfig_src="$2" makefile="$3" objexpr="$4"
+  if grep -rqF "$kconfig_src" --include=Kconfig . 2>/dev/null; then
+    echo "  ok            ${label} Kconfig sourced ($kconfig_src)"
+  else
+    echo "  MISSING       ${label} Kconfig NOT sourced anywhere ($kconfig_src)"
+    FAIL=1
+  fi
+  if grep -qF "$objexpr" "$makefile" 2>/dev/null; then
+    echo "  ok            ${label} Makefile wiring ($objexpr)"
+  else
+    echo "  MISSING       ${label} Makefile missing ($objexpr in $makefile)"
+    FAIL=1
+  fi
+}
+
+check_wiring "NoMount"   "fs/nomount/Kconfig"          "fs/Makefile"                 "nomount/"
+check_wiring "Re:Kernel" "drivers/net/rekernel/Kconfig" "drivers/net/Makefile"        "rekernel/"
+check_wiring "BBG"       "security/baseband-guard/Kconfig" "security/Makefile"        "baseband-guard/"
+check_wiring "ReSukiSU"  "drivers/kernelsu/Kconfig"    "drivers/Makefile"            "kernelsu/"
+
+# --- board symbol required for the device trees ---------------------------
+# arch/arm/boot/dts/qcom/Makefile gates sdm660-mtp-wayne.dtb AND
+# sdm660-mtp-jasmine.dtb behind CONFIG_MACH_XIAOMI_WAYNE. Without it the dts
+# Makefile falls through to the generic Qualcomm board list, so the appended
+# DTB in Image.gz-dtb contains no device DTB at all and the OC override never
+# reaches the image. jasmine-stock was missing this for its entire history.
+for dc in arch/arm64/configs/wayne_defconfig arch/arm64/configs/jasmine-stock_defconfig; do
+  [ -f "$dc" ] || continue
+  if grep -qE "^CONFIG_MACH_XIAOMI_WAYNE=y" "$dc"; then
+    echo "  ok            $(basename "$dc") has CONFIG_MACH_XIAOMI_WAYNE=y (device DTB will be built)"
+  else
+    echo "  MISSING       $(basename "$dc") lacks CONFIG_MACH_XIAOMI_WAYNE=y"
+    echo "                -> sdm660-mtp-*.dtb will NOT be built; image gets generic Qualcomm DTBs only"
+    FAIL=1
+  fi
+done
+
 SUSFS_VER="$(grep -E '^#define SUSFS_VERSION' include/linux/susfs.h 2>/dev/null | cut -d' ' -f3 | tr -d '"' || true)"
 echo "  SUSFS_VERSION ${SUSFS_VER:-unknown}"
 

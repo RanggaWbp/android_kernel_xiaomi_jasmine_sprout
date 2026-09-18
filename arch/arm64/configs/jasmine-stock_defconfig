@@ -5282,6 +5282,26 @@ CONFIG_QMI_ENCDEC=y
 # ReSukiSU
 CONFIG_KSU=y
 
+# Xiaomi board selection
+# jasmine-stock (Mi A2) is built on the wayne base: arch/arm/boot/dts/qcom/
+# xiaomi/jasmine.dtsi includes longcheer/wayne/wayne-common-base.dtsi, and
+# arch/arm/boot/dts/qcom/Makefile gates sdm660-mtp-jasmine.dtb behind
+# CONFIG_MACH_XIAOMI_WAYNE:
+#     dtb-$(CONFIG_MACH_XIAOMI_WAYNE) := sdm660-mtp-wayne.dtb sdm660-mtp-jasmine.dtb
+# Without MACH_XIAOMI_SDM660 the dts Makefile falls through to the generic
+# Qualcomm board list (sdm660-mtp/cdp/rcm/sim/...), so the appended DTB inside
+# Image.gz-dtb contained NO jasmine DTB at all and the device booted the
+# generic SDM660 MTP device tree. That is also why the OC override
+# (qcom,perfcl-force-speedbin) never reached a jasmine build.
+# MACH_XIAOMI_WAYNE selects MACH_LONGCHEER -> MACH_XIAOMI_SDM660 -> MACH_XIAOMI,
+# which additionally enables the device-specific drivers this board needs
+# (qpnp-smb2 / smb-lib charger, qpnp-fg-gen3 fuel gauge, goodix fingerprint,
+# ant_check, camera).
+CONFIG_MACH_XIAOMI=y
+CONFIG_MACH_XIAOMI_SDM660=y
+CONFIG_MACH_XIAOMI_WAYNE=y
+CONFIG_MACH_XIAOMI_NEW_CAMERA=y
+
 # SUSFS
 CONFIG_KSU_SUSFS=y
 CONFIG_KSU_SUSFS_SUS_MAP=y
