@@ -897,56 +897,82 @@
 		interrupts = <GIC_SPI 134 IRQ_TYPE_LEVEL_HIGH>;
 	};
 
+	/*
+	 * SDM660 (Kryo 260: 4x A73 big + 4x A53 little) energy model.
+	 *
+	 * cap  = round(cap_max * f / f_max), cap_max is the cluster's own maximum.
+	 *        big cap_max = 1946 = 1024 * 1.90, because the A73 cluster delivers
+	 *        ~1.90x the throughput of the A53 cluster at their respective max
+	 *        OPPs. Using 1024 for both (the previous model) made the scheduler
+	 *        treat big as only 60% faster than little.
+	 *        arm/.../juno-sched-energy.dtsi does the same thing: A57 max cap is
+	 *        1023 while A53 max cap is 447.
+	 *
+	 * power = C * V^2 * f, normalised so the most expensive OPP on the SoC
+	 *        (big @ 2457.6 MHz) = 1000. Units are bogo-watts but identical
+	 *        across all four tables, which is the only hard requirement
+	 *        (see the header comment in juno-sched-energy.dtsi).
+	 *        V is the typical 14LPP CPR corner voltage for the corner index
+	 *        recorded in qcom,pwrcl/perfcl-speedbin0-v0 (0.80/0.90/1.01 V).
+	 *        C_big/C_little = 2.60 (A73 vs A53 dynamic capacitance ratio).
+	 *
+	 * core-cost    = power per CPU
+	 * cluster-cost = power per cluster for the shared parts (L2 + interconnect),
+	 *                modelled as 30% of the core's dynamic power at that OPP.
+	 *
+	 * idle-cost-data keeps 4 states; group_idle_state() indexes
+	 * 0 .. nr_idle_states-2, so 4 entries is valid (index 0 = deepest sleep).
+	 */
 	CPU_COST0: core-cost0 {
 		busy-cost-data = <
-			 167   8
-			 352  23
-			 501  40
-			 619  59
-			 779  92
-			 853 117
-			 971 158
-			1024 206
+			 167   29
+			 352   62
+			 501   89
+			 619  138
+			 779  174
+			 853  191
+			 971  217
+			1024  288
 			>;
 		idle-cost-data = <6 5 3 1>;
 	};
 
 	CLUSTER_COST0: cluster-cost0 {
 		busy-cost-data = <
-			 167  3
-			 352  9
-			 501 16
-			 619 24
-			 779 37
-			 853 47
-			 971 63
-			1024 82
+			 167    9
+			 352   19
+			 501   27
+			 619   41
+			 779   52
+			 853   57
+			 971   65
+			1024   86
 			>;
 		idle-cost-data = <3 2 1 1>;
 	};
 
 	CPU_COST1: core-cost1 {
 		busy-cost-data = <
-			 200  21
-			 742 153
-			 934 240
-			1165 375
-			1305 497
-			1433 609
-			1638 790
+			 238   77
+			 882  284
+			1110  453
+			1383  565
+			1551  633
+			1703  695
+			1946 1000
 			>;
 		idle-cost-data = <16 13 8 3>;
 	};
 
 	CLUSTER_COST1: cluster-cost1 {
 		busy-cost-data = <
-			 200   8
-			 742  61
-			 934  96
-			1165 150
-			1305 199
-			1433 244
-			1638 316
+			 238   23
+			 882   85
+			1110  136
+			1383  170
+			1551  190
+			1703  208
+			1946  300
 			>;
 		idle-cost-data = <8 6 4 2>;
 	};

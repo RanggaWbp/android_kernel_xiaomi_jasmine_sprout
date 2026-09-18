@@ -86,6 +86,11 @@ jobs:
           chmod +x .github/scripts/audit_hooks.sh
           bash .github/scripts/audit_hooks.sh "$GITHUB_WORKSPACE" 2>&1 | tee audit-hooks.log
 
+      - name: Verify EAS energy model
+        run: |
+          python3 .github/scripts/verify_eas_model.py \
+            arch/arm/boot/dts/qcom/sdm660.dtsi 2>&1 | tee audit-eas.log
+
       - name: Audit defconfig (raw file contents)
         run: |
           {
@@ -109,6 +114,7 @@ jobs:
           name: audit-logs
           path: |
             audit-hooks.log
+            audit-eas.log
             audit-defconfig.log
             git-state.log
           retention-days: 30
