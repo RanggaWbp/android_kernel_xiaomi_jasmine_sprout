@@ -353,20 +353,82 @@ jobs:
           echo "ZIP_NAME=${ZIP_NAME}" >> "$GITHUB_ENV"
 
       # ---------------------------------------------------------------
-      # 10. UPLOAD KE GITHUB RELEASE (prerelease) -- item #10/#11/#12
-      #     brief digabung jadi satu langkah. Tag release unik per run
-      #     (tanggal + run_number) supaya run baru tidak menimpa release
-      #     run sebelumnya; 8 job matrix dalam run yang sama nge-append
-      #     ke release yang sama (satu release berisi 8 zip flash-ready).
+      # 10. UPLOAD ZIP sebagai Actions artifact (BUKAN langsung ke release).
+      #
+      #     RACE CONDITION yang diperbaiki di sini: sebelumnya setiap job
+      #     matrix memanggil softprops/action-gh-release pada tag yang sama
+      #     secara PARALEL. Empat job berebut membuat/menimpa release yang
+      #     sama, dan zip yang selesai lebih dulu ikut terhapus. Terbukti pada
+      #     run #67: log job mi6x/normal menulis "✅ Uploaded
+      #     kernel-mi6x-normal-...zip", tetapi release akhirnya hanya berisi
+      #     3 dari 4 zip -- kernel-mi6x-normal hilang, padahal job-nya hijau.
+      #
+      #     Sekarang tiap job hanya mengunggah artifact, dan job "release"
+      #     (needs: build) membuat release SEKALI setelah semua build selesai.
       # ---------------------------------------------------------------
-      - name: Upload to prerelease
+      - name: Upload zip as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zip-${{ matrix.device }}-${{ matrix.profile }}
+          path: ${{ env.ZIP_NAME }}
+          retention-days: 30
+
+  # ==========================================================================
+  # JOB release -- mengumpulkan SEMUA zip lalu membuat satu release.
+  # Dipisah dari job build supaya tidak ada penulisan paralel ke release.
+  # ==========================================================================
+  release:
+    name: Publish release
+    needs: build
+    if: always() && needs.build.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compute release tag
+        run: |
+          echo "BUILD_DATE=$(date -u +'%d-%m-%Y')" >> "$GITHUB_ENV"
+          echo "RELEASE_TAG=oc-kernel-$(date -u +'%Y%m%d')-${{ github.run_number }}" >> "$GITHUB_ENV"
+
+      - name: Download all zip artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: zip-*
+          merge-multiple: true
+          path: zips
+
+      - name: List collected zips
+        run: |
+          ls -la zips
+          COUNT=$(ls -1 zips/*.zip 2>/dev/null | wc -l)
+          echo "collected ${COUNT} zip(s)"
+          # 4 = 2 device x 2 profile. Gagal keras kalau ada yang hilang, supaya
+          # release tidak pernah terbit dengan zip tidak lengkap.
+          if [ "$COUNT" -ne 4 ]; then
+            echo "::error::expected 4 zips (mi6x/mia2 x normal/oc_cpu_only), got ${COUNT}"
+            exit 1
+          fi
+
+      - name: Verify every expected zip is present
+        run: |
+          rc=0
+          for want in kernel-mi6x-normal kernel-mi6x-cpu-only-oc \
+                      kernel-mia2-normal kernel-mia2-cpu-only-oc; do
+            if ls zips/${want}-*.zip >/dev/null 2>&1; then
+              echo "OK   ${want}"
+            else
+              echo "::error::missing ${want}*.zip"
+              rc=1
+            fi
+          done
+          exit $rc
+
+      - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.RELEASE_TAG }}
           name: "OC Kernel Build ${{ env.BUILD_DATE }} (run #${{ github.run_number }})"
           prerelease: true
           fail_on_unmatched_files: true
-          files: ${{ env.ZIP_NAME }}
+          files: zips/*.zip
           body: |
             Custom OC Kernel For Mi 6X (wayne) & Mi A2 (jasmine_sprout).
             feature **ReSukiSU + SUSFS + Re-Kernel + NoMount+BBG** included.
@@ -375,5 +437,6 @@ jobs:
             normal - nothing changes
             CPU only - OC CPU 2.46 GHz
 
+            Commit: `${{ github.sha }}`
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
