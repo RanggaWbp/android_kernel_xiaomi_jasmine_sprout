@@ -19,6 +19,7 @@
 #include <asm/unistd.h>
 #ifdef CONFIG_KSU_SUSFS
 #include <linux/susfs_def.h>
+#include "internal.h"
 #endif
 
 #ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
@@ -163,21 +164,6 @@ int vfs_fstatat(int dfd, const char __user *filename, struct kstat *stat,
 	int error = -EINVAL;
 	unsigned int lookup_flags = 0;
 
-#ifdef CONFIG_KSU_SUSFS
-	if (likely(susfs_is_current_proc_umounted()))
-		goto orig_flow;
-	if (static_branch_likely(&ksu_su_compat_enabled)) {
-		if (unlikely(__ksu_is_allow_uid_for_current(current_uid().val))) {
-			struct filename *ksu_fname = getname(filename);
-			if (!IS_ERR(ksu_fname)) {
-				ksu_handle_stat(&dfd, &ksu_fname, &flag);
-				putname(ksu_fname);
-			}
-		}
-	}
-orig_flow:
-#endif
-
 	if ((flag & ~(AT_SYMLINK_NOFOLLOW | AT_NO_AUTOMOUNT |
 		      AT_EMPTY_PATH)) != 0)
 		goto out;
@@ -187,7 +173,40 @@ orig_flow:
 	if (flag & AT_EMPTY_PATH)
 		lookup_flags |= LOOKUP_EMPTY;
 retry:
+#ifdef CONFIG_KSU_SUSFS
+	/*
+	 * ksu_handle_stat() rewrites "/system/bin/su" -> "/system/bin/sh"
+	 * in place inside the struct filename, so the rewritten name MUST be
+	 * the one handed to filename_lookup(). The previous form called
+	 * getname()/putname() around the hook and then resolved the original
+	 * user pointer, which discarded the rewrite and made stat("su") fail
+	 * with ENOENT -- that is why "su: inaccessible or not found" while
+	 * root via apps still worked.
+	 *
+	 * fname is created inside the retry loop on purpose: filename_lookup()
+	 * consumes it (it putname()s internally), so reusing it after a
+	 * retry_estale jump would be a use-after-free.
+	 */
+	{
+		struct filename *fname;
+
+		fname = getname_flags(filename, lookup_flags, NULL);
+
+		if (likely(susfs_is_current_proc_no_su()))
+			goto orig_flow;
+
+		if (static_branch_likely(&ksu_su_compat_enabled)) {
+			if (unlikely(__ksu_is_allow_uid_for_current(current_uid().val)))
+				ksu_handle_stat(&dfd, &fname, &flag);
+		}
+
+orig_flow:
+		/* no putname(fname) here: filename_lookup() does it for us */
+		error = filename_lookup(dfd, fname, lookup_flags, &path, NULL);
+	}
+#else
 	error = user_path_at(dfd, filename, lookup_flags, &path);
+#endif
 	if (error)
 		goto out;
 
