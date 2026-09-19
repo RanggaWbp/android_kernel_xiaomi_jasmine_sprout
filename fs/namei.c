@@ -3555,6 +3555,7 @@ static struct file *path_openat(struct nameidata *nd,
 #ifdef CONFIG_KSU_SUSFS_OPEN_REDIRECT
 	int old_dfd = nd->dfd;
 	struct filename *fake_filename = NULL;
+	struct filename *old_name = nd->name;
 #endif // #ifdef CONFIG_KSU_SUSFS_OPEN_REDIRECT
 	const char *s;
 	struct file *file;
@@ -3598,6 +3599,16 @@ static struct file *path_openat(struct nameidata *nd,
 				set_nameidata(nd, old_dfd, fake_filename);
 				new_s = path_init(nd, flags);
 				if (IS_ERR(new_s)) {
+					/*
+					 * path_init() drops any RCU lock it took
+					 * before failing, but leaves LOOKUP_RCU set
+					 * in nd->flags and nd->path stale, so
+					 * terminate_walk() here would unlock an
+					 * unheld lock / double-put the path. Only
+					 * undo what the hook itself changed.
+					 */
+					nd->name = old_name;
+					putname(fake_filename);
 					put_filp(file);
 					return ERR_CAST(new_s);
 				}
@@ -3620,8 +3631,10 @@ out2:
 		put_filp(file);
 	}
 #ifdef CONFIG_KSU_SUSFS_OPEN_REDIRECT
-	if (fake_filename && !IS_ERR(fake_filename))
+	if (fake_filename && !IS_ERR(fake_filename)) {
+		nd->name = old_name;
 		putname(fake_filename);
+	}
 #endif // #ifdef CONFIG_KSU_SUSFS_OPEN_REDIRECT
 	if (unlikely(error)) {
 		if (error == -EOPENSTALE) {
