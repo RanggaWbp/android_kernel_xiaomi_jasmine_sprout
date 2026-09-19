@@ -171,6 +171,43 @@ static int msm_cpufreq_init(struct cpufreq_policy *policy)
 			policy->cpu, cur_freq, table[index].frequency);
 	policy->cur = table[index].frequency;
 
+	/*
+	 * Tell cpufreq/schedutil how long a frequency switch actually takes.
+	 *
+	 * This driver is the only one bound on SDM660 (compatible
+	 * "qcom,msm-cpufreq"; CPUFREQ_DT is disabled), and it never filled in
+	 * either transition_latency or the up/down_transition_delay_us pair.
+	 * kernel/sched/cpufreq_schedutil.c::sugov_init() consumes those:
+	 *
+	 *   if (policy->up_transition_delay_us && policy->down_transition_delay_us)
+	 *           rate_limit = those;
+	 *   else {
+	 *           rate_limit = LATENCY_MULTIPLIER;              // 1000us
+	 *           lat = transition_latency / NSEC_PER_USEC;     // 0 here
+	 *           if (lat) rate_limit *= lat;                   // NOT taken
+	 *   }
+	 *
+	 * With both left at 0 the governor ended up with a bare 1ms/1ms
+	 * window: no latency scaling at all, and a down-limit ~50x smaller
+	 * than the cpufreq-dt Android default (50ms). On a driver with no
+	 * fast_switch (the stub at cpufreq_schedutil.c:24-25 compiles the
+	 * fast path out), every accepted OPP change is a cross-CPU IPI plus an
+	 * RT kthread wakeup, so a 1ms window lets the cluster bounce OPPs once
+	 * per millisecond and lets frequency collapse to min between render
+	 * bursts -- which shows up as jank during scrolling.
+	 *
+	 * Declare realistic values instead:
+	 *   up   = 1000us  - keep the ramp responsive, matches LATENCY_MULTIPLIER
+	 *   down = 10000us - ~1.7 frames at 60Hz, stops the per-frame OPP
+	 *                    collapse without the power cost of cpufreq-dt's 50ms
+	 *
+	 * transition_latency is set as well so anything else reading it (e.g.
+	 * cpufreq_governor max_transition_latency checks) sees a sane number.
+	 */
+	policy->cpuinfo.transition_latency = 1000 * NSEC_PER_USEC; /* 1000us */
+	policy->up_transition_delay_us = 1000;   /* 1ms  */
+	policy->down_transition_delay_us = 10000; /* 10ms */
+
 	return 0;
 }
 

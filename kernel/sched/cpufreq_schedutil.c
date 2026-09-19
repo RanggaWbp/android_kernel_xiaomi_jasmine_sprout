@@ -675,6 +675,29 @@ static int sugov_init(struct cpufreq_policy *policy)
                 }
 	}
 
+	/*
+	 * Guard against a rate-limit of 0, and against the un-scaled
+	 * LATENCY_MULTIPLIER fallback above being taken with an unknown
+	 * transition latency.
+	 *
+	 * When a cpufreq driver leaves BOTH transition_latency and the
+	 * up/down_transition_delay_us pair at zero (the SDM660 msm driver did
+	 * exactly this), `lat` is 0, the scaling is skipped, and the governor
+	 * silently ends up with a 1ms/1ms window. A 1ms window on a driver
+	 * without fast_switch makes the cluster bounce OPPs once per
+	 * millisecond and lets frequency collapse to min between render
+	 * bursts, which reads as UI jank.
+	 *
+	 * Keeping the up-limit at 1ms preserves ramp responsiveness; floor the
+	 * down-limit at 10ms (~1.7 frames at 60Hz) so frequency is not dropped
+	 * between frames. Only clamped upward, so a driver (or a userspace
+	 * write) asking for a larger window is never overridden.
+	 */
+	if (!tunables->up_rate_limit_us)
+		tunables->up_rate_limit_us = 1000;
+	if (tunables->down_rate_limit_us < 10000)
+		tunables->down_rate_limit_us = 10000;
+
 	policy->governor_data = sg_policy;
 	sg_policy->tunables = tunables;
 

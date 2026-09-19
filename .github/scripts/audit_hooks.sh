@@ -264,6 +264,21 @@ for dc in arch/arm64/configs/wayne_defconfig arch/arm64/configs/jasmine-stock_de
   else
     echo "      ok            CONFIG_KSU_MANUAL_HOOK not enabled"
   fi
+  # ReSukiSU main HEAD (>= 3d1185d8) calls ksu_get_session_keyring(), whose
+  # 4.4 branch dereferences cred->session_keyring. In this tree that field only
+  # exists inside `#ifdef CONFIG_KEYS` (include/linux/cred.h), so a defconfig
+  # without CONFIG_KEYS fails to compile the KernelSU submodule outright.
+  # Historical note: KernelSU used to guard this with
+  # KSU_COMPAT_REQUIRE_SESSION_KEYRING; upstream commit 6ec8d9a8 dropped that
+  # ifdef, which is exactly what makes CONFIG_KEYS mandatory here.
+  if grep -qE "^CONFIG_KEYS=y" "$dc"; then
+    echo "      ok            CONFIG_KEYS=y (required by ksu_get_session_keyring)"
+  else
+    echo "      ::error::CONFIG_KEYS=y missing in $dc -- ksu_get_session_keyring()"
+    echo "               dereferences cred->session_keyring, which is only declared"
+    echo "               under #ifdef CONFIG_KEYS in include/linux/cred.h."
+    FAIL=1
+  fi
 done
 
 # --------------------------------------------------------------------------
