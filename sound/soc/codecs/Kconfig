@@ -1008,3 +1008,6 @@ source "sound/soc/codecs/msm_sdw/Kconfig"
 source "sound/soc/codecs/tas2557/Kconfig"
 
 endmenu
+
+config SND_SOC_TFA98XX
+	tristate "nxp Instruments TFA98XX SmartAmp(R)"

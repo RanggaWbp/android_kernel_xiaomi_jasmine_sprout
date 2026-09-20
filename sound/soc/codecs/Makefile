@@ -432,3 +432,6 @@ obj-$(CONFIG_SND_SOC_MAX98937) += max98937/
 
 # Tas2557
 obj-$(CONFIG_SND_SOC_TAS2557_STEREO) += tas2557/
+
+# TFA98XX SmartAmp (Mi A2)
+obj-$(CONFIG_SND_SOC_TFA98XX) += tfa98xx/

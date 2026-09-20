@@ -111,3 +111,24 @@ obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_DSX_E7S)	+= synaptics_dsx_e7s/
 obj-$(CONFIG_TOUCHSCREEN_NVT_E7S) 	+= nvt_touch_e7s/
 obj-$(CONFIG_TOUCHSCREEN_FOCALTECH_D9_D9P)		+= focaltech_d9_d9p/
 obj-$(CONFIG_TOUCHSCREEN_GT9XX_ZQL6019)		+= gt9xx_zql6019/
+
+# Longcheer custom TP (Mi A2: D2S/E7T/E7S/F7A)
+obj-$(CONFIG_KERNEL_CUSTOM_D2S)	+= lct_tp_fm_info.o
+obj-$(CONFIG_KERNEL_CUSTOM_D2S)	+= lct_ctp_selftest.o
+obj-$(CONFIG_KERNEL_CUSTOM_D2S)	+= lct_ctp_upgrade.o
+obj-$(CONFIG_KERNEL_CUSTOM_D2S)	+= lct_if_ctp_upgrade.o
+obj-$(CONFIG_KERNEL_CUSTOM_E7T)	+= lct_tp_fm_info.o
+obj-$(CONFIG_KERNEL_CUSTOM_E7T)	+= lct_ctp_selftest.o
+obj-$(CONFIG_KERNEL_CUSTOM_E7T)	+= lct_ctp_upgrade.o
+obj-$(CONFIG_KERNEL_CUSTOM_E7T)	+= lct_if_ctp_upgrade.o
+obj-$(CONFIG_KERNEL_CUSTOM_E7S)	+= lct_tp_fm_info.o
+obj-$(CONFIG_KERNEL_CUSTOM_E7S)	+= lct_ctp_selftest.o
+obj-$(CONFIG_KERNEL_CUSTOM_E7S)	+= lct_ctp_upgrade.o
+obj-$(CONFIG_KERNEL_CUSTOM_E7S)	+= lct_if_ctp_upgrade.o
+obj-$(CONFIG_KERNEL_CUSTOM_E7S)	+= lct_tp_gesture.o
+obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_TCM_F7A)	+= synaptics_tcm_f7a/
+obj-$(CONFIG_KERNEL_CUSTOM_F7A)	+= lct_tp_selftest.o
+obj-$(CONFIG_KERNEL_CUSTOM_F7A)	+= lct_tp_info.o
+obj-$(CONFIG_KERNEL_CUSTOM_F7A)	+= lct_tp_work.o
+obj-$(CONFIG_KERNEL_CUSTOM_F7A)	+= lct_tp_gesture.o
+obj-$(CONFIG_KERNEL_CUSTOM_F7A)	+= lct_tp_grip_area.o
