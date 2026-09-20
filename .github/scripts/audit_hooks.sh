@@ -225,7 +225,7 @@ check_wiring "ReSukiSU"  "drivers/kernelsu/Kconfig"    "drivers/Makefile"       
 # Makefile falls through to the generic Qualcomm board list, so the appended
 # DTB in Image.gz-dtb contains no device DTB at all and the OC override never
 # reaches the image. jasmine-stock was missing this for its entire history.
-for dc in arch/arm64/configs/wayne_defconfig arch/arm64/configs/jasmine-stock_defconfig; do
+for dc in arch/arm64/configs/jasmine_sprout_defconfig; do
   [ -f "$dc" ] || continue
   if grep -qE "^CONFIG_MACH_XIAOMI_WAYNE=y" "$dc"; then
     echo "  ok            $(basename "$dc") has CONFIG_MACH_XIAOMI_WAYNE=y (device DTB will be built)"
@@ -247,7 +247,7 @@ hr
 echo "[6] Defconfig options"
 echo
 
-for dc in arch/arm64/configs/wayne_defconfig arch/arm64/configs/jasmine-stock_defconfig; do
+for dc in arch/arm64/configs/jasmine_sprout_defconfig; do
   [ -f "$dc" ] || continue
   echo "  --- $dc"
   for opt in CONFIG_KSU CONFIG_KSU_SUSFS CONFIG_NOMOUNT CONFIG_BBG CONFIG_REKERNEL; do
