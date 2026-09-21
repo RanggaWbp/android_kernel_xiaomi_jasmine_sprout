@@ -763,6 +763,8 @@ CONFIG_KALLSYMS=y
 # Xiaomi board selection: pulls MACH_LONGCHEER -> MACH_XIAOMI_SDM660 -> MACH_XIAOMI
 CONFIG_MACH_XIAOMI_WAYNE=y
 
-# Append exactly the Mi A2 DTB (bypasses the arbitrary find -L DTB pile-up)
-CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES="sdm660-mtp-jasmine"
+# Empty = let arch/arm64/boot/Makefile find -L discover the DTBs (the dtb-y
+# rule lives in dts/qcom/Makefile, so the built blob is dts/qcom/*.dtb, not
+# dts/*.dtb -- a bare name here makes make look in the wrong directory).
+CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES=""
 
