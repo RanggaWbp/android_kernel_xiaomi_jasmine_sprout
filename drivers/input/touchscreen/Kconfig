@@ -1313,6 +1313,4 @@ config TOUCHSCREEN_GT9XX_ZQL6019
 
 source "drivers/input/touchscreen/st/Kconfig"
 
-source "drivers/input/touchscreen/synaptics_tcm_f7a/Kconfig"
-
 endif
