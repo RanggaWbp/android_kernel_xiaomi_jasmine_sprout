@@ -104,8 +104,12 @@ jobs:
             && { echo "::error::CONFIG_KSU_MANUAL_HOOK=y present"; rc=1; }
           grep -qE "^CONFIG_MACH_XIAOMI_WAYNE=y" out/.config \
             || { echo "::error::CONFIG_MACH_XIAOMI_WAYNE=y dropped -- jasmine DTB will not be built"; rc=1; }
-          grep -qE '^CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES="sdm660-mtp-jasmine"' out/.config \
-            || { echo "::error::APPENDED_DTB_IMAGE_NAMES not pinned to sdm660-mtp-jasmine"; rc=1; }
+          # APPENDED_DTB_IMAGE_NAMES must be EMPTY: the dtb-y rule lives in
+          # dts/qcom/Makefile so the blob is built as dts/qcom/*.dtb. A bare
+          # name here makes make look for dts/<name>.dtb -> "No rule to make
+          # target". Empty falls back to find -L, which discovers qcom/*.
+          grep -qE '^CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES=""' out/.config \
+            || { echo "::error::APPENDED_DTB_IMAGE_NAMES must be empty (find -L path); a bare name breaks the dts/qcom path"; rc=1; }
           [ "$rc" -eq 0 ] && echo "resolved config OK"
           exit "$rc"
 
