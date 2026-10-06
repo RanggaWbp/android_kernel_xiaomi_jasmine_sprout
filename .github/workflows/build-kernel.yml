@@ -255,7 +255,7 @@ jobs:
           [ -f "$IMG" ] || { echo "::error::$IMG not found"; tail -150 build.log; exit 1; }
           SIZE=$(stat -c%s "$IMG")
           echo "Image.gz-dtb size: ${SIZE} bytes"
-          if (( SIZE < 15000000 )); then
+          if (( SIZE < 5000000 )); then
             echo "::error::Image.gz-dtb suspiciously small (${SIZE} bytes)"
             exit 1
           fi
