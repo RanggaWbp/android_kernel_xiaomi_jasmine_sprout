@@ -194,6 +194,22 @@ jobs:
           # GPU speedbin override (patch 0002) memang Sengaja tidak ada di repo
           # ini -- terbukti gagal (reboot/GPU hang) di hardware nyata (ref660).
 
+      - name: Apply Droidspaces patches (if enabled by profile)
+        working-directory: kernel
+        run: |
+          set -a
+          # shellcheck disable=SC1090
+          source "../oc-config/${{ env.CONF_FILE }}"
+          set +a
+
+          if [[ "${DROIDSPACES_ENABLED:-}" == "true" ]]; then
+            echo "Droidspaces enabled -> applying patches"
+            git apply "../oc-config/patches/droidspaces/0001-droidspaces-fix-xt-qtaguid-kernel-panic.patch"
+            git apply "../oc-config/patches/droidspaces/0002-droidspaces-fix-cgroup-file-prefix.patch"
+          else
+            echo "Droidspaces disabled -> skipping"
+          fi
+
       # ---------------------------------------------------------------
       # 6. Suntik nilai override konkret ke DTS device target
       # ---------------------------------------------------------------
@@ -319,10 +335,17 @@ jobs:
           RISK_LEVEL="$(grep -E '^RISK_LEVEL=' "../oc-config/${{ env.CONF_FILE }}" | cut -d= -f2 || true)"
           RISK_LEVEL="${RISK_LEVEL:-none}"
 
+          DROIDSPACES_STR="$(grep -E '^DROIDSPACES_ENABLED=' "../oc-config/${{ env.CONF_FILE }}" | cut -d= -f2 || true)"
+          if [[ "${DROIDSPACES_STR:-}" == "true" ]]; then
+            FEATURES_STR="BakaSU + SUSFS + Re:Kernel + NoMount + BBG + EAS + Droidspaces"
+          else
+            FEATURES_STR="BakaSU + SUSFS + Re:Kernel + NoMount + BBG + EAS"
+          fi
+
           cat > anykernel.sh << EOF
           ### AnyKernel3 Ramdisk Mod Script
           properties() { '
-          kernel.string=Mi A2 Kernel (${{ matrix.codename }}) | profile: ${{ matrix.profile }} (risk: ${RISK_LEVEL}) | features: BakaSU + SUSFS + Re:Kernel + NoMount + BBG + EAS | by RanggaWbp | ${{ env.BUILD_DATE }}
+          kernel.string=Mi A2 Kernel (${{ matrix.codename }}) | profile: ${{ matrix.profile }} (risk: ${RISK_LEVEL}) | features: ${FEATURES_STR} | by RanggaWbp | ${{ env.BUILD_DATE }}
           do.devicecheck=1
           do.modules=0
           do.systemless=1
