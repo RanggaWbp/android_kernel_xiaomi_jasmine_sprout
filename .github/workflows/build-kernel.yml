@@ -165,7 +165,7 @@ jobs:
           cat > anykernel.sh << EOF
           ### AnyKernel3 Ramdisk Mod Script
           properties() { '
-          kernel.string=Mi A2 Kernel (jasmine_sprout) | features: ReSukiSU + SUSFS + Re:Kernel + NoMount + BBG | by RanggaWbp | ${BUILD_DATE}
+          kernel.string=Mi A2 Kernel (jasmine_sprout) | features: ReSukiSU + SUSFS + Re:Kernel + NoMount + BBG + BORE | by RanggaWbp | ${BUILD_DATE}
           do.devicecheck=1
           do.modules=0
           do.systemless=1
