@@ -1,12 +1,22 @@
 name: Build & Release Mi A2 Kernel (jasmine_sprout)
 
+# Adaptasi single-device dari ref660 matrix (2 device x 2 profile = 4 job).
+# Di sini hanya device=[jasmine_sprout] x profile=[normal, oc_cpu_only]
+# = 2 job. Konfigurasi/toolchain langkah dgn pola ref660 yang sudah terbukti:
+# config di configs/, patch 0001 kondisional, DT override, verify DTB, AnyKernel3
+# dengan suffix BakaSU-SUSFS.
+#
+# Semua zip diupload ke satu GitHub Release (prerelease) per run via job
+# release terpisah (needs: build) -- menghindari race-condition penulisan
+# paralel ke release yang sama yang sempat memakan zip di ref660 (run #67).
 on:
   push:
-    branches: [ main ]
+    branches: [ main, ci/oc-matrix ]
     paths:
-      - "arch/arm64/configs/jasmine_sprout_defconfig"
-      - "arch/arm/boot/dts/**"
-      - "fs/**"
+      - "configs/**"
+      - "patches/**"
+      - "scripts/apply_oc_overrides.sh"
+      - "scripts/validate_oc_config.sh"
       - "kernel/**"
       - "drivers/**"
       - "security/**"
@@ -14,51 +24,124 @@ on:
       - "ipc/**"
       - "net/**"
       - "include/**"
+      - "arch/arm64/**"
+      - "arch/arm/**"
       - "sound/**"
       - "Makefile"
       - "Kbuild"
       - "KernelSU"
+      - "Baseband-guard/**"
       - ".github/workflows/*.yml"
       - ".github/scripts/**"
   workflow_dispatch: {}
 
 permissions:
-  contents: write
+  contents: write   # untuk membuat/isi GitHub Release
 
 jobs:
   build:
-    name: Build jasmine_sprout (Mi A2)
+    name: Build ${{ matrix.codename }} (${{ matrix.profile }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        device: [jasmine_sprout]
+        profile: [normal, oc_cpu_only]
+        include:
+          - device: jasmine_sprout
+            codename: jasmine_sprout
+            dtb_basename: sdm660-mtp-jasmine
+            dtb_model: ""
+            dtb_board_id: "196616 0"
+            display_name: "Mi A2"
+            defconfig: jasmine_sprout_defconfig
+            device_name2: "jasmine"
+            is_slot_device: "1"
+            # file conf berada di folder device repo config (konvensi ref660).
+            conf_dir: mia2
+    env:
+      CONF_FILE: configs/${{ matrix.conf_dir }}/${{ matrix.profile }}.conf
+      # ARTIFACT_NAME TIDAK dihitung dari format string di sini -- diambil
+      # langsung dari isi file conf (single source of truth), supaya tidak
+      # pernah meleset seperti bug "oc_balanced-oc" semasa ref660.
+
     steps:
+      # ---------------------------------------------------------------
+      # 0. Tanggal build -- buat nama zip DAN tag release unik per run.
+      # ---------------------------------------------------------------
+      - name: Set build date
+        run: |
+          echo "BUILD_DATE=$(date -u +'%d-%m-%Y')" >> "$GITHUB_ENV"
+          echo "RELEASE_TAG=jasmine-kernel-$(date -u +'%Y%m%d')-${{ github.run_number }}" >> "$GITHUB_ENV"
+
+      # ---------------------------------------------------------------
+      # 1. Checkout REPO CONFIG (configs/patches/scripts) -- repo ini.
+      # ---------------------------------------------------------------
+      - name: Checkout config repo
+        uses: actions/checkout@v4
+        with:
+          path: oc-config
+          fetch-depth: 1
+
+      # ---------------------------------------------------------------
+      # 2. STATIC VALIDATION -- FAIL BUILD kalau config invalid, sebelum
+      #    satu baris kernel pun dicompile.
+      # ---------------------------------------------------------------
+      - name: Validate OC config (static safety check)
+        working-directory: oc-config
+        run: |
+          chmod +x scripts/validate_oc_config.sh scripts/apply_oc_overrides.sh
+          bash scripts/validate_oc_config.sh "${{ env.CONF_FILE }}"
+
+      - name: Read ARTIFACT_NAME from conf (single source of truth)
+        run: |
+          NAME="$(grep -E '^ARTIFACT_NAME=' "oc-config/${{ env.CONF_FILE }}" | cut -d= -f2)"
+          if [[ -z "$NAME" ]]; then
+            echo "::error::ARTIFACT_NAME tidak ditemukan di ${{ env.CONF_FILE }}"
+            exit 1
+          fi
+          echo "ARTIFACT_NAME=${NAME}" >> "$GITHUB_ENV"
+
+      # ---------------------------------------------------------------
+      # 3. Checkout KERNEL SOURCE ke folder terpisah + submodule BakaSU.
+      # ---------------------------------------------------------------
       - name: Checkout kernel source
         uses: actions/checkout@v4
         with:
+          repository: RanggaWbp/android_kernel_xiaomi_jasmine_sprout
+          path: kernel
           fetch-depth: 1
           submodules: recursive
 
+      - name: Unshallow KernelSU submodule
+        working-directory: kernel/KernelSU
+        run: git fetch --unshallow || true
+
       - name: Report repository state
+        working-directory: kernel
         run: |
           {
-            echo "=== REPOSITORY STATE ==="
+            echo "=== KERNEL SOURCE ==="
             echo "commit : $(git rev-parse HEAD)"
-            echo "date   : $(date -u)"
             echo
             echo "=== SUBMODULE STATUS ==="
             git submodule status
             echo
-            echo "=== RESUKISU VERSION ==="
+            echo "=== BAKASU REMOTE ==="
+            git -C KernelSU remote get-url origin
             echo "commit  : $(git -C KernelSU rev-parse HEAD)"
-            echo "subject : $(git -C KernelSU log -1 --format='%s')"
           } | tee git-state.log
 
-      - name: Verify submodule resolves (drivers/kernelsu symlink)
+      - name: Verify BakaSU submodule resolves (drivers/kernelsu symlink)
+        working-directory: kernel
         run: |
           echo "drivers/kernelsu -> $(readlink drivers/kernelsu)"
           [ -f KernelSU/kernel/Kbuild ] || { echo "::error::KernelSU/kernel/Kbuild missing"; exit 1; }
           [ -f drivers/kernelsu/Kbuild ] || { echo "::error::drivers/kernelsu symlink broken"; exit 1; }
 
       - name: Run hook audit
-        run: bash .github/scripts/audit_hooks.sh "$GITHUB_WORKSPACE"
+        working-directory: kernel
+        run: bash ../oc-config/.github/scripts/audit_hooks.sh "$GITHUB_WORKSPACE/kernel"
 
       - name: Free up disk space
         run: |
@@ -72,6 +155,10 @@ jobs:
           sudo apt-get install -y bc bison flex libssl-dev libelf-dev \
             build-essential python3 zip curl git libdebuginfod1 device-tree-compiler
 
+      # ---------------------------------------------------------------
+      # 4. Toolchain -- eva-gcc (mvaisakh), pola yang sudah terbukti jalan
+      #    di repo ini. CROSS_COMPILE aarch64-elf- / arm-eabi-.
+      # ---------------------------------------------------------------
       - name: Cache toolchain
         id: cache-toolchain
         uses: actions/cache@v4
@@ -86,15 +173,66 @@ jobs:
           git clone --depth=1 https://github.com/mvaisakh/gcc-arm64.git toolchains/gcc64
           git clone --depth=1 https://github.com/mvaisakh/gcc-arm.git toolchains/gcc32
 
-      - name: Configure (jasmine_sprout_defconfig)
+      # ---------------------------------------------------------------
+      # 5. APPLY PATCH -- hanya untuk profile yang butuh mekanisme override
+      #    (dibaca dari isi conf, bukan hardcode per-profile).
+      # ---------------------------------------------------------------
+      - name: Apply opt-in speedbin override patch (if required by profile)
+        working-directory: kernel
+        run: |
+          set -a
+          # shellcheck disable=SC1090
+          source "../oc-config/${{ env.CONF_FILE }}"
+          set +a
+
+          if [[ -n "${CPU_LITTLE_FORCE_SPEEDBIN:-}" || -n "${CPU_BIG_FORCE_SPEEDBIN:-}" ]]; then
+            echo "Profile butuh CPU force-speedbin -> apply patch 0001"
+            git apply "../oc-config/patches/0001-clk-cpu-osm-add-opt-in-speedbin-override.patch"
+          else
+            echo "Profile tidak menyentuh CPU speedbin -> patch 0001 dilewati"
+          fi
+          # GPU speedbin override (patch 0002) memang Sengaja tidak ada di repo
+          # ini -- terbukti gagal (reboot/GPU hang) di hardware nyata (ref660).
+
+      - name: Apply Droidspaces patches (if enabled by profile)
+        working-directory: kernel
+        run: |
+          set -a
+          # shellcheck disable=SC1090
+          source "../oc-config/${{ env.CONF_FILE }}"
+          set +a
+
+          if [[ "${DROIDSPACES_ENABLED:-}" == "true" ]]; then
+            echo "Droidspaces enabled -> applying patches"
+            git apply "../oc-config/patches/droidspaces/0001-droidspaces-fix-xt-qtaguid-kernel-panic.patch"
+            git apply "../oc-config/patches/droidspaces/0002-droidspaces-fix-cgroup-file-prefix.patch"
+          else
+            echo "Droidspaces disabled -> skipping"
+          fi
+
+      # ---------------------------------------------------------------
+      # 6. Suntik nilai override konkret ke DTS device target
+      # ---------------------------------------------------------------
+      - name: Apply DT overrides for this profile
+        run: |
+          bash oc-config/scripts/apply_oc_overrides.sh \
+            "oc-config/${{ env.CONF_FILE }}" \
+            "kernel"
+
+      # ---------------------------------------------------------------
+      # 7. BUILD -- jasmine_sprout_defconfig, Image.gz-dtb.
+      # ---------------------------------------------------------------
+      - name: Configure (${{ matrix.defconfig }})
+        working-directory: kernel
         run: |
           export ARCH=arm64
           export SUBARCH=arm64
           export CROSS_COMPILE="$GITHUB_WORKSPACE/toolchains/gcc64/bin/aarch64-elf-"
           export CROSS_COMPILE_ARM32="$GITHUB_WORKSPACE/toolchains/gcc32/bin/arm-eabi-"
-          make O=out jasmine_sprout_defconfig 2>&1 | tee defconfig.log
+          make O=out "${{ matrix.defconfig }}" 2>&1 | tee defconfig.log
 
       - name: Validate resolved .config
+        working-directory: kernel
         run: |
           rc=0
           for opt in CONFIG_KSU CONFIG_KSU_SUSFS CONFIG_NOMOUNT CONFIG_BBG CONFIG_REKERNEL CONFIG_KEYS; do
@@ -104,16 +242,17 @@ jobs:
             && { echo "::error::CONFIG_KSU_MANUAL_HOOK=y present"; rc=1; }
           grep -qE "^CONFIG_MACH_XIAOMI_WAYNE=y" out/.config \
             || { echo "::error::CONFIG_MACH_XIAOMI_WAYNE=y dropped -- jasmine DTB will not be built"; rc=1; }
-          # APPENDED_DTB_IMAGE_NAMES must be EMPTY: the dtb-y rule lives in
-          # dts/qcom/Makefile so the blob is built as dts/qcom/*.dtb. A bare
-          # name here makes make look for dts/<name>.dtb -> "No rule to make
-          # target". Empty falls back to find -L, which discovers qcom/*.
+          # APPENDED_DTB_IMAGE_NAMES harus kosong: aturan dtb-y hidup di
+          # dts/qcom/Makefile, blob dibangun sebagai dts/qcom/*.dtb. Nama
+          # polos di sini membuat make mencari dts/<name>.dtb -> "No rule to
+          # make target". Kosong -> fallback find -L yang menemukan path benar.
           grep -qE '^CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES=""' out/.config \
             || { echo "::error::APPENDED_DTB_IMAGE_NAMES must be empty (find -L path); a bare name breaks the dts/qcom path"; rc=1; }
           [ "$rc" -eq 0 ] && echo "resolved config OK"
           exit "$rc"
 
       - name: Build kernel
+        working-directory: kernel
         run: |
           export ARCH=arm64
           export SUBARCH=arm64
@@ -122,57 +261,98 @@ jobs:
           set -o pipefail
           make O=out -j"$(nproc)" 2>&1 | tee build.log
 
+      # ---------------------------------------------------------------
+      # 8a. VERIFIKASI output build -- image harus ada dan bebas error fatal.
+      # ---------------------------------------------------------------
       - name: Verify build output
+        working-directory: kernel
         run: |
           IMG="out/arch/arm64/boot/Image.gz-dtb"
           [ -f "$IMG" ] || { echo "::error::$IMG not found"; tail -150 build.log; exit 1; }
           SIZE=$(stat -c%s "$IMG")
           echo "Image.gz-dtb size: ${SIZE} bytes"
-          if (( SIZE < 5000000 || SIZE > 90000000 )); then
-            echo "::error::abnormal Image.gz-dtb size (${SIZE} bytes)"
+          if (( SIZE < 5000000 )); then
+            echo "::error::Image.gz-dtb suspiciously small (${SIZE} bytes)"
             exit 1
           fi
-          if grep -qiE "fatal error|undefined reference|multiple definition" build.log; then
-            echo "::error::build.log contains fatal errors"
+          if grep -qE "make.*Error|Error [0-9]|error:" build.log; then
+            echo "::error::build.log mengandung error -- lihat log lengkap"
+            grep -inE "error" build.log | head -30
+            exit 1
+          fi
+          if grep -qiE "fatal|undefined reference|multiple definition" build.log; then
+            echo "::error::build.log mengandung fatal error -- lihat log lengkap"
             grep -inE "fatal error|undefined reference|multiple definition" build.log | head -30
             exit 1
           fi
           echo "Build output OK."
 
+      # ---------------------------------------------------------------
+      # 8b. APPENDED DTB VALIDATION -- membuktikan image benar-benar membawa
+      #     DTB jasmine_sprout (lewat board-id, karena model jasmine sama
+      #     dengan MTP generik) dan, khusus OC, override speedbin terpasang.
+      # ---------------------------------------------------------------
       - name: Verify appended DTB matches this device
+        working-directory: kernel
+        env:
+          EXPECT_MODEL: ${{ matrix.dtb_model }}
+          EXPECT_BOARD_ID: ${{ matrix.dtb_board_id }}
+          PROFILE: ${{ matrix.profile }}
         run: |
           IMG="out/arch/arm64/boot/Image.gz-dtb"
-          python3 .github/scripts/verify_appended_dtb.py "$IMG" \
-            --expect-board-id "196616 0" \
-            --expect-dtb "sdm660-mtp-jasmine.dtb"
+          SCRIPT="../oc-config/.github/scripts/verify_appended_dtb.py"
+          ARGS=()
 
-      - name: Confirm hook symbols in build artifacts
-        run: |
-          for sym in ksu_handle_setresuid ksu_handle_execveat ksu_handle_faccessat \
-                     ksu_handle_sys_read ksu_handle_stat ksu_handle_sys_reboot \
-                     ksu_handle_input_handle_event; do
-            printf '  %-32s ' "$sym"
-            grep -qw "$sym" out/System.map 2>/dev/null && echo present || echo ABSENT
-          done
+          # Model hanya ditegaskan bila unik buat device ini. Model jasmine
+          # identik dengan MTP generik SDM660, jadi identitasnya lewat board-id.
+          if [[ -n "$EXPECT_MODEL" ]]; then
+            ARGS+=(--expect-model "$EXPECT_MODEL")
+          fi
+          ARGS+=(--expect-board-id "$EXPECT_BOARD_ID")
 
+          # OC profile wajib membawa override speedbin di dalam DTB -- satu-satunya
+          # bukti zip "oc" benar-benar overclock: apply_oc_overrides.sh menulis
+          # qcom,perfcl-force-speedbin=<0> ke DTS board, dan oc_cpu_only.conf
+          # menetapkan CPU_BIG_FORCE_SPEEDBIN=0 (bin0 cap 2457.6 MHz).
+          if [[ "$PROFILE" == "oc_cpu_only" ]]; then
+            ARGS+=(--expect-prop "qcom,perfcl-force-speedbin=0")
+          fi
+
+          ARGS+=(--expect-dtb "${{ matrix.dtb_basename }}.dtb")
+          python3 "$SCRIPT" "$IMG" "${ARGS[@]}"
+          echo "Appended DTB OK: image carries ${{ matrix.dtb_basename }}.dtb"
+
+      # ---------------------------------------------------------------
+      # 9. PACKAGE AnyKernel3 -- tag BakaSU + SUSFS di kernel.string.
+      # ---------------------------------------------------------------
       - name: Package AnyKernel3 zip
         run: |
-          BUILD_DATE="$(date -u +'%d-%m-%Y')"
           git clone --depth=1 https://github.com/osm0sis/AnyKernel3.git AK3
           cd AK3
           rm -rf ramdisk patch tools/keycheck
-          cp ../out/arch/arm64/boot/Image.gz-dtb .
+          cp ../kernel/out/arch/arm64/boot/Image.gz-dtb .
+
+          RISK_LEVEL="$(grep -E '^RISK_LEVEL=' "../oc-config/${{ env.CONF_FILE }}" | cut -d= -f2 || true)"
+          RISK_LEVEL="${RISK_LEVEL:-none}"
+
+          DROIDSPACES_STR="$(grep -E '^DROIDSPACES_ENABLED=' "../oc-config/${{ env.CONF_FILE }}" | cut -d= -f2 || true)"
+          if [[ "${DROIDSPACES_STR:-}" == "true" ]]; then
+            FEATURES_STR="BakaSU + SUSFS + Re:Kernel + NoMount + BBG + EAS + Droidspaces"
+          else
+            FEATURES_STR="BakaSU + SUSFS + Re:Kernel + NoMount + BBG + EAS"
+          fi
+
           cat > anykernel.sh << EOF
           ### AnyKernel3 Ramdisk Mod Script
           properties() { '
-          kernel.string=Mi A2 Kernel (jasmine_sprout) | features: ReSukiSU + SUSFS + Re:Kernel + NoMount + BBG + BORE | by RanggaWbp | ${BUILD_DATE}
+          kernel.string=Mi A2 Kernel (${{ matrix.codename }}) | profile: ${{ matrix.profile }} (risk: ${RISK_LEVEL}) | features: ${FEATURES_STR} + BORE | by RanggaWbp | ${{ env.BUILD_DATE }}
           do.devicecheck=1
           do.modules=0
           do.systemless=1
           do.cleanup=1
           do.cleanuponabort=0
-          device.name1=jasmine_sprout
-          device.name2=jasmine
+          device.name1=${{ matrix.codename }}
+          device.name2=${{ matrix.device_name2 }}
           device.name3=
           device.name4=
           device.name5=
@@ -181,26 +361,33 @@ jobs:
           supported.vendorpatchlevels=
           '; }
           boot_attributes() {
-          set_perm_recursive 0 0 755 644 \$RAMDISK/*;
-          set_perm_recursive 0 0 750 750 \$RAMDISK/init* \$RAMDISK/sbin;
+          set_perm_recursive 0 0 755 644 \\$RAMDISK/*;
+          set_perm_recursive 0 0 750 750 \\$RAMDISK/init* \\$RAMDISK/sbin;
           }
           BLOCK=/dev/block/bootdevice/by-name/boot;
-          IS_SLOT_DEVICE=1;
+          IS_SLOT_DEVICE=${{ matrix.is_slot_device }};
           RAMDISK_COMPRESSION=auto;
           PATCH_VBMETA_FLAG=auto;
           . tools/ak3-core.sh;
           dump_boot;
           write_boot;
           EOF
-          SHORT_SHA="$(cd .. && git rev-parse --short HEAD)"
-          ZIP_NAME="jasmine_sprout-ReSukiSU-SUSFS-${SHORT_SHA}-${BUILD_DATE}.zip"
+
+          SHORT_SHA="$(cd ../kernel && git rev-parse --short HEAD)"
+          # ARTIFACT_NAME dari conf (single source of truth); suffix BakaSU-SUSFS
+          # ditambahkan otomatis ke setiap zip.
+          ZIP_NAME="${{ env.ARTIFACT_NAME }}-BakaSU-SUSFS-${SHORT_SHA}-${{ env.BUILD_DATE }}.zip"
           zip -r9 "../${ZIP_NAME}" . -x ".git/*" ".github/*" "*.md"
           echo "ZIP_NAME=${ZIP_NAME}" >> "$GITHUB_ENV"
 
+      # ---------------------------------------------------------------
+      # 10. UPLOAD zip sebagai Actions artifact -- job release yang membuat
+      #     release, supaya tidak ada penulisan paralel ke release yang sama.
+      # ---------------------------------------------------------------
       - name: Upload zip as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: zip-jasmine_sprout
+          name: zip-${{ matrix.device }}-${{ matrix.profile }}
           path: ${{ env.ZIP_NAME }}
           retention-days: 30
 
@@ -208,13 +395,17 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-logs
+          name: build-logs-${{ matrix.device }}-${{ matrix.profile }}
           path: |
-            build.log
-            defconfig.log
-            git-state.log
+            kernel/build.log
+            kernel/defconfig.log
+            kernel/git-state.log
           retention-days: 7
 
+  # ==========================================================================
+  # JOB release -- kumpulkan SEMUA zip lalu buat satu release (prerelease).
+  # Dipisah dari job build supaya tidak ada penulisan paralel ke release.
+  # ==========================================================================
   release:
     name: Publish release
     needs: build
@@ -226,19 +417,23 @@ jobs:
           echo "BUILD_DATE=$(date -u +'%d-%m-%Y')" >> "$GITHUB_ENV"
           echo "RELEASE_TAG=jasmine-kernel-$(date -u +'%Y%m%d')-${{ github.run_number }}" >> "$GITHUB_ENV"
 
-      - name: Download zip artifacts
+      - name: Download all zip artifacts
         uses: actions/download-artifact@v4
         with:
           pattern: zip-*
           merge-multiple: true
           path: zips
 
-      - name: Verify expected zip is present
+      - name: List collected zips
         run: |
+          ls -la zips
           COUNT=$(ls -1 zips/*.zip 2>/dev/null | wc -l)
           echo "collected ${COUNT} zip(s)"
-          [ "$COUNT" -eq 1 ] || { echo "::error::expected 1 zip, got ${COUNT}"; exit 1; }
-          ls zips/jasmine_sprout-*.zip >/dev/null 2>&1 || { echo "::error::jasmine zip missing"; exit 1; }
+          # 2 = 1 device x 2 profile. Gagal keras kalau ada yang hilang.
+          if [ "$COUNT" -ne 2 ]; then
+            echo "::error::expected 2 zips (jasmine_sprout x normal/oc_cpu_only), got ${COUNT}"
+            exit 1
+          fi
 
       - name: Publish release
         uses: softprops/action-gh-release@v2
@@ -257,14 +452,30 @@ jobs:
 
             | Feature | Description |
             | :------ | :---------- |
-            | **ReSukiSU** | Kernel-based root solution |
+            | **BakaSU** | Kernel-based root solution |
             | **SUSFS** | Root-hiding filesystem layer |
             | **Re:Kernel** | Kernel-level hardening |
             | **NoMount** | Mount namespace isolation |
             | **BBG** | Baseband guard, anti-format |
+            | **EAS** | Energy-aware scheduling |
+            | **Droidspaces** | LXC container isolation & networking |
+
+            ## Variants
+
+            | Profile | CPU big cluster | Risk |
+            | :------ | :-------------- | :--- |
+            | `normal` | stock (efuse speed-bin) | none |
+            | `cpu-only-oc` | 2.46 GHz (forced speed-bin 0) | HIGH |
+
+            > The OC profile forces the best-binned LUT onto silicon that may be
+            > binned lower. Keep a boot backup ready.
 
             ## Flash
 
             Flash the zip in TWRP. AnyKernel3 — no need to extract.
+
+            ---
+
+            **Build** ${{ env.BUILD_DATE }} · run #${{ github.run_number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
