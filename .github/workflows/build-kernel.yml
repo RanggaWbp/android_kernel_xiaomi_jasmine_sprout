@@ -459,6 +459,7 @@ jobs:
             | **BBG** | Baseband guard, anti-format |
             | **EAS** | Energy-aware scheduling |
             | **Droidspaces** | LXC container isolation & networking |
+            | **BORE** | Burst-Oriented Response Enhancer scheduler |
 
             ## Variants
 
