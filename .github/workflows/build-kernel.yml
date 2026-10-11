@@ -361,8 +361,8 @@ jobs:
           supported.vendorpatchlevels=
           '; }
           boot_attributes() {
-          set_perm_recursive 0 0 755 644 \\$RAMDISK/*;
-          set_perm_recursive 0 0 750 750 \\$RAMDISK/init* \\$RAMDISK/sbin;
+          set_perm_recursive 0 0 755 644 \$RAMDISK/*;
+          set_perm_recursive 0 0 750 750 \$RAMDISK/init* \$RAMDISK/sbin;
           }
           BLOCK=/dev/block/bootdevice/by-name/boot;
           IS_SLOT_DEVICE=${{ matrix.is_slot_device }};
