@@ -345,7 +345,7 @@ jobs:
           cat > anykernel.sh << EOF
           ### AnyKernel3 Ramdisk Mod Script
           properties() { '
-          kernel.string=Mi A2 Kernel (${{ matrix.codename }}) | profile: ${{ matrix.profile }} (risk: ${RISK_LEVEL}) | features: ${FEATURES_STR} | by RanggaWbp | ${{ env.BUILD_DATE }}
+          kernel.string=Mi A2 Kernel (${{ matrix.codename }}) | profile: ${{ matrix.profile }} (risk: ${RISK_LEVEL}) | features: ${FEATURES_STR} + BORE | by RanggaWbp | ${{ env.BUILD_DATE }}
           do.devicecheck=1
           do.modules=0
           do.systemless=1
@@ -361,8 +361,8 @@ jobs:
           supported.vendorpatchlevels=
           '; }
           boot_attributes() {
-          set_perm_recursive 0 0 755 644 \\$RAMDISK/*;
-          set_perm_recursive 0 0 750 750 \\$RAMDISK/init* \\$RAMDISK/sbin;
+          set_perm_recursive 0 0 755 644 \$RAMDISK/*;
+          set_perm_recursive 0 0 750 750 \$RAMDISK/init* \$RAMDISK/sbin;
           }
           BLOCK=/dev/block/bootdevice/by-name/boot;
           IS_SLOT_DEVICE=${{ matrix.is_slot_device }};
@@ -459,6 +459,7 @@ jobs:
             | **BBG** | Baseband guard, anti-format |
             | **EAS** | Energy-aware scheduling |
             | **Droidspaces** | LXC container isolation & networking |
+            | **BORE** | Burst-Oriented Response Enhancer scheduler |
 
             ## Variants
 
